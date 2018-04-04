@@ -1,0 +1,48 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:composite = "http://java.sun.com/jsf/composite"     
+     id="divDatosSolicitantePlantilla">
+     
+     <composite:interface>
+		<composite:attribute name="solicitante"/>
+		<composite:attribute name="colonia"/>
+		<composite:attribute name="direccion"/>
+		<composite:attribute name="medioContacto"/>
+		<composite:attribute name="medioContactoInfo"/>		
+	</composite:interface>
+     
+     <composite:implementation> 
+     
+     
+     <style>
+     	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+     </style>
+     <p:panelGrid columns="3" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+		
+		<p:outputLabel  class="lblGral" id="m1p1_lblNombre" value="Nombre:"/>
+		<p:outputLabel  id="m0p1s1_txtNombre" value="#{cc.attrs.solicitante}" />
+		<br/>
+	    
+		<p:outputLabel  class="lblGral" id="m1p1_lblColoniaComunid" value="Colonia / Comunidad:"/>
+	    <p:outputLabel id="m0p1s1_txtColonia" value="#{cc.attrs.colonia}" /> 
+		<br/>
+		
+		<p:outputLabel  class="lblGral" id="m1p1_lblDireccion" value="Direccion:"/>
+	    <p:outputLabel id="m0p1s1_txtDireccion" value="#{cc.attrs.direccion}" /> 
+		<br/>
+		
+		<p:outputLabel  class="lblGral" id="m1p1_lblMedioContacto" value="Medio de Contacto:"/>
+		<p:outputLabel id="m0p1s1_MedioContacto" value="#{cc.attrs.medioContacto}" />
+		<p:outputLabel id="m0p1s1_txtInfoDeContacto" value="#{cc.attrs.medioContactoInfo}" />
+	 
+	 </p:panelGrid >
+    
+  	</composite:implementation>
+</div>

@@ -1,0 +1,54 @@
+
+<div xmlns="http://www.w3.org/1999/xhtml"   
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:composite="http://java.sun.com/jsf/composite">
+   
+   <composite:interface componentType="inputTipoPago">
+     
+      <composite:attribute name="idTipoPago" />
+      <composite:attribute name="noReferencia" />
+      <composite:valueHolder name="inputTipoPago-menuTipoPago" />
+   	  <composite:valueHolder name="inputTipoPago-txtNoReferencia" />
+      <composite:attribute name="bean" />
+     
+   </composite:interface>
+   <composite:implementation>
+   		 <style>
+   		 	 #inputTipoPago-divNoReferencia .ui-panel-content, #inputTipoPago-divNoReferencia .ui-panel,
+     		 #inputTipoPago-divNoReferencia >div
+			 {
+  		 		 background: none ;
+    				border: 0px !important;
+    				padding: 0px !important;
+			 }
+			 #inputTipoPago-divPrincipal .tipoPago{
+        		 margin-right:  15px;
+       		 }
+
+       		 #inputTipoPago-divPrincipal{
+           		width: 270px;
+       		 }
+   		 </style>
+   		<h:form>
+         <div id="inputTipoPago-divPrincipal">
+         <h:message  style="color:red;" />    
+         <h:outputLabel id="inputTipoPago-lblMenu" value="Tipo Pago" styleClass="lblGral tipoPago"/>
+         <h:selectOneMenu id="inputTipoPago-menuTipoPago" value="#{cc.attrs.idTipoPago}" >
+           
+            <f:selectItems value="#{cc.listaTipoPago}" var="tipoPago" itemLabel="#{tipoPago.descripcion}"
+            		itemValue="#{tipoPago.idTipoPago}"/>
+            <f:ajax event="change" execute="@this" render="inputTipoPago-panelNoReferencia" listener="#{cc.mostrarNumeroReferencia}"/>
+         </h:selectOneMenu>
+         <div id="inputTipoPago-divNoReferencia" >
+         	<p:panel id="inputTipoPago-panelNoReferencia" visible="#{cc.mostrarNumeroReferencia}">
+         	    <h:outputLabel id="inputTipoPago-lblNoReferencia" value="No. Referencia" styleClass="lblGral" />
+         		<h:inputText id="inputTipoPago-txtNoReferencia" value="#{cc.attrs.noReferencia}" 
+         			styleClass="txtGral"></h:inputText>
+         	</p:panel>
+         </div>
+      	</div>
+      	</h:form>
+   </composite:implementation>
+</div>

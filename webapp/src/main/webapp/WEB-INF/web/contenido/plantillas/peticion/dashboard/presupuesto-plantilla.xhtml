@@ -1,0 +1,176 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     id="divPresupuestoPlantilla"
+      style="width: 700px; height: 400px; margin:5px; ">
+ 	
+ 	<style> 				 
+		
+		#presupuesto_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	}
+		
+		#presupuesto_divTablaPartidas{   		   
+		   overflow: auto; 		   
+		}
+         
+        #presupuesto_accordionResumen a{
+   			text-decoration: none;
+		}
+		
+		#presupuesto_btnAgregarPartidas{
+			margin-bottom:5px;
+		}
+
+		
+		#presupesto_divTablaBtns{
+			width:100%;
+		}
+		#presupesto_divTabla{
+			width:70%;
+			float:left;
+		}
+		#presupesto_divBtns{
+			width:30%;
+			float:left;
+		}
+		#presupesto_divTotal{			
+			float:right;
+		}	
+		.textoMonedaALaDerecha{
+		   text-align: right;
+		}
+	</style>
+ 	
+ 	<h:form id="presupuesto_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+ 		
+        <p:messages id="presupuesto_areaMsges" showDetail="false" globalOnly="false" for="presupuesto_msges"/>      		
+				
+		<div id="presupesto_divFecha">
+			<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+				<h:outputText class="lblGral" id="presupuesto_lblFechaElaboracionPresupuesto" value="Fecha de Elaboracion:"/>
+				<p:inputText id="presupuesto_txtFechaElaboracionPresupuesto" 
+					value="#{presupuestoBean.fechaElaboracionPresupuesto}" 
+					size="10"  
+					readonly="true">
+					<f:convertDateTime pattern="dd-MMM-yyyy"/>
+				</p:inputText> 
+			</p:panelGrid>
+		</div>
+			
+		<div  id="presupesto_divPartida">		
+			<p:panelGrid columns="4" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+				<h:outputText class="lblGral" id="presupuesto_lblProducto" value="Concepto:" />
+				<h:outputText class="lblGral" id="presupuesto_lblCantidad" value="Cantidad:" />
+				<h:outputText class="lblGral" id="presupuesto_lblPrecioUnitario" value="PU:" />
+				<br/>						
+				
+				<p:inputText id="presupuesto_txtProducto"  value ="#{presupuestoBean.concepto}"   
+						disabled="#{!presupuestoBean.habilitarCaptura}"	size="30" maxlength="75"/> 
+				<p:inputText id="presupuesto_txtCantidad" value ="#{presupuestoBean.cantidad}" 
+			   			disabled="#{!presupuestoBean.habilitarCaptura}" size="5" maxlength="5"/>
+			   	<p:inputText id="presupuestos_txtPrecioUnitario"  value ="#{presupuestoBean.pu}" 
+						disabled="#{!presupuestoBean.habilitarCaptura}"	size="4" maxlength="10"
+						style="margin-right: 10px;"/>
+				<p:commandButton id="presupuesto_btnAgregarPartidas" 
+						value="Agregar Partida" 
+						icon="ui-icon-plus" 
+						actionListener="#{presupuestoBean.agregarPartida}" 
+						update="@form"
+						disabled="#{!presupuestoBean.habilitarBtnAgregarPartida}"/> 
+			</p:panelGrid>
+			<pe:keyFilter for="presupuesto_txtCantidad" regEx="/[\d\-\.]/" ></pe:keyFilter>
+			<pe:keyFilter for="presupuestos_txtPrecioUnitario" regEx="/[\d\-\.]/" ></pe:keyFilter>
+		</div>
+		
+		<div id="presupesto_divTablaBtns">
+			<div id="presupesto_divTabla">
+				<p:dataTable id="presupuesto_tablaPartidas" 
+				  	var="partida" value="#{presupuestoBean.listaPartidas}">						  	
+				  	<p:column headerText="Fecha">
+						<h:outputText value="#{partida.fecha}"> 
+							<f:convertDateTime pattern="dd-MMM-yyyy"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Concepto">
+						<h:outputText value="#{partida.concepto}" />
+					</p:column>
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{partida.cantidad}" />
+					</p:column>
+					<p:column headerText="UM">
+						<h:outputText value="1" />
+					</p:column>
+					<p:column headerText="PU">
+						<div class="textoMonedaALaDerecha">
+							<h:outputText value="#{partida.pu}">
+								<f:convertNumber currencySymbol="$" type="currency" locale="es_MX" />
+							</h:outputText>
+						</div>
+					</p:column>
+					<p:column  headerText="Total">
+					    <div class="textoMonedaALaDerecha">
+							<h:outputText value="#{partida.totalPartida}">
+								<f:convertNumber  currencySymbol="$" type="currency" locale="es_MX"/>
+							</h:outputText>
+						</div>
+					</p:column>
+					<p:column rendered="#{presupuestoBean.mostrarLnkRemover}">
+						<p:commandLink id="presupuesto_lnkQuitarPartida" value="Quitar" actionListener="#{presupuestoBean.quitarPartida(partida)}"
+							update="@form"  
+							style = "font-weight: bold; 
+							color: rgb(0,0,255);">																	
+						</p:commandLink>							
+					</p:column>														
+				  </p:dataTable>
+				<div id="presupesto_divTotal">	
+					<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+						<h:outputText class="lblGral" id="presupuesto_lblTotal" value="Total:" />			      	
+						<p:inputText id="presupuesto_txtTotal" value="#{presupuestoBean.sumaTotal}" size="8"
+							styleClass="textoMonedaALaDerecha" readonly="true">
+							<f:convertNumber currencySymbol="$" type="currency" locale="es_MX" />
+						</p:inputText>					
+					</p:panelGrid>
+				</div>
+			</div>
+			
+			<div id="presupesto_divBtns" >
+				<p:panelGrid columns="1" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+					<p:commandButton id="presupuesto_btnGuardar" 
+						value="Guardar" 
+						icon="ui-icon-disk"
+						style="width:100px;"
+						actionListener="#{presupuestoBean.guardar}"
+						update="@form"
+						disabled="#{!presupuestoBean.habilitarBtnGuardar}"/>
+					<p:commandButton id="presupuesto_btnAutorizar" 
+						value="Autorizar" 
+						icon="ui-icon-key"
+						style="width:100px;"
+						actionListener="#{presupuestoBean.autorizar}"
+						update="@form"
+						disabled="#{!presupuestoBean.habilitarBtnAutorizar}"								
+						rendered="#{presupuestoBean.mostrarBtnAutorizar}"/>
+					<p:commandButton id="presupuesto_btnRechazar" 
+						value="Rechazar" 
+						icon="ui-icon-closethick"
+						style="width:100px;"
+						actionListener="#{presupuestoBean.rechazar}"
+						update="@form"
+						disabled="#{!presupuestoBean.habilitarBtnRechazar}"
+						rendered="#{presupuestoBean.mostrarBtnRechazar}"/>
+					<p:commandButton id="areaAtencion_btnCerrar" value="Cerrar" icon="ui-icon-power"
+						onclick="dlg.hide();"
+						style="width:100px;"						
+						actionListener="#{presupuestoBean.resetBean}"
+						update=":panelContenido"/>							
+				</p:panelGrid>
+			</div>
+		</div>		
+				
+						        		
+ 	</h:form> 	
+ </div>

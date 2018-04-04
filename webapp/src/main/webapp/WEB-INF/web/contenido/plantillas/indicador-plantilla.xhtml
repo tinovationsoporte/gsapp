@@ -1,0 +1,44 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p ="http://primefaces.org/ui"
+	id="divIndicadorNavegacion">
+	
+	<h:form id="opcionesUsuario-formPrincipal"> 
+		<div id="opcionesUsuario">
+			<p:commandLink id="indicadorNav-linkInicio" styleClass="icono-awesome fa fa-home" actionListener="#{aplicacion.opcionesUsuario.actualizarContenido}"
+				update=":formularioNavegacion,:panelIndicadorNavegacion,:panelContenido" onclick="quitarElementoActivo();">					         
+			</p:commandLink>
+			
+			<p:commandLink id="indicadorNav-linkUsuario" styleClass="icono-awesome fa fa-user" actionListener="#{aplicacion.opcionesUsuario.actualizarContenido}"
+				update=":formularioNavegacion,:panelIndicadorNavegacion,:panelContenido" onclick="quitarElementoActivo();">
+			</p:commandLink>
+			<p:commandLink id="indicadorNav-linkConfiguracion" styleClass="icono-awesome fa fa-cog" actionListener="#{aplicacion.opcionesUsuario.actualizarContenido}"
+				update=":formularioNavegacion,:panelIndicadorNavegacion,:panelContenido" onclick="quitarElementoActivo();"  >
+			</p:commandLink>
+			<p:commandLink id="indicadorNav-linkSalir" styleClass="icono-awesome fa fa-power-off" onclick="confirmacionSalir.show()">
+			</p:commandLink>
+		</div>
+		
+		<p:confirmDialog id="confirmarSalirDialog" message="Esta seguro que desea salir de la aplicacion?"  
+                header="Salir" severity="alert" widgetVar="confirmacionSalir" styleClass="confirmSalirDialog">  
+            <div id="divBotonesConfirmSalida">
+	        	<p:commandButton id="confirmar" value="Si"  oncomplete="confirmacionSalir.hide()"  styleClass="botonConfirmarSalirDialog"
+	                    	 actionListener="#{aplicacion.cerrarSession}" action="cerrar" ajax="false" />
+	                    	  
+	        	<p:commandButton id="rechazar" value="No" onclick="confirmacionSalir.hide()" type="button" styleClass="botonConfirmarSalirDialog"/>   
+            </div> 
+    	</p:confirmDialog> 
+	</h:form>
+	
+		
+	<h:panelGroup id="panelIndicadorNavegacion">
+		<ul class="informacionNavegacion" id="listaNavegacion">
+			<ui:repeat var="opcionNavegacion"
+				value="#{aplicacion.rutaNavegacion}">
+				<li>#{opcionNavegacion}</li>
+			</ui:repeat>
+		</ul>	
+	</h:panelGroup>
+	
+</div>

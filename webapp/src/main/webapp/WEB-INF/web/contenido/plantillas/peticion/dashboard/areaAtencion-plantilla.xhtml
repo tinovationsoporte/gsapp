@@ -1,0 +1,115 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     id="divAreaAtencionPlantilla">
+ 
+ 	 <style>    
+     	
+		
+		#areaAtencion_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	 }
+         
+        
+    </style>
+
+	<h:form id="areaAtencion_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }" >
+      	   <p:messages id="areaMsges" showDetail="false" globalOnly="false" for="autorizar_msges"/>
+			   
+			   <p:panelGrid columns="5" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+					
+					<h:outputText class="lblGral" id="areaAtencion_lblFechaAut"  value="Fecha de Autorizacion:" /> 
+					<p:inputText id="areaAtencion_txtFechaAutorizacion" value="#{autorizarPeticionBean.fechaAutorizacion}" size="10" readonly="true">
+						<f:convertDateTime pattern="dd-MMM-yyyy"/>
+					</p:inputText>
+					<h:outputText value=""/>
+					<br/>					
+					<p:commandButton id="areaAtencion_btnValida" value="#{autorizarPeticionBean.etiquetaBtnAutorizar}" 
+						 actionListener="#{autorizarPeticionBean.validarPeticion}"
+						 disabled="#{!autorizarPeticionBean.habilitarBtnValidar}"  
+						 style="width:100px"
+						 icon="ui-icon-key" 
+						 update="@form">
+					</p:commandButton> 
+					
+					
+					
+					<h:outputText class="lblGral" id="areaAtencion_lblArea" value="Area Asignada:" />
+					<p:selectOneMenu id="areaAtencion_listaAreasPrincipal" value="#{autorizarPeticionBean.idAreaAsignada}"
+						disabled="#{!autorizarPeticionBean.habilitarCaptura}">
+						<f:selectItem itemLabel="Seleccione un Area" itemValue="0"/>							 
+						<f:selectItems value="#{autorizarPeticionBean.listaAreasAsignar}" var="area" itemLabel="#{area.nombre}" 
+							itemValue="#{area.idArea}" />						
+						<p:ajax update="@form" listener="#{autorizarPeticionBean.onListChange}" process="@this"/>
+					</p:selectOneMenu>
+					<p:selectOneMenu id="areaAtencion_listaUsrsAreaPrincipal" value="#{autorizarPeticionBean.idUsuarioAreaAsignada}"
+						disabled="#{!autorizarPeticionBean.habilitarCaptura}">
+						<f:selectItem itemLabel="Seleccione un Usuario" itemValue="0"/>							
+						<f:selectItems value="#{autorizarPeticionBean.listaUsuariosAreaAsignar}" var="usuario" itemLabel="#{usuario.nombre}" 
+								itemValue="#{usuario.idUsuarioSistema}" />	
+						<p:ajax update="@form" listener="#{autorizarPeticionBean.onListChange}" process="@this"/>
+					</p:selectOneMenu>
+					<p:commandLink id="areaAtencion_lnkAreaPrincipal" value="Ver info" style = "font-weight: bold; color: rgb(0,0,255);text-decoration: underline;"
+							update="@form,:subPantallaNivel2" actionListener="#{autorizarPeticionBean.abrirSubPantallaNivel2}" 
+							oncomplete="if(!args.validationFailed){dlg_2.show()}" disabled="#{!autorizarPeticionBean.habilitarLnkVer}" process="@this">			
+								<f:param name="urlPagina" value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1s1-detalleArea-pantalla.xhtml" />
+								<f:param name="nombrePagina" value="Area Principal" />
+								<f:param name="idArea" value="#{autorizarPeticionBean.idAreaAsignada}"/>
+								<f:param name="idUsuario" value="#{autorizarPeticionBean.idUsuarioAreaAsignada}"/>				
+					</p:commandLink>
+					<p:commandButton id="areaAtencion_btnCancelar" value="Rechazar" icon="ui-icon-closethick"
+							actionListener="#{autorizarPeticionBean.rechazar}" 							
+							disabled="#{!autorizarPeticionBean.habilitarBtnRechazar}"
+							style="width:100px"
+							update="@form">
+					</p:commandButton>
+					
+					
+					<h:outputText  class="lblGral" id="areaAtencion_lblResponsable" value="Are de presupuesto: " />
+					<p:selectOneMenu id="areaAtencion_listaAreasPresupuesto" value="#{autorizarPeticionBean.idAreaPresupuesto}"
+						disabled="#{!autorizarPeticionBean.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Area" itemValue="0"/>
+							<f:selectItems value="#{autorizarPeticionBean.listaAreasPresupuesto}" var="area" itemLabel="#{area.nombre}" 
+								itemValue="#{area.idArea}" />
+							<p:ajax update="areaAtencion_listaUsrsAreaPresupuesto" listener="#{autorizarPeticionBean.onListChange}" process="@this"/>
+					</p:selectOneMenu> 
+					<p:selectOneMenu id="areaAtencion_listaUsrsAreaPresupuesto" value="#{autorizarPeticionBean.idUsuarioAreaPresupuesto}"
+							disabled="#{!autorizarPeticionBean.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Usuario" itemValue="0"/>							
+							<f:selectItems value="#{autorizarPeticionBean.listaUsuariosAreaPresupuesto}" var="usuario" itemLabel="#{usuario.nombre}" 
+									itemValue="#{usuario.idUsuarioSistema}"  />			
+							<p:ajax update="@form" listener="#{autorizarPeticionBean.onListChange}" process="@this"/>
+					</p:selectOneMenu>
+					<p:commandLink id="areaAtencion_lnkAreaPresupuesto" value="Ver info" style = "font-weight: bold; color: rgb(0,0,255);text-decoration: underline;"
+							update="@form,:subPantallaNivel2" actionListener="#{autorizarPeticionBean.abrirSubPantallaNivel2}" 
+							oncomplete="if(!args.validationFailed){dlg_2.show()}" disabled="#{!autorizarPeticionBean.habilitarLnkVer}" process="@this">			
+								<f:param name="urlPagina" value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1s1-detalleArea-pantalla.xhtml" />
+								<f:param name="nombrePagina" value="Area Presupuesto" />
+								<f:param name="idArea" value="#{autorizarPeticionBean.idAreaPresupuesto}"/>
+								<f:param name="idUsuario" value="#{autorizarPeticionBean.idUsuarioAreaPresupuesto}"/>				
+					</p:commandLink>
+					<p:commandButton id="areaAtencion_btnCerrar" value="Cerrar" icon="ui-icon-power"
+							onclick="dlg.hide();" 	 
+      		 				actionListener="#{autorizarPeticionBean.resetBean}"
+      		 				update=":panelContenido"
+							style="width:100px">							
+					</p:commandButton>
+			   
+					
+					<h:outputText class="lblGral" id="areaAtencion_lblPrioridad" value="Prioridad: " />
+					<p:selectOneMenu id="areaAtencion_listaPrioridad" disabled="#{!autorizarPeticionBean.habilitarCaptura}"
+						value="#{autorizarPeticionBean.idPrioridadSeleccionada}">
+						  <f:selectItem itemLabel="Selecciona una opcion" itemValue="0" />
+						  <f:selectItems value="#{autorizarPeticionBean.listaPrioridad}" var="prioridad" itemLabel="#{prioridad.valor}"
+          	     	  		itemValue="#{prioridad.idtcgeneral}" />
+          	        </p:selectOneMenu>				 
+					<br/>
+					<br/>					
+					<br/>
+			   </p:panelGrid>			   			   		  
+	</h:form>	
+	
+</div>

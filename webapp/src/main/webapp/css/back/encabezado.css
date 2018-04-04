@@ -1,0 +1,412 @@
+@CHARSET "ISO-8859-1";
+
+/**
+.cabe {
+
+    float: left;
+    height: 103px;
+    margin-left: 189px;
+    margin-top: 2px;
+    position: relative;
+    width: 823px;
+}
+.titulo {
+    background: none repeat scroll 0 0 rgba(200, 200, 250, 0.5);
+    float: left;
+    margin-left: 52px;
+    margin-top: 42px;
+    width: 490px;
+}
+
+.info {
+background-color: #000066;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 10px;
+    font-style: italic;
+    margin-left: 21px;
+    margin-top: 25px;
+    padding: 3px;
+}
+#modulesForm ul {
+    background-color: #000066;
+    clear: both;
+    float: left;
+    margin-left: -12px;
+    margin-top: 2px;
+    width: 812px;
+	
+}
+#modulesForm ul li {
+    float: left;
+}
+.logo {
+    display: none;
+    float: left;
+    margin: 10px;
+    width: 20%;
+}
+
+.login .formulario form {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+}
+.login .formulario fieldset {
+    background-color: #EEEEFF;
+    margin: 0 auto 10px 170px;
+    position: relative;
+    width: 30%;
+}
+.login .formulario label {
+    cursor: default;
+    font-family: "Lucida Grande",Arial,Sans-Serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+.login .formulario {
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+.login p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+.indicador {
+    background-color: #CCCCCC;
+    height: 30px;
+}
+**/
+
+.info {
+    background-color: #343538;
+    border-radius: 5px;
+    color: #ffffff;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 600;
+    height: 80px;
+    line-height: 1.2;
+    margin-left: -97px;
+    margin-top: 5px;
+    padding: 3px;
+    width: 295px;
+}
+
+.cabe {
+    float: right;
+    height: 103px;
+    margin-right: 2px;
+    margin-top: 2px;
+    position: relative;
+    width: 293px;
+}
+
+.titulo {
+	display:none;	
+}
+
+.indicador {
+    background-color: TRANSPARENT;
+    height: 30px;
+}
+
+
+.tabla_form {
+    border-spacing: 10px 20px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+
+#ayudaFormulario{
+    clear: both;
+    float: right;
+    margin-right: 42px;
+    margin-top: 56px;
+    font-size:13px;
+}
+
+#ayudaFormulario a{
+    color: white;
+    float: left;
+    font-weight: bold;
+    padding-right: 9px;
+}
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 16px;
+    margin-top: 24px;
+    text-decoration: none;
+}
+
+
+.info {
+    background-color: #000066;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    height: 90px;
+    margin-left: -67px;
+    margin-top: 60px;
+    padding: 3px;
+    width: 270px;
+}
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 92px;
+    margin-top: 24px;
+    text-decoration: none;
+}
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 92px;
+    margin-top: 24px;
+    text-decoration: none;
+}
+/*Agregados el 1 de abril del 2013*/
+
+#ayudaFormulario a {
+    color: white;
+    float: left;
+    font-size: 11px;
+    font-weight: bold;
+    padding-right: 14px;
+}
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 85px;
+    margin-top: 3px;
+    text-decoration: none;
+}
+
+.info {
+    background-color: #000066;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    height: 90px;
+    margin-left: -67px;
+    margin-top: 60px;
+    padding: 3px;
+    width: 270px;
+}
+
+.info {
+    background-color: #000066;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    height: 90px;
+    margin-left: -67px;
+    margin-top: 60px;
+    padding: 3px;
+    width: 270px;
+}
+
+#ayudaFormulario {
+   clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 15px;
+    margin-top: -16px;
+    text-decoration: none;
+}
+
+.info {
+   background-color: #343538;
+    border-radius: 5px;
+    color: #ffffff;
+    float: left;
+    font-size: 11px;
+    font-style: italic;
+    font-weight: 600;
+    height: 80px;
+    line-height: 1.2;
+    margin-left: -15px;
+    margin-top: 5px;
+    padding: 3px;
+    width: 295px;
+}
+/*ESTILOS PARA LA PÁGINA LOGIN   Karmina Angeles Bautista 25/abril/2013*/
+
+.imgMainWrapper{
+    float:left;
+}
+
+.imgMainWrapper img {
+    float: left;
+    margin-left: 162px;
+    margin-top: 82px;
+}
+
+.tabla_form {
+    border-spacing: 10px 20px;
+    float: left;
+    margin: 92px auto 0 32px;
+    padding: 10px;
+    width: 340px;
+    z-index:100;
+}
+
+.loginPage input{
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0;
+    text-align: start;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    width: 250px;
+    word-spacing: normal;
+    position:absolute;
+    z-indez:100;
+}
+
+.loginPage .btn{
+    background-color: #2471AF;
+    float: left;
+    margin-left: 160px;
+    padding-bottom: 23px;
+    padding-left: 12px;
+    width: 94px;
+    }
+
+.loginPage label {
+    color: #333333;
+    cursor: default;
+    font-family: "Lucida Grande",Arial,Sans-Serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.tabla_form {
+    border-spacing: 10px 20px;
+    float: left;
+    margin: 55px auto 0 48px;
+    padding: 10px;
+    width: 340px;
+}
+
+.login .formulario label {
+    color: #999999;
+    cursor: default;
+    font-family: "Lucida Grande",Arial,Sans-Serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.loginPage .btn {
+    background-color: #2471AF;
+    float: left;
+    font-size: 13px;
+    margin-left: 160px;
+    padding-bottom: 21px;
+    padding-left: 9px;
+    width: 94px;
+}
+
+.loginPage input {
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0;
+    position: absolute;
+    text-align: start;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    width: 250px;
+    word-spacing: normal;
+    z-index: 210;
+}
+
+.titPrincipal{}
+.pPrincipal{
+	
+}
+
+.pPrincipal {
+    clear: both;
+    float: left;
+    margin-bottom: 13px;
+    margin-left: 202px;
+    margin-top: 24px;
+    text-align: justify;
+    width: 620px;
+}
+
+.titPrincipal {
+    float: left;
+    margin-left: 242px;
+    margin-top: 76px;
+}
+.pWrapper{
+	width:100px;
+	background:url("../img/topAgua.png") no-repeat scroll center top #006699;
+	
+}
+.pWrapper {
+    background: url("../img/soap.png") no-repeat scroll 375px top;
+    height: 283px;
+    width: 977px;
+}
+
+.titPrincipal {
+    float: left;
+    margin-left: 242px;
+    margin-top: 133px;
+
+}
+
+.titPrincipal {
+    float: left;
+    margin-left: 242px;
+    margin-top: 208px;
+}
+
+.imgBg {
+    margin-left: 710px;
+    margin-top: 205px;
+    position: absolute;
+    z-index:1;
+}
+ 
+.topLine{
+	background-color: #2471AF;
+    height: 40px;
+    width: 1186px;  
+}

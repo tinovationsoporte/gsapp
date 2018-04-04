@@ -1,0 +1,18 @@
+package com.core.app.bd;
+
+public enum LockMode {
+
+	 NONE //1
+	,READ //2
+	,UPGRADE //3
+	,UPGRADE_NOWAIT //4 
+	,WRITE //5
+	,FORCE //6
+	,OPTIMISTIC //7
+	,OPTIMISTIC_FORCE_INCREMENT //8 
+	,PESSIMISTIC_READ //9
+	,PESSIMISTIC_WRITE //10
+	,PESSIMISTIC_FORCE_INCREMENT //11 
+	,READPAST //12 ;
+
+}

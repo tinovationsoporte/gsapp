@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.ReporteActividadMapper">
+
+	<resultMap type="com.modelo.datos.estructuras.ReportesActividades" id="reportes">
+		<result column="idReporte"			property="idReporte" 		/>
+		<result column="fechaInicial" 		property="fechaInicial"	   	/>
+		<result column="nombre"		 		property="nombre"	    	/>
+		<result column="area"	 			property="area"  		  	/>	
+		<result column="status"	 			property="status"  		  	/>
+		<result column="idStatusReporte"	property="idStatusReporte" 	/>
+	</resultMap>
+	
+	
+	<resultMap type="com.modelo.datos.estructuras.TotalReportes" id="totalReportes">
+		<result column="staus"		property="status" 		/>
+		<result column="total" 	property="total"	   	/>	
+	</resultMap>
+	
+	<select id="consultarReportesPorFecha" resultMap="reportes" parameterType="map" timeout="10" >
+	
+		SELECT ra.idTpReporteActividad as idReporte
+		   ,ra.fechaInicial       
+	       ,u.nombre              
+	       ,a.nombre as area
+	       ,c.valor as status
+	       ,c.idtcgeneral as idStatusReporte
+		FROM tpreporteactividad ra
+		JOIN usuariosistema u on (ra.idUsuario = u.idUsuarioSistema)
+		JOIN tcarea a ON (u.idtcarea = a.idtcarea)
+		JOIN tcgeneral c ON(ra.idStatusReporteActividad = c.idtcgeneral)
+		WHERE 1=1		
+		<if test="fechaInicial != null">	
+			AND ra.fechaInicial = #{fechaInicial};
+		</if>
+	</select>
+
+	<select id="consultarFechasReportes" resultMap="reportes" parameterType="map" timeout="10" >	
+		SELECT ra.fechaInicial	
+		    ,CASE SUM(ra.idStatusReporteActividad  = 25 OR ra.idStatusReporteActividad  = 26) > 0 
+				WHEN TRUE THEN	'Reportes Pendientes'
+				ELSE 'Terminado'
+			 END AS status
+		FROM tpreporteactividad ra
+		GROUP BY ra.fechaInicial
+		ORDER BY ra.fechaInicial;	
+	</select>
+
+	<select id="consultarTotalReportes" resultMap="totalReportes" parameterType="map" timeout="10" >			
+		SELECT status 
+			, sum(total) as total
+		FROM (
+			SELECT c.idtcgeneral  
+				,c.valor status
+				,count(c.idtcgeneral) as total  
+			FROM tcgeneral c 
+				 JOIN tpreporteactividad ra on (c.idtcgeneral = ra.idStatusReporteActividad) 
+			WHERE c.referencia = 'status_reporte_actividad'
+			<if test="fechaInicial != null">
+				AND ra.fechaInicial = #{fechaInicial}
+			</if> 
+			GROUP BY c.idtcgeneral	
+			UNION
+			SELECT c.idtcgeneral 
+				,c.valor status
+				,count(c.idtcgeneral) - 1 as total 
+			FROM tcgeneral c
+			WHERE c.referencia = 'status_reporte_actividad'
+			GROUP BY c.idtcgeneral
+		) q
+		GROUP BY status
+		ORDER BY idtcgeneral;			
+	</select>
+
+
+</mapper>

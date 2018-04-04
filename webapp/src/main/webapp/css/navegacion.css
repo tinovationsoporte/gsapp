@@ -1,0 +1,146 @@
+@CHARSET "ISO-8859-1";
+
+
+.ui-tree .ui-tree-nodes .ui-tree-item {
+    clear: left;
+    display: inline;
+    float: left;
+    margin: 4px 0 0 1px;
+    padding: 0;
+    width: 100%;
+}
+
+.ui-tree .ui-tree-nodes .ui-tree-parent {
+    clear: left;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 83%;
+}
+
+.ui-tree-nodes{
+	color:red;
+}
+
+.ui-tree-node{
+	color:blue;
+	font-weight: 500;
+}
+
+.ui-tree .ui-tree-nodes .ui-tree-item {
+    clear: left;
+    display: inline;
+    float: left;
+    margin: 4px 0 0 -7px;
+    padding: 0;
+    width: 100%;
+}
+
+.ui-tree-node-content {
+    background:transparent;
+    
+    font-size: 12px;
+    font-weight: lighter;
+    padding-bottom: 4px;
+    vertical-align: middle;
+    width: 140px;
+    color:black;
+}
+.ui-tree-node-content:hover {
+    background: transparent;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    vertical-align: middle;
+    width: 170px;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    background:transparent;
+    border: 1px solid #529BCC;
+    color: black;
+    text-shadow: none;
+    font-weight:bold;
+    /*max-width: 179px;*/
+}
+.ui-state-default {
+    box-shadow: none;
+}
+
+/*Contenedor principal*/
+.ui-tree{
+	background-color: #EAEAEA;
+	border: none;
+	width: 183px;
+	color: black;
+	background-color: 
+}
+
+/* Cada item del arbol*/
+.ui-tree .ui-tree-nodes .ui-tree-item {
+	margin-left: 0px !important;
+	width: 150px;
+}
+	
+/*Contenido del nodo*/
+.ui-tree-node-content{
+	width: 150px !important;
+}
+
+/*Elimina decoracion extra de los nodos*/
+.ui-tree .ui-state-default{
+	box-shadow:none;
+}
+
+/* Estado con el mouse sobre el nodo*/
+.ui-tree .ui-state-hover{
+	/*background-image: url('../img/medio-gris-ruido.jpg');*/
+	color: #FFFFFF !important;
+	text-shadow: none; 
+}
+
+/*Estado del nodo seleccionado*/
+.ui-tree .ui-state-highlight{
+	background-image: url('../img/oscuro-gris-ruido.jpg');
+	color: white !important;
+}
+
+.ui-tree .ui-tree-child .hijo{
+	color: #3f3f3f !important;
+	font-weight: normal;
+}
+
+
+
+.ui-tree .ui-tree-parent span, .ui-tree .ui-tree-item span {
+    color: #343538 !important;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ui-tree-node-content .ui-icon-triangle-1-s{
+	background-image: url('img/flecha24-s.png') !important;
+	background-position: 0px 0px !important;
+	background-repeat:no-repeat;
+	height: 16px;
+	width: 16px;
+}
+
+.ui-tree-node-content .ui-icon-triangle-1-e{
+	background-image: url('img/flecha24-e.png') !important;
+	background-position: 0px 0px !important;
+	height: 16px; 
+	width: 16px;
+	background-repeat:no-repeat;
+}
+
+.ui-state-default .ui-icon{
+	
+}
+
+.ui-state-highlight .ui-tree-node-label .hijo{
+	font-weight: 600;
+	color: white !important;
+}

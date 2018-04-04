@@ -1,0 +1,196 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      id="m4p2_divReporteActividades" style="width: 1250px; height: 700px; margin-left: 5px; " >
+      
+      <style>
+      	 #m4p2_formPrincipal{
+		   width: 1250px;
+		   height: height:650px;		   	
+         }   
+		      
+         #m4p2_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	 }	
+         		 
+		#m4p2_divCalendario{
+			width:400px;
+			heigth:500px;
+			float:left;		
+			margin:10px;
+		}
+		
+		#m4p2_divReporte{
+			width:800px;
+			heigth:600px;
+			float:left;
+			margin:10px;			
+		}	
+		
+		.porCapturar .fc-event-inner{
+   			background-color: red;
+   			border-color: red;
+   			color: black;
+		}
+		
+		.capturado .fc-event-inner{
+   			background-color: blue;
+   			border-color: white;
+   			color: white;
+		}
+		
+		.revisado .fc-event-inner{
+   			background-color: green;
+   			border-color: white;
+   			color: white;
+		}
+		
+		.observaciones .fc-event-inner{
+   			background-color: yellow;
+   			border-color: red;
+   			color: black;
+		}
+		
+		.m4p2_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m4p2_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+		
+		.m4p2_pnlGridCaptura{
+			height:100%;
+			width:100%;
+		}
+		
+		#m4p2_divEtiquetas{			
+			margin-top:10px;			
+		}
+		
+		.m4p2_divEtiqueta{			
+			font-size: 9px !important;
+			font-weight: bold; 
+			color: black;
+			width:70px; 
+			height:35px; 
+			float:left;
+			margin: 5px;			
+			border: 1px gray solid;
+		  	background-color: red;
+		  	border-radius: 4px;	
+			box-shadow: 2px 5px #888888;
+			padding-left:7px;
+			padding-top: 5px;	
+     	}
+		
+	</style>
+
+	
+	  <script type="text/javascript">
+	    PrimeFaces.locales['es'] = {
+	        closeText: 'kapat',
+	        prevText: 'anterior',
+	        nextText: 'siguiente',
+	        currentText: 'actual',
+	        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+	            'Julio','Agosto','Septiembre','Octubre','Noviembre','Dic'],
+	        monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+	            'Jul','Ago','Sep','Oct','Nov','Dic'],
+	        dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
+	        dayNamesShort: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+	        dayNamesMin: ['Do,','Lu','Ma','Mi','Ju','Vi','Sa'],
+	        weekHeader: 'Semana',
+	        
+	        isRTL: false,
+	        showMonthAfterYear: false,
+	        yearSuffix: '',
+	        month: 'Mes',
+	        week: 'Semana',
+	        day: 'Dia',
+	        allDayText : 'Todo el Dia'
+		};
+	  </script>
+      <h:form id="m4p2_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+      	<p:messages id="reporte_areaMsges" showDetail="false" globalOnly="false" for="reporte_msges"/>
+        
+		
+		<p:growl id="messages" showDetail="true" />
+
+		<div id="m4p2_divCalendario"> 
+			<p:panel header="Calendario de Reportes">		
+				<p:schedule id="m4p2_schActividades" value="#{validaReporteActividadBean.modeloCalendario}" locale="es"  rightHeaderTemplate=""
+					centerTemplate="month">
+					<p:ajax event="eventSelect" listener="#{validaReporteActividadBean.onEventSelect}" update=":m4p2_formPrincipal:m4p2_pnlInfoReportes, reporte_areaMsges"  />				
+				</p:schedule>      	  		      	  	
+			</p:panel>	
+			
+			<div id="m4p2_divEtiquetas"> 				
+				<div id="m4p2_divLblPorCapturar" class="m4p2_divEtiqueta" style="background-color: yellow !important; ">
+					Revisión Pendiente
+				</div>
+				
+				<div id="m4p2_divLblPorObservaciones" class="m4p2_divEtiqueta" style="background-color: green !important; color: white !important;">
+					Revisión Terminada
+				</div>
+			</div>
+			
+		</div>		
+		
+		<div id="m4p2_divReporte">
+			<p:panel header="Reportes" id="m4p2_pnlInfoReportes">
+				
+				<p:panelGrid columns="1" cellpadding="150"  styleClass="m4p2_pnlGridCaptura" >
+
+				
+				<p:dataList value="#{validaReporteActividadBean.listaTotalReportes}" var="totales" type="ordered" emptyMessage="Sin información">
+        			<f:facet name="header">
+            			Reportes Por Status
+        			</f:facet>
+        			<p:outputLabel styleClass="lblGral" value="#{totales.status}:" style="padding-left:20px;"/>
+					
+					<p:outputLabel value="#{totales.total}" style="padding:20px;"/>
+    			</p:dataList>			
+				<br/>
+				<p:dataTable id="m4p2_tablaReportes" var="reporte" value="#{validaReporteActividadBean.listaReportes}"						 	
+						paginator = "true"
+						currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,25,50"
+						rows = "10"
+						emptyMessage="Sin información">
+   	      				<p:column headerText="Fecha" sortBy="#{reporte.fechaInicial}">						 
+							 <p:commandLink  
+							 	oncomplete="dlg.show()" update=":subPantallaNivel1" 
+								style ="font-weight:bold;color: rgb(0,0,255);" 
+								actionListener="#{validaReporteActividadBean.abrirSubPantallaNivel1}"
+								process="@this" rendered="#{reporte.idStatusReporte > 25}">	
+								<h:outputText  value="#{reporte.fechaInicial}">							
+									<f:convertDateTime pattern="dd-MM-yyyy"/>		
+								</h:outputText>
+								<f:param name="urlPagina" 
+									         value="/WEB-INF/web/contenido/pantallas/reportes/m4p2p1-ValidarReporteActividadDetalle.xhtml" />
+								<f:param name="nombrePagina" 
+										value="Reporte de Actividades" />
+								<f:param name="idReporte" value="#{reporte.idReporte}"/>							
+							</p:commandLink>
+							<h:outputText  value="#{reporte.fechaInicial}" rendered="#{reporte.idStatusReporte == 25}">							
+									<f:convertDateTime pattern="dd-MM-yyyy"/>		
+							</h:outputText>							
+   	      				</p:column>   	      				
+   	      				<p:column headerText="Usuario" sortBy="#{reporte.nombre}">
+   	      					<h:outputText class="lblGral" value="#{reporte.nombre}" />							
+   	      				</p:column>
+   	      				<p:column headerText="Area" sortBy="#{reporte.area}">
+   	      					<h:outputText  value="#{reporte.area}" />
+   	      				</p:column>     		
+   	      				<p:column headerText="Status" sortBy="#{reporte.status}">
+   	      					<h:outputText  value="#{reporte.status}" />
+   	      				</p:column>   	      				
+   	      		</p:dataTable>					
+				</p:panelGrid>
+			</p:panel>		
+		</div>		   
+      </h:form>
+      
+</div>

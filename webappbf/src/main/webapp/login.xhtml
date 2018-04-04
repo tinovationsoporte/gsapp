@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p= "http://primefaces.org/ui">
+
+    <h:head>
+    	<title>Sistema de gestión</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	    <meta http-equiv="Content-Language" content="es" />
+	    <meta http-equiv="imagetoolbar" content="no" />
+	    <meta name="keywords" content="" />
+	    <meta name="description" content="" />
+        <link rel="stylesheet" href="css/login.css" type="text/css"/>  
+        <link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
+    </h:head>    
+    
+    <h:body> 
+    	<h:form id="formulario">
+    	  <div id="loginContenedorPrincipal">
+    	  	<div id="loginColumnaIzq">
+    	  	    <div id="divLogos">
+    	  			<!-- <h:outputLabel id="login-lblNombreSistema" value="G E S T" styleClass="labelNombreSistema" /> 
+    	  			<h:outputLabel id="login-lblDescripcion" value="enterprise" styleClass="labelDescripcion" />
+    	  			 
+    	  			 <h:graphicImage library="img" name="Logo-veracruz.png" />-->
+    	  			 <img id="logoVeracruz" src="#{request.contextPath}/img/Logo-veracruz.png" style="position:relative; margin-left:50px; margin-top: -75px;"/>    	  			 
+    	  		</div>
+    	  	</div>
+    	  	<div id="loginColumnaDer">
+    	  		<div id="divInfoUsuario">
+    	  			<p:messages id="mensages" showDetail="true" autoUpdate="true"/>
+    	  		    <h:outputLabel id="lblGobiernoMunicipal" value="Gobierno Municipal" styleClass="lblGobiernoMunicipal"/>
+    	  		    <h:outputLabel id="lblBienvenidos" value="Bienvenidos" styleClass="margin lblBienvenidos"/>
+    	  		    <h:outputLabel id="lblNombreUsuario" value="Usuario"/>
+    	  			<p:inputText id="txtNombreUsuario" value="#{validarUsuarioSistemaPeticion.obtenerUsuarioSistemaPeticion.nombreUsuario}" 
+    	  						size="20" maxlength="20" styleClass="margin fontPrincipal"></p:inputText>
+    	  			<h:outputLabel id="lblContrasena" value="Password"/>
+    	  			<p:password id="pwdPassWordUsuario" value="#{validarUsuarioSistemaPeticion.obtenerUsuarioSistemaPeticion.contrasena}" 
+    	  						size="20" maxlength="20" styleClass="margin fontPrincipal"></p:password>
+    	  			<h:commandButton id="loginBtnIngresar" value="Ingresar" action="#{loginBean.redireccionar}"  actionListener="#{loginBean.onLogin}"  
+    	  					styleClass="margin fontPrincipal botonLogin"/>
+    	  			<h:outputLabel id="lblAvisoImportante" value="Si usted no cuenta aun con sus credenciales de ingreso, favor de comunicarse al area de sistemas" styleClass="lblAvisoImportante"/>
+    	  		</div>
+    	    </div>    	 
+    	  </div>    	 
+    	</h:form>
+    </h:body>
+</html>

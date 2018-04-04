@@ -1,0 +1,149 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html" 
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+	 style="width: 800px; height: 500px; padding: 20px;">
+	
+ <style type="text/css">
+	 
+	 
+	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+	}
+	
+	#infoUsuario_divInfo{
+		float:left;
+	}
+	
+	#infoUsuario_divPassword{
+		float:left;
+		margin-left:25px;
+	}
+	
+	#infoUsuario_form .ui-widget{
+	   font-size: 11px;	   
+	}
+
+	
+</style>
+<script type="text/javascript">
+   function cambiarTipo(obj){
+	   if(obj.getAttribute('type') == 'password')
+	   	obj.setAttribute('type', 'text');
+	   	else
+	   		obj.setAttribute('type', 'password');
+   }
+   
+   function checarCombos(){
+	   var obj1 = document.getElementById('infoUsuario_form:catUsuariosSis_smcPass1:0');	   
+	   var obj2 = document.getElementById('infoUsuario_form:catUsuariosSis_smcPass2:0');
+	   var pass1 = document.getElementById('infoUsuario_form:infoUsuario_txtPass');
+	   var pass2 = document.getElementById('infoUsuario_form:infoUsuario_confPass');
+	   
+	   if(obj1.checked) // mostrar password
+			pass1.setAttribute('type', 'text');
+	   else
+		   pass1.setAttribute('type', 'password'); 
+	   
+	   if(obj2.checked) // mostrar password
+			pass2.setAttribute('type', 'text');
+	   else
+		   pass2.setAttribute('type', 'password');     
+	   
+   }
+</script>
+
+    <h:form id="infoUsuario_form" class="frmGral">
+		
+		<p:messages id="infoUsuario_areaMsges" showDetail="false" for="infoUsuario_msges" globalOnly="false"/>				 										
+		
+		<div id="infoUsuario_divInfo">
+			<p:panel id="infoUsuario_pnlInfoUsuario" header="Informacion de Usuario" >	
+				<p:panelGrid  columns="3" cellpadding="10" styleClass="m1p1_pnlGridCaptura">
+					
+					<h:outputText class="lblGral" value="Nombre: "/> 
+					<h:outputText value="#{infoUsuarioBean.usuarioSistema.nombre}"/>
+					<br/>
+					
+					<h:outputText class="lblGral" value="Usuario: "/>
+					<h:outputText value="#{infoUsuarioBean.usuarioSistema.login}"/>
+					<br/>
+					
+					<h:outputText class="lblGral" value="Area: "/>
+					<h:outputText value="#{infoUsuarioBean.usuarioSistema.area.nombre}"/>
+					<br/>
+					
+					<h:outputText class="lblGral" value="Rol: "/> 
+					<h:outputText value="#{infoUsuarioBean.usuarioSistema.rol.descripcion}"/>
+					<br/>
+					
+					<h:outputText value=""/> 
+					<p:commandLink value="#{infoUsuarioBean.etiquetaLink}" 
+						update="@form" 
+						actionListener="#{infoUsuarioBean.actualizar}" 
+						style ="font-weight:bold;color: rgb(0,0,255);" 
+						process="@this">
+						
+					</p:commandLink>
+					<br/>
+				</p:panelGrid>
+			</p:panel>
+		</div>
+		
+		<div id="infoUsuario_divPassword">
+			<p:panel id="infoUsuario_pnlCambioPass" header="Cambio de contraseña" rendered="#{infoUsuarioBean.mostrarSeccionPasswords}" >			
+				<p:panelGrid  columns="3" cellpadding="10" styleClass="m1p1_pnlGridCaptura">
+					
+					<h:outputLabel value="Password:" id="infoUsuario_lblPassword" class="lblGral"/>
+					<p:password id="infoUsuario_txtPass"  autocomplete="off"
+			       			 label="Password" maxlength="20" value="#{infoUsuarioBean.password1}" redisplay="true"
+			       			 feedback="true" 
+                        promptLabel="Inserte una contrasena" weakLabel="Debil"  
+                        goodLabel="Buena" strongLabel="Fuerte">
+                        <p:ajax process="@this" />
+                    </p:password>
+					<h:selectManyCheckbox id="catUsuariosSis_smcPass1"  
+			      		value="#{infoUsuarioBean.mostrarPassword1}"
+			      		onchange="cambiarTipo(document.getElementById('infoUsuario_form:infoUsuario_txtPass'))">
+			       		<f:selectItem itemValue="1" itemLabel="Mostrar Password" />
+			       	</h:selectManyCheckbox>		
+
+					<h:outputLabel value="Confirmar PW:" id="infoUsuario_lblConfPass" class="lblGral"/>
+					<p:password id="infoUsuario_confPass" autocomplete="off"
+			       		label="Confirmar PW" value="#{infoUsuarioBean.password2}" redisplay="true"
+			       		feedback="true" maxlength="20" 
+						promptLabel="Inserte una contrasena" weakLabel="Debil"  
+						goodLabel="Buena" strongLabel="Fuerte">
+						<p:ajax process="@this"> </p:ajax>
+                    </p:password>
+					<h:selectManyCheckbox id="catUsuariosSis_smcPass2"
+				        value="#{infoUsuarioBean.mostrarPassword2}" 
+				    	onchange="cambiarTipo(document.getElementById('infoUsuario_form:infoUsuario_confPass'))">
+				    	<f:selectItem itemValue="1" itemLabel="Mostrar Password" />
+				    </h:selectManyCheckbox>
+                    
+					<br/>
+					<p:commandButton id="cat1p1_btnActualizar" value="Actualizar Password" onclick="dlgGuardar.show()" 
+						update="@form"	/>	
+					<br/>
+				
+				</p:panelGrid>
+				<pe:keyFilter for="infoUsuario_txtPass" regEx="/[a-zA-Z0-9\.\-\_]/" />
+				<pe:keyFilter for="infoUsuario_confPass" regEx="/[a-zA-Z0-9\.\-\_]/" />
+			</p:panel>
+		</div>
+		
+	</h:form>
+	
+	<!-- Dialogo para confirmar guardado de informacion -->
+	<p:confirmDialog id="catalogo_dlgGuardar" severity="alert" widgetVar="dlgGuardar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea actualizar su pasword&#63;">
+		<h:form id="formDialogoGuardar">
+			<p:commandButton id="butSiGuardar" styleClass="butGral boton" value="Si" oncomplete="dlgGuardar.hide();" 
+				actionListener="#{infoUsuarioBean.actualizarCatalogo}" update=":infoUsuario_form" />
+			<p:commandButton id="butNoGuardar" styleClass="butGral boton" value="No" onclick="dlgGuardar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+</div>

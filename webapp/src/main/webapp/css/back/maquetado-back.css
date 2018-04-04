@@ -1,0 +1,206 @@
+
+/*----------------------------------------- MAQUETADO PRINCIPAL--------------------------------------------*/
+html, body { height: 100%; }
+
+.contenedorLogin{
+	background-color:#ffffff;
+    margin: 0 auto;
+    width: 1190px;
+    overflow:auto;
+    min-height: 680px;
+}
+
+.contenedor{
+	background-color:#eaeaea;
+    margin: 0 auto;
+    width: 1364px;
+	overflow: auto;
+	min-height: 647px;
+	min-width: 860px;
+}
+
+.encabezado{
+    float: left;
+    height: 97px;
+    width: 1190px;
+    display:none;
+}
+
+.contenedorModulos{	
+	background-color: #31353A;
+	float: left;
+	width: 100%;
+}
+
+.navegacionIzquierda{
+    background-color: #EAEAEA;
+    /*background-image:url('img/ligero-gris-ruido.jpg');*/
+    float: left;
+    width: 200px;
+    height:100%;
+    min-height: 560px;
+}
+
+.contenido{
+    background-color: white;
+    float: left;
+    width: 1162px;
+    min-height: 558px; 
+    padding: 0px;
+    margin: 0px;
+    min-width: 660px;    
+}
+
+.piePagina{
+    background-color: #0000FF;
+    clear: both;
+    height: 90px;
+    width: 980px;
+}
+
+
+/*---------------------------------------- FIN MAQUETADO ------------------------------------------*/
+
+
+/*-------------------------------------- MAQUETADO LOGIN -------------------------------------------*/
+
+.contenedorLogin{
+	background-color:#ffffff;
+    margin: 0 auto;
+    width: 940px;
+    overflow:auto;
+    min-height: 680px;
+}
+.imagenLogin{
+	background: url('../img/login2.png') no-repeat center;
+	height: 550px;
+    width: 500px;
+	float: left;
+	
+}
+/*
+.formularioLogin{
+	
+	float: left;
+	height: 550px;
+    width: 440px;
+}
+*/
+
+.formularioLogin {
+    float: left;
+    height: 450px;
+    margin-left: 260px;
+    margin-top: 144px;
+    width: 440px;
+}
+ .piePaginaLogin{
+ 	clear: both;
+ 	float: left;
+ 	width: 940px;
+ 	height: 30px;
+ 	
+ }
+ .txtUsuario:focus{
+ 	border: 1px solid;
+ 	outline: 0 none;
+ }
+ .txtUsuario{
+ 	height: 25px;
+    padding: 3px;
+    width: 350px;
+    font-weight: 600;
+    color: #666666;
+ }
+ .txtContrasena{
+ 	height: 25px;
+    padding: 3px;
+    width: 350px;
+    font-weight: 600;
+    color: #666666;
+ }
+ .txtContrasena:focus{
+ 	border: 1px solid;
+ 	outline: 0 none;
+ }
+ .botonLogin{
+ 	background-color: #3A01DF;
+    border: 0 none;
+    color: #FFFFFF;
+    font-weight: bolder;
+    height: 40px;
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 123px;
+    -moz-transition: all 0.2s ease-in-out;
+ }
+ 
+ .botonLogin:hover{
+ 	background-color: #7D61D0;
+ }
+
+.usuarioLogin{
+	margin-left: 10px;
+}
+.contrasenaLogin{
+	margin-left: 10px;
+}
+.contenedorLogin h3{
+    font-family: istok web;
+    font-size: 15px;
+    height: 10px;
+    font-weight: 500;
+    color: #666666;
+}
+.contenedorLogin h2{
+    color: #666666;
+    font-family: istok web;
+    font-size: 33px;
+    font-weight: inherit;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+.piePaginaLogin h6{
+    float: left;
+    font-family: istok web;
+    width: 375px;
+    font-weight: 100;
+}
+.piePaginaLogin h5{
+	float: left;
+    margin-left: 464px;
+    width: 100px;
+    font-family: istok web;
+    font-weight: 100;
+}
+.piePaginaLogin hr{
+	color: #EAEAEA;
+}
+
+.formularioLogin .ui-messages-error{
+    border: 1px solid;
+    font-size: 13px;
+    margin: 10px 0;
+    padding: 10px;
+    text-align: justify;
+    width: 380px;
+}
+.soAgua{
+	margin-left: -20px;
+    margin-top: 75px;
+    width: 220px;
+    margin-top: 90px;
+}
+
+.contenedor_imagen_portada{
+	width: 740px;
+	height: 100px;
+	margin-top: 50px;
+}
+
+.imagen_portada{
+	float: right;
+    margin-right: 10px;
+    margin-top: -7px;
+    width: 90px;
+}

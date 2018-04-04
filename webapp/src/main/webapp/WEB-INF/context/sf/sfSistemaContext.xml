@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sistema" class="com.servicios.app.sistema.impl.SistemaImpl" >
+		<property name="validarUsuarioSistema" ref="validarUsuarioSistema" />
+	</bean>
+	
+	<bean id="servicioPeticiones" class="com.servicios.app.peticion.impl.ServicioPeticionesImpl" >
+		<property name="registrarPeticion" ref="registrarPeticion" />
+		<property name="consultarPeticion" ref="consultarPeticion" />	
+		<property name="autorizarPeticion" ref="autorizarPeticion" />	
+		<property name="asignarOperador" ref="asignarOperador" />	
+		
+		<property name="consultarArchivos" ref="consultarArchivos" />	
+		<property name="consultarMovimientosProceso" ref="consultarMovimientosProceso" />
+		
+		<property name="consultarUltimoMovimientoValido" ref="consultarUltimoMovimientoValido" />
+		
+		<property name="agregarMovimientoGestion" ref="agregarMovimientoGestion" />	
+		<property name="actualizarStatusPeticion" ref="actualizarStatusPeticion" />	
+		
+		<property name="actualizarPeticion" ref="actualizarPeticion" />	
+		
+		
+		<property name="agregarProcesoPeticion" ref="agregarProcesoPeticion" />	
+		<property name="removerProcesoPeticion" ref="removerProcesoPeticion" />
+		
+		<property name="consultarPartidasPresupuesto" ref="consultarPartidasPresupuesto" />		
+		<property name="removerPartidaPresupuesto" ref="removerPartidaPresupuesto" />
+		<property name="agregarPartidaPresupuesto" ref="agregarPartidaPresupuesto" />	
+		<property name="crearPresupuesto" ref="crearPresupuesto" />
+		<property name="actualizarPresupuesto" ref="actualizarPresupuesto" />
+		
+		<property name="consultarFechaMovimiento" ref="consultarFechaMovimiento" />
+	
+	</bean>
+	
+	<bean id="servicioDashboard" class="com.servicios.app.dashboard.impl.ServicioDashboardImpl" >		
+		<property name="consultarDashboard" ref="consultarDashboard" />		 
+		<property name="consultarStatusPeticionPorRol" ref="consultarStatusPeticionPorRol" />
+		<property name="consultarResumenDashboard" ref="consultarResumenDashboard" />		 
+		
+		
+	</bean>
+	
+	<bean id="servicioCatalogo" class="com.servicios.app.catalogos.impl.ServicioCatalogoImpl" >
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="eliminarEntidad" ref="eliminarEntidad" />
+		<property name="actualizarEntidad" ref="actualizarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />
+		<property name="obtenerEntidadesPorCriterio" ref="obtenerEntidadesPorCriterio" />
+	</bean>
+	
+	<bean id="servicioComun" class="com.servicios.app.comun.impl.ServicioComunImpl" >		
+		<property name="codificarAES" ref="codificarAES" />		 
+		<property name="decodificarAES" ref="decodificarAES"/>		
+	</bean>
+	
+	<bean id="servicioReportes" class="com.servicios.app.reportes.impl.ServicioReportesImpl" >		
+		<property name="consultarReportesPorFecha" ref="consultarReportesPorFecha" />		 
+		<property name="consultarFechasReportes" ref="consultarFechasReportes"/>
+		<property name="consultarTotalReportes" ref="consultarTotalReportes"/>		
+	</bean>
+	
+	</beans>

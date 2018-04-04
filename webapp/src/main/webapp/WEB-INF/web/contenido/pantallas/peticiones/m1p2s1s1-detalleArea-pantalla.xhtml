@@ -1,0 +1,54 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     id="divDatosPeticionEstatusPlantilla"
+	 style="width: 380px; height: 200px; margin-left: 0px; margin-top: 0px;">
+     	
+		<style>
+			.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+			.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+				border: none;			
+			}
+			
+			#pnlDatosArea .ui-widget{
+				font-size: 11px;
+			}
+			
+		</style>     
+		<p:panelGrid id="pnlDatosArea" columns="3" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+        		
+        	<p:outputLabel  class="lblGral" id="m1p2s1s1_lblArea" value="Area:"/> 				
+        	<p:outputLabel id="m1p2s1s1_txtArea" value="#{areaBean.infoArea.nombre}" /> 
+			<br/>
+			
+			<p:outputLabel  class="lblGral" id="m1p2s1s1_lblResponsable" value="Responsable:"/> 
+        	<p:outputLabel id="m1p2s1s1_txtResponsable" value="#{areaBean.infoArea.descripcion}" /> 
+			<br/>
+			
+			<p:outputLabel  class="lblGral" id="m1p2s1s1_lblDireccion" value="Dirección:"/> 	
+        	<p:outputLabel id="m1p2s1s1_txtDireccion" value="#{areaBean.infoArea.direccion}" />
+			<br/>
+			
+			<p:outputLabel class="lblGral" id="m1p2s1s1_lblTelefono" value="Teléfono:" /> 		
+        	<p:outputLabel id="m1p2s1s1_txtTelefono" value="#{areaBean.infoArea.telefono}" /> 
+			<br/>
+			
+			<p:outputLabel class="lblGral" id="m1p2s1s1_lblEmail" value="Email:" />			
+        	<p:outputLabel id="m1p2s1s1_txtEmail" value="#{areaBean.infoArea.email}" /> 
+			<br/>
+			
+			<p:outputLabel class="lblGral" id="m1p2s1s1_lblUsuario" value="Usuario Asignado:" /> 
+			<p:outputLabel id="m1p2s1s1_txtUsuario" value="#{areaBean.infoUsuario.nombre}" /> 
+			<br/>
+			
+			<br/>        	
+			<p:commandButton id="m1p2s1s1_btnCerrar" value="Cerrar" onclick="dlg_2.hide();" 
+							actionListener="#{areaBean.resetBean}"/> 
+			<br/>
+		</p:panelGrid>		
+        		
+           
+</div>

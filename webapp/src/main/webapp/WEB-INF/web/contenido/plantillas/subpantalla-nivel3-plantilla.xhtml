@@ -1,0 +1,16 @@
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:dialog id="subpantallaNivel3_dlg"
+		header="#{aplicacion.paginaNivel3.nombre}" widgetVar="dlg_3"
+		modal="true" resizable="false" draggable="false"
+		closable="false" style="font-size:13px; width:100% !important;">
+
+		<h:panelGroup id="panelSubPantalla3">
+			<ui:include src="#{aplicacion.paginaNivel3.urlPantalla}" />
+		</h:panelGroup>
+	</p:dialog>
+</div>

@@ -1,0 +1,178 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     id="divPresupuestoPlantilla">
+ 	
+ 	<style> 				 
+		#presupuesto_ulFechaElaboracion{
+		   float:left;
+		   margin: 0;
+		   padding: 0;
+		   overflow: hidden;   
+		}
+		
+		#presupuesto_ulFechaElaboracion li {
+		   float:left;
+		   margin-right: 5px;
+		}
+		
+		#presupuesto_divFechaAutorizacion{
+			float:left;
+		   width: 560px;   
+		   margin-top: 8px;
+		   margin-bottom: 5px;
+	
+		}
+		
+		#presupuesto_divPartidas{
+		   float:left;
+		   width: 760px;   
+		   margin-top: 8px;
+		   margin-bottom: 5px;
+		}
+		#presupuesto_ulProducto{
+		   float: left;
+		   margin-right: 10px;
+		}
+		#presupuesto_ulCantidad{
+		   float:left;
+		   margin-right: 10px;
+		}
+		#presupuesto_ulUnidadMedida{
+		   float:left;
+		   margin-right: 10px;
+		}
+		#presupuesto_ulPrecioUnitario{
+		   float:left;
+		}
+		
+		#presupuesto_divResumenPartidas{
+		   float:left;
+		   width: 700px;
+		   height: 190px;   
+		}
+		#presupuesto_divPartidasYTotales{
+		   float:left;
+		   width: 550px;
+		   height: 190px;
+		   margin-right: 12px;
+		}
+		#presupuesto_divTablaPartidas{   
+		   float:left;
+		   border: 1px #DDDDDD solid;
+		   border-radius: 7px;
+		   width: 550px;
+		   height: 150px;
+		   overflow: auto;   
+		   margin-bottom: 10px;
+		}
+		#presupuesto_divTotalPartidas{
+		   float:right;
+		}
+		#presupuesto_ulTotalPartidas li:first-child{
+		   width: 50px;
+		   padding-top: 3px;
+		}
+		#presupuesto_ulTotalPartidas li{
+		   float: left;
+		}
+		.textoMonedaALaDerecha{
+		   text-align: right;
+		}
+		#presupuesto_ulBtnsPrincipalesPresupuesto{
+		   float:left;
+		   width: 125px;  
+		}
+		#presupuesto_ulBtnsPrincipalesPresupuesto li:first-child{
+		   height: 90px;
+		}
+		#presupuesto_ulBtnsPrincipalesPresupuesto li button{
+		   width: 125px;
+		}
+		
+		#presupuesto_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	 }
+         
+        #presupuesto_accordionResumen a{
+   			text-decoration: none;
+		}
+	</style>
+ 	
+ 	<h:form id="presupuesto_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+ 		
+ 		<h:inputText id="presupuesto_txtInfoTabSeleccionado" value="#{consultaDetalleBean.anclaTabSeleccionado}" style="display:none;" />
+      	<p:accordionPanel id="presupuesto_accordionResumen" multiple="true" activeIndex="0,1"  >
+      	    <p:ajax event="tabChange" listener="#{consultaDetalleBean.onTabChange}" update=":presupuesto_formPrincipal:presupuesto_txtInfoTabSeleccionado"/>
+        	<p:tab title="Presupuesto" id="presupuesto_tabAccordionDatSolicitante" rendered="#{consultaDetalleBean.asignarPresupesto.mostrarContenido}">
+        		<p:messages id="presupuesto_areaMsges" showDetail="false" globalOnly="false" for="presupuesto_msges"/>        		
+				
+				<div id="presupuesto_divFechaAutorizacion" > 
+					<ul id="presupuesto_ulFechaElaboracion">
+						<li> <p:outputLabel  class="lblGral" id="presupuesto_lblFechaElaboracionPresupuesto" value="Fecha de Elaboracion:"/> </li>
+						<li> <p:outputLabel id="presupuesto_txtFechaElaboracionPresupuesto" value="#{consultaDetalleBean.asignarPresupesto.fechaElaboracionPresupuesto}" 
+								>
+								<f:convertDateTime pattern="dd-MMM-yyyy"/>
+							 </p:outputLabel> 
+						</li>
+					</ul>				
+				</div>
+				<div id="presupuesto_divResumenPartidas" >
+				    <div id="presupuesto_divPartidasYTotales">
+						<div id="presupuesto_divTablaPartidas">
+						  <p:dataTable id="presupuesto_tablaPartidas" 
+						  	var="partida" value="#{consultaDetalleBean.asignarPresupesto.listaPartidas}">
+						  	
+						  	<p:column headerText="Fecha">
+								<h:outputText value="#{partida.fecha}"> 
+									<f:convertDateTime pattern="dd-MMM-yyyy"/>
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Concepto">
+								<h:outputText value="#{partida.concepto}" />
+							</p:column>
+							<p:column headerText="Cantidad">
+								<h:outputText value="#{partida.cantidad}" />
+							</p:column>
+							<p:column headerText="UM">
+								<h:outputText value="1" />
+							</p:column>
+							<p:column headerText="PU">
+								<div class="textoMonedaALaDerecha">
+									<h:outputText value="#{partida.pu}">
+										<f:convertNumber currencySymbol="$" type="currency" locale="es_MX" />
+									</h:outputText>
+								</div>
+							</p:column>
+							<p:column  headerText="Total">
+							    <div class="textoMonedaALaDerecha">
+									<h:outputText value="#{partida.totalPartida}">
+										<f:convertNumber  currencySymbol="$" type="currency" locale="es_MX"/>
+									</h:outputText>
+								</div>
+							</p:column>														
+						  </p:dataTable>
+					    </div>
+					    <div id="presupuesto_divTotalPartidas">
+					      <ul id="presupuesto_ulTotalPartidas">
+					      	<li> <h:outputText id="presupuesto_lblTotal" value="Total:" /> </li>
+					      	<li> </li>
+					      	<li> <p:outputLabel id="presupuesto_txtTotal" value="#{consultaDetalleBean.asignarPresupesto.sumaTotal}" size="8"
+					      			styleClass="textoMonedaALaDerecha" class="lblGral" >
+					      			<f:convertNumber currencySymbol="$" type="currency" locale="es_MX" />
+					      		 </p:outputLabel> </li>
+					      </ul>
+						</div>      	   				 
+					</div>					
+					
+				</div>
+        	</p:tab>
+        	<p:tab title="Crear Presupuesto" id="presupuesto_tabAccordionDatSolicitante2" rendered="#{!consultaDetalleBean.asignarPresupesto.mostrarContenido}">
+        		<p:messages id="presupuesto_areaMsges2" showDetail="false" globalOnly="false" for="presupuesto_msges2"/>
+        	</p:tab>
+        </p:accordionPanel>	
+ 	</h:form> 	
+ </div>

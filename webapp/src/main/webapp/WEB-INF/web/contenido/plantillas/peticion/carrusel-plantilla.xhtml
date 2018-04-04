@@ -1,0 +1,47 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+     id="divCarruselPlantilla"
+     style="width: 900px; height: 600px; margin-left: 0px; margin-top: 0px; ">
+     	
+	<style>	
+		
+		#carrusel_divBotones{
+			margin-bottom: 10px;
+			margin-top: 10px;
+			width:100px;
+			margin-left:400px;
+		}
+	
+		/**#carrusel_divImagenes{
+			width:100px;
+			height:100px; 
+		}
+	
+		.ui-galleria-panel{
+			width=800px;
+			height=500px;
+		}*/
+	</style>
+
+	<div id="carrusel_divImagenes">
+		<p:messages id="carrusel_areaMsges" showDetail="false" globalOnly="false" for="carrusel_msges"/>		
+		
+		<p:accordionPanel id="carrusel_accordion" var="archivo" value="#{archivosBean.listaArchivos}" 
+			multiple="true" activeIndex="0">
+			<p:tab title="#{archivo.nombre}">
+				<p:graphicImage value="#{imagenBean.streamedImage}" width="890">
+					<f:param name="idArchivo" value="#{archivo.idArchivo}" />
+				</p:graphicImage>			
+			</p:tab>
+		</p:accordionPanel>		
+		
+	</div>	
+	<div id="carrusel_divBotones">
+		<p:commandButton value = "Cerrar" onclick="dlg_2.hide()" actionListener="#{imagenBean.resetBean}" />
+	</div>
+</div>	

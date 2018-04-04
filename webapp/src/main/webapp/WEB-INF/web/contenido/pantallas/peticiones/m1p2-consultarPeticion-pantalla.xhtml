@@ -1,0 +1,180 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      id="m1p2_divBusqueda" style="width: 1250px; height: calc(100% - 100px); margin-left: 5px; " >
+      
+      <style>
+      	 #m1p2_formPrincipal{
+		   width: 100%;
+		   height: 100%;		   
+         }   
+		 #m1p2_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	 }        
+         
+         #m1p2_divBusqueda{
+		   
+		   padding-top: 5px;
+		   padding-bottom: 5px;
+		}		 
+		
+		/*Use this to remove cell borders in panelgrid component*/
+		.m1p2_pnlGridOpcionesConsulta.ui-panelgrid>*>tr,
+		.m1p2_pnlGridOpcionesConsulta.ui-panelgrid>*>tr>td {
+			border: none;
+		}
+}
+		 
+		       </style>
+      <h:form id="m1p2_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+      	<p:messages id="consulta_areaMsges" showDetail="false" globalOnly="false" for="consulsta_msges"/>
+      
+      	   <div id="m1p2_divColumnaIzq">
+      	   		
+				<div id="m1p2_divBusqueda">
+      	   			<p:panel id="m1p2_fldSetOpcionesConsulta" header="Opciones de Consulta" >
+      	   			
+					<p:panelGrid  columns="5" cellpadding="10" styleClass="m1p2_pnlGridOpcionesConsulta">
+						<p:outputLabel class="lblGral"  id="m1p2_lblFolio" value="Folio:"/>
+						<p:inputText id="m1p2_txtFolio" value="#{consultaPeticionesBean.folio}" size="20" maxlength="13"/>
+						<p:outputLabel class="lblGral"  id="m1p2_lblSolicitante" value="Solicitante:" />
+						<p:inputText id="m1p2_txtSolicitante" value="#{consultaPeticionesBean.solicitante}" size="40" />
+						<p:commandButton id="m1p2_btnBuscar" value="Buscar" actionListener="#{consultaPeticionesBean.buscar}" icon="ui-icon-search" 
+      	   					 	process="m1p2_fldSetOpcionesConsulta" update="@form"/> 
+						
+						<p:outputLabel class="lblGral"  id="m1p2_lblColonia" value="Colonia/Comunidad:"/>
+						<p:selectOneMenu id="m1p2_listaComunidades" value="#{consultaPeticionesBean.idEntidadMpalSeleccionada}">
+      	   						<f:selectItem itemLabel="Todas" itemValue="0" />      	   						
+      	   						<f:selectItems value="#{consultaPeticionesBean.listaEntidadMpal}" var="colonia" itemLabel="#{colonia.nombre}" 
+      	   							itemValue="#{colonia.idEntidadMpal}"/>      	   						 
+      	   					 </p:selectOneMenu>
+						<p:outputLabel class="lblGral"  id="m1p2_lblFechaCaptura" value="Fecha de captura:" />
+						<p:calendar id="m1p2_calendario" value="#{consultaPeticionesBean.fechaDeBusqueda}" showOn="button"/>
+						<p:commandButton id="m1p2_btnLimpiar" value="Limpiar" actionListener="#{consultaPeticionesBean.limpiar}" icon="ui-icon-close" 
+      	   					 	process="m1p2_fldSetOpcionesConsulta" update="@form"/> 
+					
+						<p:outputLabel class="lblGral"  id="m1p2_lblSatatus" value="Estatus:" />
+						<p:selectOneMenu id="m1p2_listaStatus" value="#{consultaPeticionesBean.idEstatusSeleccionado}">
+      	   						<f:selectItem itemLabel="Todos" itemValue="0" />      	   						
+      	   						<f:selectItems value="#{consultaPeticionesBean.listaEstatus}" var="status" itemLabel="#{status.valor}" 
+      	   							itemValue="#{status.idStatusPeticion}"/>      	   						 
+      	   					 </p:selectOneMenu>
+						<p:outputLabel class="lblGral"  id="m1p2_lblArea" value="Área:" rendered="#{consultaPeticionesBean.mostrarCmbAreas}"/>
+						<p:selectOneMenu id="m1p2_listaAreas" value="#{consultaPeticionesBean.idAreaSeleccionada}" rendered="#{consultaPeticionesBean.mostrarCmbAreas}">
+      	   						<f:selectItem itemLabel="Todas" itemValue="0" />      	   						
+      	   						<f:selectItems value="#{consultaPeticionesBean.listaAreas}" var="area" itemLabel="#{area.nombre}" 
+      	   							itemValue="#{area.idArea}"/>      	   						 
+						</p:selectOneMenu>
+							
+					</p:panelGrid>
+					<pe:keyFilter for="m1p2_txtFolio" regEx="/[\d\-\.]/" preventPaste="false"></pe:keyFilter>							
+					
+      	   		</p:panel>
+      	   		</div>
+			
+      	   		<div id="m0p2_divTablaPeticiones">
+				<p:panel id="m1p2_pnlResultados" header="Resultados de la Consulta"> 
+      	   			<p:dataTable id="m1p2_tablaPeticiones" var="peticion" value="#{consultaPeticionesBean.listaPeticiones}" 
+   	      			 	rowKey="#{peticion.idPeticion}" 	
+						paginator = "true"
+						currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,25,50"
+						rows = "10">
+   	      				<p:column headerText="Folio" sortBy="#{peticion.folio}">
+   	      					<p:commandLink value="#{peticion.folio}" oncomplete="dlg.show()" update=":subPantallaNivel1" 
+									actionListener="#{consultaPeticionesBean.abrirSubPantallaNivel1}" 
+									process="@this"	style = "font-weight: bold; color: rgb(0,0,255);" >
+									<f:param name="urlPagina"
+									         value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1-consultarPeticionDetalle-pantalla.xhtml" />
+									<f:param name="nombrePagina" 
+										value="#{'Resultado de la consulta :: '.concat('Folio: ').concat(peticion.folio).concat(' :: Status: ').concat(peticion.statusActual)}" />
+									<f:param name="idPeticion" value="#{peticion.idPeticion}"/>
+									<f:param name="origen" value="consulta"/>									
+							</p:commandLink>
+   	      				</p:column>
+   	      				<p:column headerText="Descripcion">
+   	      					<p:commandLink id="m1p2_lnkVerDescripcion" value="..."  
+							style = "font-weight: bold; color: rgb(0,0,255);" onclick="return false;"/>							
+							<p:overlayPanel for="m1p2_lnkVerDescripcion" showEvent="mouseover" hideEvent="mousedown">
+									<h:outputText class="lblGral" value="#{peticion.descripcion}" />									
+							</p:overlayPanel>							
+   	      				</p:column>
+   	      				<p:column headerText="Solicitante" sortBy="#{peticion.solicitante}">
+   	      					<h:outputText  value="#{ peticion.solicitante}" />
+   	      				</p:column>     		
+   	      				<p:column headerText="Colonia/Comunidad" sortBy="#{peticion.colonia}">
+   	      					<h:outputText  value="#{peticion.colonia}" />
+   	      				</p:column>   	      				
+						<p:column headerText="F. Captura" sortBy="#{peticion.fechaCaptura}">
+   	      					<h:outputText  value="#{peticion.fechaCaptura}">
+   	      						<f:convertDateTime pattern="dd-MM-yyyy"/>
+   	      					</h:outputText>
+   	      				</p:column>
+						<p:column headerText="Area" sortBy="#{peticion.area}">
+   	      					<h:outputText   
+   	      						value="#{ peticion.area}" />
+   	      				</p:column>
+   	      				<p:column headerText="Status" sortBy="#{peticion.statusActual}">
+   	      					<h:outputText class="lblGral"
+   	      						value="#{peticion.statusActual}" />
+   	      				</p:column>   	      				
+   	      				<p:column headerText="Prioridad" sortBy="#{peticion.prioridad}">
+   	      					<h:outputText 
+   	      					    value="#{peticion.prioridad}" />
+   	      				</p:column>   	  
+   	      				
+						<p:column rendered="#{consultaPeticionesBean.mostrarColumnaSuspender}">
+							<div>						
+								<p:commandLink value="|Suspender|" update="@form,:m1p2_formConfirmarAccion:m1p2_confirmarAccion" 
+										rendered="#{peticion.idStatusActual != 20 and peticion.idStatusActual != 17 and peticion.idStatusActual != 18 and peticion.idStatusActual != 19}"
+										actionListener="#{consultaPeticionesBean.actualizarStatusPeticion(19,peticion.idPeticion,peticion.folio)}" 
+										style = "font-weight: bold; color: rgb(0,0,255);font-size: 11px; float: left;padding:  4px;" 
+										oncomplete="confirmarAccion.show()" process="@form">																		
+								</p:commandLink>
+								<p:commandLink value="|Cancelar|" update="@form,:m1p2_formConfirmarAccion:m1p2_confirmarAccion"
+										rendered="#{peticion.idStatusActual != 20 and peticion.idStatusActual != 17 and peticion.idStatusActual != 18 and peticion.idStatusActual != 19}" 
+										actionListener="#{consultaPeticionesBean.actualizarStatusPeticion(20,peticion.idPeticion,peticion.folio)}" 
+										style = "font-weight: bold; color: rgb(0,0,255);font-size: 11px; float: left;padding:  4px;" 
+										oncomplete="confirmarAccion.show()" process="@form">									
+								</p:commandLink>
+								<p:commandLink value="|Reactivar|" update="@form,:m1p2_formConfirmarAccion:m1p2_confirmarAccion" 
+										rendered="#{peticion.idStatusActual == 18 or peticion.idStatusActual == 19}" 
+										actionListener="#{consultaPeticionesBean.actualizarStatusPeticion(0,peticion.idPeticion,peticion.folio)}"
+										style = "font-weight: bold; color: rgb(0,0,255); font-size: 11px; float: left;padding: 4px;" 
+										oncomplete="confirmarAccion.show()" process="@form">																		
+								</p:commandLink>
+								<p:commandLink value="|Reasignar|" 
+										style = "font-weight: bold; color: rgb(0,0,255); font-size: 11px; float: left;padding: 4px;"
+										oncomplete="dlg.show()" update=":subPantallaNivel1" 
+										actionListener="#{dashboardBean.abrirSubPantallaNivel1}"
+										rendered="#{peticion.idStatusActual == 3 or peticion.idStatusActual == 4}" process="@this">
+										<f:param name="urlPagina" value="/WEB-INF/web/contenido/plantillas/peticion/dashboard/areaAtencion-plantilla.xhtml" />
+										<f:param name="nombrePagina" value="#{'REASIGANAR FOLIO '.concat(peticion.folio)}" />
+										<f:param name="idPeticionDashboard" value="#{peticion.idPeticion}"/>
+										<f:param name="movimiento" value="Reasignar"/>												
+								</p:commandLink>
+							</div>
+						</p:column>  	      				
+   	      			</p:dataTable>
+				</p:panel>
+      	   		</div>
+      	   </div>
+		   
+      </h:form>
+      <h:form id="m1p2_formConfirmarAccion">
+      	
+      	<p:confirmDialog id="m1p2_confirmarAccion" severity="alert" widgetVar="confirmarAccion" header="Confirmacio&#769;n" visible="false"
+			message="#{consultaPeticionesBean.mensajeConfirmDialog}" styleClass="confirmarAccionGral" >
+			<div id="m1p2_confirmaAccion_divBotones" class="confirmarAccion_divBotones">
+				<p:commandButton id="m1p1_btnConfirmarAccion_Si" value="Si" oncomplete="confirmarAccion.hide();" 
+					actionListener="#{consultaPeticionesBean.realizarAccion}" 
+					update=":m1p2_formPrincipal:" />
+				<p:commandButton id="m1p1_btnConfirmarAccion_No" value="No" onclick="confirmarAccion.hide()" type="button"/>
+			</div>		
+	  	</p:confirmDialog>
+	  </h:form>
+</div>

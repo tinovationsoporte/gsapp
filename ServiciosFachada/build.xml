@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Deploy Servicio Fachada a glassfish" basedir=".">
+    
+	<import file="../general-propierties.xml" as="general" />
+	<import file="${mc.package}" as="package"/> 
+			
+	<target name="empaquetarServicioFachada" depends="empaquetarServicioNegocios">		
+		<empaquetar-jar nombre="SF"  directorioFuentes="${src.dir}" directorioClases="${build.dir}" 
+			        classpath-id="master-classpath" archivoDestino="${sf.nombrearchivo}" />
+	</target>
+	
+	<target name="empaquetarServicioNegocios">
+	   <ant dir="${sn.ruta}" antfile="build.xml"  target="empaquetarServicioNegocios" inheritall="true" inheritrefs="true"/>		
+	</target>
+	
+	<target name="crearOneJAR" depends="empaquetarServicioFachada">
+		<jar destfile="${proyecto.classpath}/principal.jar">		     
+		     <fileset dir="${proyecto.classpath}" includes="**/*.jar" />
+	    </jar>
+	</target>
+
+</project>

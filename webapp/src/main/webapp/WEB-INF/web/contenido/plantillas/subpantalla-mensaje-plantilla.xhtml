@@ -1,0 +1,16 @@
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<p:dialog id="subpantallaMensaje_dlg"
+		header="Mensaje" widgetVar="dlg_mensaje"
+		modal="true" resizable="false" draggable="false"
+		style="font-size:13px;">
+
+		<h:panelGroup id="panelMensaje">
+			<h:outputLabel value="#{aplicacion.mensaje}" styleClass="lblGral"/>
+		</h:panelGroup>
+	</p:dialog>
+</div>

@@ -1,0 +1,54 @@
+@CHARSET "ISO-8859-1";
+
+.modulos {
+    background-color: #3A01DF;
+    float: left;
+    font-size: 13px;
+    margin-top: 0;
+    width: 100%;
+}
+.modulos ul li {
+    border: none;
+	border-right: 0px solid #FFFFFF;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 4.5px;
+    border-radius: 0px;
+    transition: all 0.5s linear 0s;
+}
+.modulos ul li a {
+    color: #FFFFFF;
+    padding: 0 4px;
+    text-decoration: none;
+}
+.modulos ul li:hover {
+    background-color: #0150A0;
+   	border-radius: 0px;
+   	border-right: 0px solid #FFFFFF;   	
+}
+.modulos ul li *:active {
+    background-color: #0150A0;
+    border-radius: 1px 1px 1px 1px !important;
+    clear: both;
+}
+.modulos ul li a:visited{
+	border-radius:7px;
+	background-color:#000099;
+}
+.modulos ul li:last-child {
+	border-right: none;
+}
+.modulos ul li + li {
+    padding-left: 2px;
+    content: "|";
+}
+
+
+.moduloActivo{
+	background-color: #0150A0 !important;
+}

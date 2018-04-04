@@ -1,0 +1,62 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"    
+     id="divAsignacionOperadorPlantilla"
+	  style="width: 500px; height: 200px; margin: 10px;">
+	 
+	 <style>
+	 
+		#asignacion_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	 
+	    }	
+	 </style>
+	 
+	 <h:form id="asignacion_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+     	<p:messages id="asignacion_areaMsges" showDetail="false" globalOnly="false" for="asignacion_msges"/>
+        	
+			<p:panelGrid columns="3" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+				<h:outputText class="lblGral" id="asignacion_lblFechaAsignacionOperador" value="Fecha de Asignacion:" /> 
+				<p:inputText id="asignacion_txtFechaAsignacionOperador" readonly="true"
+								 value="#{asignarOperadorBean.fecha}" >
+								<f:convertDateTime pattern="dd-MM-yyyy"/>
+				</p:inputText>
+				<p:commandButton id="asignacion_btnAsignarOperador" value="Asignar"  
+								actionListener="#{asignarOperadorBean.asignarOperador}"
+								style="width:100px;"
+								update="@form"
+								disabled ="#{!asignarOperadorBean.habilitarBtnAsignar}"  
+								icon="ui-icon-person"/>
+				
+				
+				
+				<h:outputText class="lblGral" id="asignacion_lblOperador" value="Operador:"/>
+				<p:selectOneMenu id="asignacion_listaOperadores" value="#{asignarOperadorBean.idUsuarioOperador}"
+								disabled="#{!asignarOperadorBean.habilitarCaptura}">
+								<f:selectItem itemLabel="Selecciona un operador" itemValue="0"/>
+								
+								<f:selectItems value="#{asignarOperadorBean.listaOperadores}" var="operador" itemLabel="#{operador.nombre}" 
+									itemValue="#{operador.id}" />
+								 <p:ajax update="@form" listener="#{asignarOperadorBean.onListChange}" process="@this"/>
+				</p:selectOneMenu>
+				<p:commandButton id="reasignacion_btnCerrar" 
+								actionListener="#{asignarOperadorBean.resetBean}"
+								onclick="dlg.hide();" 
+								style="width:100px;"
+								update=":panelContenido"			  	    		
+								value="Cerrar" icon="ui-icon-power"/> 				
+				
+				<h:outputText class="lblGral" id="asignacion_lblCerrarEvidencia" value="Cerrar Evidencia:" />
+				<p:selectOneMenu id="asignacion_listaCerrarConEvidencia" value="#{asignarOperadorBean.requiereEvidencia}"
+								disabled="#{!asignarOperadorBean.habilitarCaptura}">
+								<f:selectItem itemLabel="Si" itemValue="1"/>
+								<f:selectItem itemLabel="No" itemValue="0"/>							
+							 </p:selectOneMenu> 		
+				<br/>
+			</p:panelGrid>		
+     </h:form> 
+ </div>

@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+.arrow_box {
+	position: relative;
+	background: #88b7d5;
+	border: 4px solid #4522f5;
+}
+.arrow_box:after, .arrow_box:before {
+	left: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: #88b7d5;
+	border-width: 10px;
+	top: 50%;
+	margin-top: -10px;
+}
+.arrow_box:before {
+	border-color: rgba(69, 34, 245, 0);
+	border-left-color: #4522f5;
+	border-width: 16px;
+	top: 50%;
+	margin-top: -16px;
+}

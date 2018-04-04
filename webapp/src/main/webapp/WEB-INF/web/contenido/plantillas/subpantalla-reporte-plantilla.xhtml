@@ -1,0 +1,22 @@
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<style>
+	
+	
+	
+	</style>
+
+	<p:dialog id="subpantallaReporte_dlg"
+		header="Reporte" widgetVar="dlg_reporte"
+		modal="true" resizable="false" draggable="false"
+		style="font-size: 13px; margin-top: 1px; width:980px; height: 510px; left: 240.5px; z-index: 1003;" >
+
+		<h:panelGroup id="panelReporte">
+			<object width="960px" height="500px" data="#{aplicacion.direccionReporte}"></object>
+		</h:panelGroup>
+	</p:dialog>
+</div>

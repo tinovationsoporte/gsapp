@@ -1,0 +1,180 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      id="m4p1_divReporteActividades" style="width: 1250px; height: 700px; margin-left: 5px; " >
+      
+      <style>
+      	 #m4p1_formPrincipal{
+		   width: 1250px;
+		   height: height:650px;		   	
+         }   
+		      
+         #m4p1_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	 }	
+         		 
+		#m4p1_divCalendario{
+			width:400px;
+			heigth:300px;
+			float:left;		
+			margin:10px;
+		}
+		
+		#m4p1_divReporte{
+			width:800px;
+			heigth:600px;
+			float:left;
+			margin:10px;			
+		}
+		
+		
+		
+		#m4p1_divObservaciones{
+			width:800px;
+			heigth:600px;
+			float:left;
+			margin:10px;			
+		}
+
+		#m4p1_divEtiquetas{			
+			margin-top:10px;			
+		}	
+		
+		
+		.m4p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m4p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+		
+		.m4p1_pnlGridCaptura{
+			margin-right:200px;
+		}
+		
+		
+		.porCapturar .fc-event-inner{
+   			background-color: red;
+   			border-color: red;
+   			color: black;
+		}
+		
+		.capturado .fc-event-inner{
+   			background-color: blue;
+   			border-color: white;
+   			color: white;
+		}
+		
+		.revisado .fc-event-inner{
+   			background-color: green;
+   			border-color: white;
+   			color: white;
+		}
+		
+		.observaciones .fc-event-inner{
+   			background-color: yellow;
+   			border-color: red;
+   			color: black;
+		}
+		
+		#m4p1_divEtiquetas{			
+			margin-top:10px;			
+		}	
+		
+		.m4p1_divEtiqueta{			
+			font-size: 9px !important;
+			font-weight: bold; 
+			width:70px; 
+			height:35px; 
+			float:left;
+			margin: 5px;			
+			border: 1px gray solid;
+		  	border-radius: 4px;	
+			box-shadow: 2px 5px #888888;
+			padding-left:7px;
+			padding-top: 5px;	
+     	}
+		
+	</style>
+
+	<script type="text/javascript">
+	    PrimeFaces.locales['es'] = {
+	        closeText: 'kapat',
+	        prevText: 'anterior',
+	        nextText: 'siguiente',
+	        currentText: 'actual',
+	        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+	            'Julio','Agosto','Septiembre','Octubre','Noviembre','Dic'],
+	        monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+	            'Jul','Ago','Sep','Oct','Nov','Dic'],
+	        dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
+	        dayNamesShort: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+	        dayNamesMin: ['Do,','Lu','Ma','Mi','Ju','Vi','Sa'],
+	        weekHeader: 'Semana',
+	        
+	        isRTL: false,
+	        showMonthAfterYear: false,
+	        yearSuffix: '',
+	        month: 'Mes',
+	        week: 'Semana',
+	        day: 'Dia',
+	        allDayText : 'Todo el Dia'
+	    };
+	</script>
+	
+      <h:form id="m4p1_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+      	<p:messages id="reporte_areaMsges" showDetail="false" globalOnly="false" for="reporte_msges"/>	
+
+		<div id="m4p1_divCalendario"> 
+			<p:panel header="Calendario de Reportes" id="m4p1_pnlCalendario">		
+				<p:schedule id="m4p1_schActividades" value="#{capturaReporteActividadBean.modeloCalendario}" locale="es"  rightHeaderTemplate=""
+					centerTemplate="month">
+					<p:ajax event="eventSelect" listener="#{capturaReporteActividadBean.onEventSelect}" 
+						update=":m4p1_formPrincipal:m4p1_pnlReporte,:m4p1_formPrincipal:m4p1_pnlObservaciones, reporte_areaMsges"  />				
+				</p:schedule>      	  		      	  	
+			</p:panel>	
+			<div id="m4p1_divEtiquetas"> 
+				<div id="m4p1_divLblPorCapturar" class="m4p1_divEtiqueta" style="background-color: red; color: black">
+					Por Capturar
+				</div>
+				
+				<div id="m4p1_divLblCapturado" class="m4p1_divEtiqueta" style="background-color: blue; color: white">
+					Capturado
+				</div>
+				
+				<div id="m4p1_divLblRevisado" class="m4p1_divEtiqueta" style="background-color: green; color: white">
+					Revisado 
+				</div>
+				
+				<div id="m4p1_divLblObservaciones" class="m4p1_divEtiqueta" style="background-color: yellow">
+					Revisado - Observaciones
+				</div>
+				
+				
+			</div>
+		</div>
+		
+		<div id="m4p1_divReporte">
+			<p:panel header="Reporte" id="m4p1_pnlReporte" >
+					<p:editor value="#{capturaReporteActividadBean.textoEditor}" disabled="#{!capturaReporteActividadBean.habilitarCaptura}" 
+						controls="bold italic underline color size bullets numbering alignleft center alignright justify copy paste undo redo print" />													
+					
+					<p:panelGrid columns="2" cellpadding="150"  styleClass="m4p1_pnlGridCaptura" rendered="#{capturaReporteActividadBean.mostrarBotones}" >
+						<p:commandButton id="m0p1_btnGuardar" value="Guardar" actionListener="#{capturaReporteActividadBean.guardarReporte}" 
+									icon="ui-icon-disk" style="width:100px" update=":m4p1_formPrincipal:m4p1_pnlCalendario,reporte_areaMsges"/> 						
+					</p:panelGrid>
+			</p:panel>
+		</div>	
+		
+		<div id="m4p1_divObservaciones">
+			<h:panelGroup id="m4p1_pnlObservaciones">
+			<p:panel  header="Observaciones" rendered="#{capturaReporteActividadBean.mostrarObservaciones}">
+				<p:editor value="#{capturaReporteActividadBean.textoObservaciones}" disabled="true" 
+					controls="" />
+			</p:panel>
+			</h:panelGroup>
+		</div>			   
+      </h:form>
+      
+</div>

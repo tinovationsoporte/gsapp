@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+	
+	
+	<application>
+	 
+    	<el-resolver>        
+        	org.springframework.web.jsf.el.SpringBeanFacesELResolver
+    	</el-resolver>
+  	
+  		<resource-bundle>
+        	<base-name>recursos.mensajes</base-name>
+        	<var>msj</var>
+    	</resource-bundle>
+    
+    	<locale-config>
+        	<default-locale>es</default-locale>
+        </locale-config>  	
+  	</application>
+	
+	<factory>
+
+  		<exception-handler-factory>
+    		org.primefaces.extensions.component.ajaxerrorhandler.AjaxExceptionHandlerFactory
+  		</exception-handler-factory>
+	</factory> 
+
+	 
+	
+	
+	<managed-bean>
+		<description>DTO para validar el acceso de usuarios al sistema.</description>
+		<managed-bean-name>validarUsuarioSistemaPeticion</managed-bean-name>
+		<managed-bean-class>com.objetos.transf.datos.app.sistema.ValidarUsuarioSistemaPeticion</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+
+	
+	<managed-bean>
+		<description>DTO para obtener los usuarios CMAS por un criterio establecido.</description>
+		<managed-bean-name>obtenerUsuariosPorCriterioPeticion</managed-bean-name>
+		<managed-bean-class>com.objetos.transf.datos.app.padron.ObtenerUsuariosPorCriterioPeticion</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<description>DTO para obtener los usuarios CMAS por un criterio establecido.</description>
+		<managed-bean-name>consultarUsuariosPorCriterioPeticion</managed-bean-name>
+		<managed-bean-class>com.objetos.transf.datos.app.padron.ConsultarUsuariosPorCriterioPeticion</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	
+	
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/principal.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>fallo</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+    </navigation-rule>	
+    
+    
+	<navigation-rule>
+		<display-name>principal.xhtml</display-name>
+		<from-view-id>/principal.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>cerrar</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+
+</faces-config>
+
+    
+
+
+
+
+
+

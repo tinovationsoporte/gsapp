@@ -1,0 +1,238 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html" 
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+	 >
+	
+ <style type="text/css">
+	 .fieldsetGral{
+	 	width:600px;
+	 }	
+	 
+	 .ul1{
+	 	margin-left:10px;
+	 }
+	 
+	 .texBox1{
+	 	width:400px;
+	 }
+	 
+	 .textBox{
+	 	width:210px;
+	 }
+	 .listaBotones{
+	 	margin-left:50px;
+	 	margin-top:10px;
+	 	margin-bottom:10px;
+	 }
+	 
+	 .espacioBoton{
+	 	margin-left:10px;
+	 }
+	 
+	 .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0 #C4C4C4;
+	    border: 1px solid #A8A8A8;
+	    color: #4F4F4F;
+	    font-size: 12px;
+	    font-weight: bold;
+	    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	}
+	.ui-dialog .ui-dialog-title {
+	    float: left;
+	    font-size: 13px;
+	    margin: 0.3em 16px 0.1em 0;
+	}
+	.ui-dialog .ui-dialog-content {
+		font-size: 15px;
+	}
+	.ui-messages-info, .ui-messages-warn, .ui-messages-error, .ui-messages-fatal {
+	    border: 1px solid;
+	    font-size: 13px;
+	    margin: 10px 0;
+	    padding: 10px;
+	    width: 584px;
+	}
+	
+	.ui-inputfield, .ui-password, .ui-widget, .ui-state-default, .ui-corner-all, .ui-state-error, 
+	.ui-state-hover, .ui-state-focus{
+	   font-size: 12px;	   
+	}
+	
+	.ui-state-hover, .ui-state-focus, .ui-inputfield .ui-state-focus, .ui-widget-content .ui-inputfield.ui-state-focus,
+	.ui-widget-header .ui-inputfield .ui-state-focus{
+	   box-shadow: 0;
+	}
+	
+	.ui-inputfield.ui-state-focus, .ui-widget-content .ui-inputfield.ui-state-focus, .ui-widget-header .ui-inputfield.ui-state-focus {
+    	box-shadow: 0 important!;
+	}
+	
+	.ui-inputfield{
+	   padding: 1px;
+	}
+</style>
+
+
+    <h:form id="m4p5_form" class="frmGral">
+		<p:messages id="m4p5_mensajes" showDetail="true"  for="mensajes" />
+		<h:inputHidden id="m4p5_hdn" ></h:inputHidden>
+		<h2>
+			<h:outputText id="catTxtNombreCatalogo" value="Catalogo de Productos"></h:outputText>
+		</h2>
+		<br/>
+		<fieldset id="m4p5_field" class="fieldGral fieldsetGral">
+			<legend class="lblGral">Captura / edicion de datos</legend>
+			
+			<table>  			  
+			   <tr>
+			       <td> <h:outputLabel value="LINEA:" id="m4p5_lblLinea" class="lblGral"/> </td>
+			       <td> <h:selectOneMenu id="m4p5_cmbLinea" value="" >
+			       			<f:selectItem itemLabel="Seleccione una opcion" itemValue="" noSelectionOption="true"></f:selectItem>
+			       			<f:selectItem itemLabel="PLATILLOS" itemValue="1"></f:selectItem>
+			       		    <f:selectItem itemLabel="BOTANAS" itemValue="2"></f:selectItem>
+			       		    <f:selectItem itemLabel="POSTRES" itemValue="3"></f:selectItem>
+			       		    <f:selectItem itemLabel="BEBIDAS" itemValue="3"></f:selectItem>
+			       		    
+			       		</h:selectOneMenu> 
+			       </td>
+			       <td> <p:message for="m4p5_cmbLinea"/> </td>
+			    </tr>
+			    <tr>
+			       <td> <h:outputLabel value="FAMILIA:" id="m4p5_lblFamilia" class="lblGral"/> </td>
+			       <td> <h:selectOneMenu id="m4p5_cmbFamilia" value="">
+			       			<f:selectItem itemLabel="Seleccione una opcion" noSelectionOption="true"></f:selectItem>
+			       			<f:selectItem itemLabel="REFRESCO" itemValue="1"></f:selectItem>
+			       		    <f:selectItem itemLabel="CERVEZA" itemValue="2"></f:selectItem>
+			       		    <f:selectItem itemLabel="AGUAS" itemValue="3"></f:selectItem>
+			       		</h:selectOneMenu> 
+			       </td>
+			    </tr>					 			
+				<tr>
+			       <td> <h:outputLabel value="UNIDAD DE MEDIDA:" id="m4p5_lblMedida" class="lblGral"/> </td>
+			       <td> <h:selectOneMenu id="m4p5_cmbMedida" value="" >
+			       			<f:selectItem itemLabel="Seleccione una opcion" itemValue="" noSelectionOption="true" ></f:selectItem>
+			       			<f:selectItem itemLabel="PIEZA" itemValue="1"></f:selectItem>
+			       		    <f:selectItem itemLabel="GRAMOS" itemValue="2"></f:selectItem>
+			       		</h:selectOneMenu> 
+			       </td>
+			    </tr>
+				<tr>
+			       <td> <h:outputLabel value="CLAVE:" id="m4p5_lblClave" class="lblGral"/> </td>
+			       <td> <p:inputText styleClass="txtGral textBox" id="m4p5_txtClave" 
+			       			maxlength="4" value="#{catalogoSociosBean.socio.noPersonal}" 
+			       						       			
+			       		/>
+			       		<pe:keyFilter for="m4p5_txtClave" regEx="/[0-9]/" />
+			       	</td> 
+			       	<td> <p:message for="m4p5_txtClave" id="m4p5_msge1" /> </td>
+			    </tr>
+			    
+			    <tr>
+			       <td> <h:outputLabel value="DESCRIPCION:" id="m4p5_lblDesc" class="lblGral"/> </td>
+			       <td> <p:inputText styleClass="txtGral textBox" id="m4p5_txtDesc" 
+			       			maxlength="80" value="" >			       			
+			            </p:inputText>
+			            <pe:keyFilter for="m4p5_txtDesc" 
+			            regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />
+			        </td>
+			    </tr>
+			    <tr>
+			       <td> <h:outputLabel value="INSUMO:" id="m4p5_lblInsumo" class="lblGral"/> </td>
+			       <td> <p:selectBooleanCheckbox id="m4p5_chkInsumo" value="false"></p:selectBooleanCheckbox>
+			       </td>
+			    </tr>	
+			    	
+			
+			
+			</table>
+			
+			<ul  class="listaBotones" id="m4p5_ul4">
+				<li>
+					<p:commandButton id="m4p5_btnBuscar" value="BUSCAR"	 
+						styleClass="espacioBoton butGral" disabled="false"
+						actionListener="#{catalogoSociosBean.buscar}" update="@form"  />
+					
+					<p:commandButton id="m4p5_btnLimpiar" value="LIMPIAR"  						
+						styleClass="espacioBoton butGral" disabled="false"  
+						actionListener="#{catalogoSociosBean.limpiar}" update="@form" />
+					
+					<p:commandButton id="m4p5_btnRegistrar" value="#{catalogoSociosBean.btnAgregarText}"	 
+						styleClass="espacioBoton butGral"	disabled="#{!catalogoSociosBean.habilitarAgregar}" 
+						actionListener="#{catalogoSociosBean.agregar}" update="@form"/>
+										
+					<p:commandButton id="m4p5_btnActualizar" value="GUARDAR CAMBIOS" onclick="dlgGuardar.show();" 
+						styleClass="espacioBoton butGral"	disabled="#{!catalogoSociosBean.habilitarGuardarCambios}"/>
+				</li>
+			</ul>
+	       	
+	       	<p:dataTable style="height: 190px; overflow:scroll;" id="dataTable1"
+	       	  >  
+                 		
+                 		
+                <p:column headerText="CLAVE"  styleClass="pf-table-columna" sortBy="#{socio.idSocio}">  
+	            	<h:outputText value="" />	            	
+	        	</p:column>
+	        	
+        		<p:column headerText="DESCRIPCION"  styleClass="pf-table-columna" sortBy="#{socio.noPersonal}">  
+	            	<h:outputText value="" />	            	
+	        	</p:column>
+	       		 
+	  
+	        	<p:column headerText="UNIDAD MEDIDA"  styleClass="pf-table-columna" sortBy="#{socio.aPaterno}">  
+	            	<h:outputText value="" />	            	
+	        	</p:column>
+	        	
+	        	<p:column headerText="LINEA"  styleClass="pf-table-columna" sortBy="#{socio.aMaterno}">  
+	            	<h:outputText value="" />	            	
+	        	</p:column> 
+	        	
+	        	<p:column headerText="FAMILIA"  styleClass="pf-table-columna" sortBy="#{socio.nombre}">  
+	            	<h:outputText value="" />	            	
+	        	</p:column>    
+	        	
+	        	<p:column headerText="INSUMO"  styleClass="pf-table-columna" sortBy="#{socio.categoria}">  
+	            	<h:outputText value="" />	            	
+	        	</p:column>      	
+	        		 			
+	 		
+	 			<p:column  styleClass="pf-table-columna">  
+	            	<p:commandLink value="Eliminar" onclick="dlgEliminar.show()" update="@form" >
+	            			
+	            	</p:commandLink> 	            		
+	            </p:column>
+	        	
+	        	<p:column  styleClass="pf-table-columna">  
+	            	<p:commandLink value="Actualizar" update="@form" >
+	            		            			            		 	            	
+	            	</p:commandLink>	        	
+	        	</p:column>
+	 		
+	 		
+	 		</p:dataTable>
+ 			 	
+		</fieldset>					
+	</h:form>	
+	
+	<!-- Dialogo para confirmar guardado de informacion -->
+	<p:confirmDialog id="m4p5_dlgGuardar" severity="alert" widgetVar="dlgGuardar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea guardar los cambios&#63;">
+		<h:form id="formDialogoGuardar">
+			<p:commandButton id="butSiGuardar" styleClass="butGral boton" value="Si" oncomplete="dlgGuardar.hide();" 
+				 update=":m4p5_form" />
+			<p:commandButton id="butNoGuardar" styleClass="butGral boton" value="No" onclick="dlgGuardar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+	
+	<!-- Dialogo para confirmar borrado de informacion -->
+	<p:confirmDialog id="m4p5_dlgEliminar" severity="alert" widgetVar="dlgEliminar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea eliminar el registro&#63;">
+		<h:form id="formDialogoEliminar">
+			<p:commandButton id="butSiEliminar" styleClass="butGral boton" value="Si" oncomplete="dlgEliminar.hide();" 
+			 update=":m4p5_form" />
+			<p:commandButton id="butNoEliminar" styleClass="butGral boton" value="No" onclick="dlgEliminar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+	
+</div>

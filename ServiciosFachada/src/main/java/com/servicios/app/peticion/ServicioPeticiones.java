@@ -1,0 +1,56 @@
+package com.servicios.app.peticion;
+
+import com.objetos.transf.datos.app.peticion.ActualizarPeticionesPeticion;
+import com.objetos.transf.datos.app.peticion.ActualizarPresupuestoRespuesta;
+import com.objetos.transf.datos.app.peticion.ActualizarStatusPeticionesPeticion;
+import com.objetos.transf.datos.app.peticion.AgregarMovimientoGestionPeticion;
+import com.objetos.transf.datos.app.peticion.AgregarMovimientoGestionRespuesta;
+import com.objetos.transf.datos.app.peticion.AgregarProcesoPeticionRespuesta;
+import com.objetos.transf.datos.app.peticion.AgregarProcesoPeticionesPeticion;
+import com.objetos.transf.datos.app.peticion.AsignarOperadorPeticion;
+import com.objetos.transf.datos.app.peticion.AsignarOperadorRespuesta;
+import com.objetos.transf.datos.app.peticion.AutorizarPeticionesPeticion;
+import com.objetos.transf.datos.app.peticion.AutorizarPeticionesRespuesta;
+import com.objetos.transf.datos.app.peticion.ConsultarArchivosPeticion;
+import com.objetos.transf.datos.app.peticion.ConsultarArchivosRespuesta;
+import com.objetos.transf.datos.app.peticion.ConsultarFechaMovimientoPeticion;
+import com.objetos.transf.datos.app.peticion.ConsultarFechaMovimientoRespuesta;
+import com.objetos.transf.datos.app.peticion.ConsultarMovimientosProcesoPeticion;
+import com.objetos.transf.datos.app.peticion.ConsultarMovimientosProcesoRespuesta;
+import com.objetos.transf.datos.app.peticion.ConsultarPeticionesPeticion;
+import com.objetos.transf.datos.app.peticion.ConsultarPeticionesRespuesta;
+import com.objetos.transf.datos.app.peticion.RegistrarPeticionesPeticion;
+import com.objetos.transf.datos.app.peticion.RegistrarPeticionesRespuesta;
+import com.objetos.transf.datos.app.presupuesto.ActualizarPresupuestoPeticion;
+import com.objetos.transf.datos.app.presupuesto.AgregarPartidaPresupuestoPeticion;
+import com.objetos.transf.datos.app.presupuesto.ConsultarPartidasPresupuestoPeticion;
+import com.objetos.transf.datos.app.presupuesto.ConsultarPartidasPresupuestoRespuesta;
+import com.objetos.transf.datos.app.presupuesto.CrearPresupuestoPeticion;
+import com.objetos.transf.datos.app.presupuesto.CrearPresupuestoRespuesta;
+import com.servicios.excepcion.ExcepcionServicioFachada;
+
+public interface ServicioPeticiones {
+
+	RegistrarPeticionesRespuesta registrarPeticiones(RegistrarPeticionesPeticion peticion) throws ExcepcionServicioFachada; 
+	ConsultarPeticionesRespuesta consultarPeticiones(ConsultarPeticionesPeticion peticion) throws ExcepcionServicioFachada;
+	AutorizarPeticionesRespuesta autorizarPeticion(AutorizarPeticionesPeticion peticion) throws ExcepcionServicioFachada;
+	AsignarOperadorRespuesta asignarOperador(AsignarOperadorPeticion peticion) throws ExcepcionServicioFachada;	
+	ConsultarFechaMovimientoRespuesta consultarFechaMovimiento(ConsultarFechaMovimientoPeticion peticion) throws ExcepcionServicioFachada;	
+	
+	AgregarProcesoPeticionRespuesta agregarProcesoPeticion(AgregarProcesoPeticionesPeticion peticion) throws ExcepcionServicioFachada;
+	void removerProcesoPeticion(Integer idProcesoPeticion)throws ExcepcionServicioFachada;
+	ConsultarArchivosRespuesta consultarArchivos(ConsultarArchivosPeticion peticion) throws ExcepcionServicioFachada;
+	ConsultarMovimientosProcesoRespuesta consultarMovimientosProceso(ConsultarMovimientosProcesoPeticion peticion)throws ExcepcionServicioFachada;
+	ConsultarMovimientosProcesoRespuesta consultarUltimoMovimientoValido(ConsultarMovimientosProcesoPeticion peticion)throws ExcepcionServicioFachada;
+	
+	AgregarMovimientoGestionRespuesta agregarMovimientoGestion(AgregarMovimientoGestionPeticion peticion)throws ExcepcionServicioFachada;
+	void actualizarStatusPeticion(ActualizarStatusPeticionesPeticion peticion) throws ExcepcionServicioFachada;
+	
+	
+	ConsultarPartidasPresupuestoRespuesta consultarPartidasPresupuesto(ConsultarPartidasPresupuestoPeticion peticion)throws ExcepcionServicioFachada;
+	void agregarPartidaPresupuesto(AgregarPartidaPresupuestoPeticion peticion) throws ExcepcionServicioFachada;
+	void removerPartidaPresupuesto(Integer idPartidaPresupuesto) throws ExcepcionServicioFachada;
+	CrearPresupuestoRespuesta crearPresupuesto(CrearPresupuestoPeticion peticion)throws ExcepcionServicioFachada;
+	ActualizarPresupuestoRespuesta actualizarPresupuesto(ActualizarPresupuestoPeticion petiion) throws ExcepcionServicioFachada;
+	void actualizarPeticion(ActualizarPeticionesPeticion peticion) throws ExcepcionServicioFachada;
+}

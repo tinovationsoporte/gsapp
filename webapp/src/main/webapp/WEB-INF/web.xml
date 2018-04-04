@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>webapp</display-name>
+  
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Production</param-value>
+  </context-param>   
+  <context-param>
+    <param-name>javax.faces.FULL_STATE_SAVING_VIEW_IDS</param-name>
+    <param-value>/login.xhtml,/principal.xhtml</param-value>
+  </context-param>  
+  <context-param>
+   		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+   		<param-value>server</param-value>
+  </context-param>  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.XmlWebApplicationContext</param-value>
+  </context-param>
+  
+  <context-param>
+	<param-name>primefaces.UPLOADER</param-name>
+	<param-value>auto</param-value>
+  </context-param>
+  
+  <!-- The BootsFaces_THEME context-param controls the loading of the Themes -->
+    <!-- The default is Bootstrap, the valid values are a Bootswach Theme name (lowercase) or "custom".
+         If custom is chosen, you will have to provide your custom CSS in the "other" folder. -->
+    <context-param>
+        <param-name>BootsFaces_THEME</param-name>
+        <param-value>spacelab</param-value>
+    </context-param>
+    <!-- The BootsFaces_USETHEME context-param controls the loading of the bootstrap-theme.css -->
+    <!-- The default is false, when set to true the bootstrap-theme.css will be loaded -->
+    <context-param>
+        <param-name>BootsFaces_USETHEME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>net.bootsfaces.get_jquery_from_cdn</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>AESKEY</param-name>
+        <param-value>1w4n4b3f0r3v3ry0ung</param-value>
+    </context-param>
+    <context-param>
+        <param-name>ENABLE_GET_ENCRIPTION</param-name>
+        <param-value>TRUE</param-value>
+  	</context-param>
+  
+  <!-- 
+  <filter>
+	 <filter-name>PrimeFaces FileUpload Filter</filter-name>
+	 <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>PrimeFaces FileUpload Filter</filter-name>
+	<servlet-name>Faces Servlet</servlet-name>
+  </filter-mapping>
+   -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>ImagenesServlet</display-name>
+  	<servlet-name>ImagenesServlet</servlet-name>
+  	<servlet-class>com.app.servlets.ImagenesServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ImagenesServlet</servlet-name>
+  	<url-pattern>/ImagenesServlet</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <persistence-unit-ref>
+    <persistence-unit-ref-name>persistence/MD</persistence-unit-ref-name>
+    <persistence-unit-name>MD</persistence-unit-name>
+  </persistence-unit-ref>
+  <session-config>
+    <session-timeout>20</session-timeout>
+  </session-config>
+  
+   <!-- Start Primefaces Theme -->
+  
+  <context-param>
+	<param-name>primefaces.THEME</param-name>
+	<param-value>bootstrap</param-value>
+  </context-param>
+    
+  <!-- End Primefaces theme -->
+  
+</web-app>

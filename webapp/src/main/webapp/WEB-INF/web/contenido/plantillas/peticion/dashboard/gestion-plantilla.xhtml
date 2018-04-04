@@ -1,0 +1,227 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"     
+     id="divGestionPlantilla"
+	 style="width: 800px; height: 500px; margin-left: 10px;">
+	 <h:outputScript name="reports.js" library="js"></h:outputScript>
+  	 <style>
+	 		
+		#gestion_divCapturaMovimientos{
+			margin-bottom:5px;
+		}
+		#gestion_divMovimiento{
+			margin-bottom:5px;
+		}
+		#gestion_divTablaBtns{
+			width:100%;
+		}
+		#gestion_divTablaBtns{
+			width:100%;
+		}
+		#gestion_divTabla{
+			width:70%;
+			float:left;
+		}
+		#gestion_divBtns{
+			width:30%;
+			float:left;
+		}
+		
+		#gestion_formArchivos .ui-widget {
+            font-size: 11px;	 	 
+		}
+		
+		#gestion_formPrincipal .ui-widget {
+            font-size: 11px;	 	 
+		}
+		
+		#gestion_fldSetArchivo{
+			font-size: 11px;
+		}
+		 
+  	 </style>
+  		<div id="gestion_divCapturaMovimientos">
+			<h:form id="gestion_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+				<p:panel id="gestion_pnlCapturaGestion" header="Captura de Movimientos" >				
+					<p:messages id="gestion_areaMsges" showDetail="false" for="gestion_msges" globalOnly="false"/>				 										
+					
+					<div id="gestion_divDatosOperador">
+						<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+							<h:outputText class="lblGral" id="gestion_lblNombreOperadorResGestion" value="Operador: "/>
+							<p:inputText id="gestion_txtNombreOperadorResGestion" value="#{gestionBean.operador}" size="25"
+										readonly="true"/> 	
+						
+						</p:panelGrid>
+					</div>
+					
+					<div id="gestion_divMovimiento">
+						<p:panelGrid columns="3" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+							<h:outputLabel class="lblGral" id="gestion_lblFechaMovimientoGestion" value="Fecha: "/>
+							<h:outputText class="lblGral" id="gestion_lblComentarioGestion" value="Comentario: " />
+							<br/>
+	
+							<p:calendar id="gestion_calFechaMovimientoFestion" value="#{gestionBean.fechaMovimiento}" 
+										disabled="#{!gestionBean.habilitarCaptura}" showOn="button" />
+							<p:inputText id="gestion_txtComentarioGestion" value="#{gestionBean.comentario}" maxlength="99"
+										disabled="#{!gestionBean.habilitarCaptura}"	size="25"/>
+							<p:commandButton id="gestion_btnAgregarMovimiento" value="Agregar Movimiento" 
+									icon="ui-icon-plus" 
+									actionListener="#{gestionBean.agregarMovimiento}"
+									update="@form"
+									disabled="#{!gestionBean.habilitarCaptura}"/> 
+						
+						</p:panelGrid>
+					</div>
+					
+					<div id="gestion_divTablaBtns">
+						<div id="gestion_divTabla">
+							<p:dataTable id="gestion_tablaMovimientosGestion" var="movimiento" value="#{gestionBean.listaMovimientos}" 
+								emptyMessage="Sin movimientos">
+								<p:column headerText="Fecha">
+									<h:outputText value="#{movimiento.fecha}">
+										<f:convertDateTime pattern="dd-MM-yyyy"/>
+									</h:outputText>
+								</p:column>
+								
+								<p:column headerText="Movimiento">
+									<h:outputText value="#{movimiento.movimiento}" />
+								</p:column>
+								<p:column headerText="Comentario">
+									<h:outputText value="#{movimiento.comentarios}" />
+								</p:column>
+								<p:column headerText="Usuario">
+									<h:outputText value="#{movimiento.nombreUsuario}" />							
+								</p:column>
+								<p:column rendered="#{gestionBean.mostrarLinkRemover}">
+									<p:commandLink  value="Eliminar"
+										actionListener="#{gestionBean.eliminarMovimiento(movimiento)}"
+										update="@form"
+										style = "font-weight: bold; color: rgb(0,0,255);">							 
+									</p:commandLink>									
+								</p:column>				
+							</p:dataTable>
+						</div>
+						<div id="gestion_divBtns">
+							<p:panelGrid columns="1" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+								<p:commandButton id="gestion_btnImprimir" value="Imprimir Entrega" icon="ui-icon-image"
+								actionListener="#{gestionBean.imprimirEntrega}"
+								rendered="#{gestionBean.mostrarBtnImprimirEntrega}"	
+								disabled="#{!gestionBean.habilitarBtnImprimirEntrega}"
+								style="width:125px"
+								update="@form"/> 
+								
+								<p:commandButton id="gestion_btnAgregarEvidencia" value="Agregar Evidencia" icon="ui-icon-image"
+								actionListener="#{gestionBean.agregarEvidencia}"
+								rendered="#{gestionBean.mostrarBtnAgregarEvidencia}"	
+								disabled="#{!gestionBean.habilitarBtnAgregarEvidencia}"										
+								style="width:125px"
+								update="@form,
+										:gestion_formArchivos,
+										:gestion_formArchivo"/> 
+								
+								<p:commandButton id="gestion_btnTerminarGestion" value="Terminar Gestion" icon="ui-icon-circle-check"
+								style="width:125px"
+								actionListener="#{gestionBean.terminarGestion}"								
+								rendered="#{gestionBean.mostrarBtnTerminarGestion}"
+								disabled="#{!gestionBean.habilitarBtnTerminarGestion}"
+								update="@form,
+										:gestion_formArchivos,
+										:gestion_formArchivo"/> 		
+								
+								<p:commandButton id="gestion_btnCerrarGestion" 
+								value="Cerrar Gestion" icon="ui-icon-circle-check" 
+								style="width:125px"
+								actionListener="#{gestionBean.cerrarGestion}"
+								rendered="#{gestionBean.mostarBtnCerrarGestion}"
+								disabled="#{!gestionBean.habilitarBtnCerrarGestion}"
+								update="@form,
+										:gestion_formArchivos,
+										:gestion_formArchivo"/> 
+								
+								<p:commandButton id="gestion_btnRechazarGestion" value="Rechazar Gestion" icon="ui-icon-circle-close" 
+								style="width:125px"
+								actionListener="#{gestionBean.rechazarGestion}"
+								rendered="#{gestionBean.mostrarBtnRechazarGestion}"
+								disabled="#{!gestionBean.habilitarBtnRechazarGestion}"
+								update="@form,
+										:gestion_formArchivos,
+										:gestion_formArchivo"/> 
+								
+								<p:commandButton id="gestion_btnCerrar" value="Cerrar" icon="ui-icon-power"
+									style="width:125px"
+									onclick="dlg.hide();" 	 
+									actionListener="#{gestionBean.resetBean}"
+									update=":panelContenido"/> 	 								
+							</p:panelGrid>
+						</div>				
+					</div>
+					
+					<div id="gestion_divDescEntrega">
+						<p:panelGrid columns="1" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+							<h:outputLabel class="lblGral" id="gestion_lblDescripcion" value="Descripcion Entrega: "/>					
+							<p:inputTextarea id="gestion_textareaDescripcion" 
+								value="#{gestionBean.descripcionEntrega}"
+								rows="5" cols="80"												
+								disabled="#{gestionBean.habilitarDescripcionEntrega}"  maxlength="300"/>
+						</p:panelGrid>
+					</div>
+				</p:panel>
+			</h:form >
+		</div>
+		
+		<div id="gestion_divFormArchivo" >
+			<p:panel id="gestion_fldSetArchivo" header="Carga de archivos" rendered="#{gestionBean.mostrarCargaArchivos}">
+				<p:panelGrid  columns="2" cellpadding="10" styleClass="m1p1_pnlGridCaptura">
+					<h:form id="gestion_formArchivo" enctype="multipart/form-data" onkeypress="if (event.keyCode == 13) { return false; }">		  
+						<div id="gestion_divUpload"> 				
+							<p:fileUpload  fileUploadListener="#{gestionBean.cargarArchivo}" 
+									mode="advanced" uploadLabel="Adjuntar" cancelLabel="Cancelar" label="Buscar"							
+									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"							
+									invalidFileMessage="Formato de arvchivo no valido. Solo se permite archivos jpg o pdf"	
+									auto="true"
+									multiple="true"
+									process="@this"
+									update="@form,:gestion_formArchivos"
+									rendered="#{gestionBean.mostrarFileUploadBtn}"
+									sizeLimit="100000"			
+									invalidSizeMessage="El  tamaño de la imagen no puede ser mayor a 100K"						
+									/>					
+						</div>		
+					</h:form>
+					<h:form id = "gestion_formArchivos" onkeypress="if (event.keyCode == 13) { return false; }">
+						<div id="gestion_divArchivos"> 	
+							<p:dataTable id="gestion_tablaArchivos" var="archivo" value="#{gestionBean.listaArchivos}" emptyMessage="Sin archivos">
+														
+								<p:column headerText="Archivo" rendered="#{!gestionBean.mostrarLinkNombreArchivo}">	
+									<h:outputText value="#{archivo.nombreArchivo}"/>
+								</p:column>
+								
+								<p:column headerText="Archivo" rendered="#{gestionBean.mostrarLinkNombreArchivo}">						
+									<p:commandLink id="gestion_lnkArchivo" value="#{archivo.nombreArchivo}" 
+										actionListener="#{gestionBean.abrirSubPantallaNivel2}"
+										style = "font-weight: bold; color: rgb(0,0,255);"
+										oncomplete="dlg_2.show()" update=":subPantallaNivel2" >
+										<f:param name="urlPagina"
+												 value="/WEB-INF/web/contenido/plantillas/peticion/imagen-plantilla.xhtml" />
+										<f:param name="nombrePagina" value="Evidencia - #{archivo.nombreArchivo}" />	
+										<f:param name="idArchivo" value="#{archivo.idArchivo}"></f:param>		 
+									</p:commandLink>
+								</p:column>									
+																
+								<p:column rendered="#{gestionBean.mostrarLinkRemover}">						
+									<p:commandLink id="gestion_lnkRemoverArchivo" value="Remover" disabled="#{!archivo.nuevo}"
+										actionListener="#{gestionBean.removerArchivo(archivo)}"
+										update="@form"  style = "font-weight: bold; color: rgb(0,0,255);">			 
+									</p:commandLink>
+								</p:column>														
+							</p:dataTable>	
+						</div>
+					</h:form>				
+				</p:panelGrid>			 
+			</p:panel>
+		</div>
+</div>

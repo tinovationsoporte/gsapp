@@ -1,0 +1,60 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets" 
+     xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:h="http://java.sun.com/jsf/html"
+	 id="divPrincipalMensajesPlantilla">	
+	
+	 <p:ajaxStatus onstart="statusDialog.show()" onsuccess="statusDialog.hide()" onerror="statusDialog.hide(); cmasErrorHandler.show();"/>
+		
+	 <pe:ajaxErrorHandler type="javax.faces.application.ViewExpiredException" button="Ir a pagina de Login"  
+                    buttonOnclick="document.location.href=document.location.href;"  
+                    body="Su sesion ha expirado, inicie nuevamente sesion." title="Sesion expirada."/>  
+	
+	
+     <pe:ajaxErrorHandler id="cmasErrorHandler" widgetVar="cmasErrorHandler" 
+			button="Cerrar" buttonOnclick="cmasErrorHandler.hide();">  
+  	    <f:facet name="title">
+  		    <h:outputLabel value="Notificacion del Sistema" />          
+    	</f:facet>  
+    	<f:facet name="body">  
+        	<div id="cmasErrorHandler_divBody">  
+            	<h:form>  
+                	<p:tabView id="tabErrorHandler">  
+                    	<p:tab id="tabView1" title="Información">  
+                    		<h:outputText value="GEST ha detectado un error interno, notificar al administrador de sistemas." style="font-size: 14px; color:#380000;" />
+                        	<p:spacer></p:spacer>
+                        	<h:panelGrid columns="2">  
+                        		<h:outputLabel value="Tipo de Error:" />  
+                            	<h:outputText value="{error-name}" style="font-size: 13px;color:red;" />
+                        	
+                            	<h:outputLabel value="Mensaje:" />  
+                            	<h:outputText value="{error-message}" style="font-size: 14px;color:black; " />  
+  
+                            	<h:outputLabel value="Equipo:" />  
+                            	<h:outputText value="{error-hostname}"  style="font-size: 14px;color:black; "/>  
+                        	</h:panelGrid>  
+  
+                    	</p:tab>  
+                    	<p:tab id="tabView2" title="Detalle" >  
+                        	<h:panelGroup id="panel_stackTrace" style="overflow: scroll; height: 220px !important;">  
+                            	<h:inputTextarea value="{error-stacktrace}" 
+                            	    rows="15" cols="100"/>  
+                        	</h:panelGroup>  
+                    	</p:tab>  
+                	</p:tabView>  
+            	</h:form>  
+        	</div>  
+    	</f:facet>  
+	</pe:ajaxErrorHandler> 
+
+ 
+	<p:dialog id="mainStatusDialog" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" 
+			showHeader="false" style="z-index:2001;">
+	    <p:graphicImage value="/img/ajax-loader/loading.gif" styleClass="imgAjax"/>
+	    <h:outputLabel value="Procesando..." styleClass="lblGral lblAjax"/>
+	</p:dialog>
+		
+	
+</div>

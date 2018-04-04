@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="validarUsuarioSistema"
+		class="com.servicios.negocio.app.sistema.impl.ValidarUsuarioSistemaImpl">
+		<property name="obtenerUsuarioSistema" ref="obtenerUsuarioSistema" />
+	</bean>
+	
+	<bean id="registrarPeticion"
+		class="com.servicios.negocio.app.peticion.impl.RegistrarPeticionImpl">
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />
+		<property name="modificarTamanoImagen" ref="modificarTamanoImagen" />
+	</bean>	
+	
+	<bean id="modificarTamanoImagen"
+		class="com.servicios.negocio.app.comun.impl.ModificarTamanoImagenImpl">
+	</bean>
+	
+	<bean id="autorizarPeticion"
+		class="com.servicios.negocio.app.peticion.impl.AutorizarPeticionImpl">
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="actualizarEntidad" ref="actualizarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />		
+		<property name="agregarProcesoPeticion" ref="agregarProcesoPeticion" />
+		
+	</bean>	
+	
+	<bean id="actualizarPeticion"
+		class="com.servicios.negocio.app.peticion.impl.ActualizarPeticionImpl">		
+		<property name="actualizarEntidad" ref="actualizarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />
+	</bean>	
+	
+	<bean id="asignarOperador"
+		class="com.servicios.negocio.app.peticion.impl.AsignarOperadorImpl">
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="actualizarEntidad" ref="actualizarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />		
+		<property name="agregarProcesoPeticion" ref="agregarProcesoPeticion" />		
+	</bean>	
+	
+	<bean id="agregarMovimientoGestion"
+		class="com.servicios.negocio.app.peticion.impl.AgregarMovimientoGestionImpl">
+		<property name="actualizarEntidad" ref="actualizarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />		
+		<property name="agregarProcesoPeticion" ref="agregarProcesoPeticion" />		
+	</bean>	
+	
+	
+	
+	<bean id="agregarProcesoPeticion"
+		class="com.servicios.negocio.app.peticion.impl.AgregarProcesoPeticionImpl">
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />		
+	</bean>	
+	
+	<bean id="removerProcesoPeticion"
+		class="com.servicios.negocio.app.peticion.impl.RemoverProcesoPeticionImpl">
+		<property name="eliminarEntidad" ref="eliminarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />		
+	</bean>	
+	
+	
+	<bean id="actualizarStatusPeticion"
+		class="com.servicios.negocio.app.peticion.impl.ActualizarStatusPeticionImpl">
+		<property name="actualizarEntidad" ref="actualizarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />		
+		<property name="agregarProcesoPeticion" ref="agregarProcesoPeticion" />	
+		<property name="consultarUltimoMovimientoValido" ref="consultarUltimoMovimientoValido" />			
+	</bean>	
+	
+	
+	
+	<bean id="removerPartidaPresupuesto"
+		class="com.servicios.negocio.app.peticion.impl.RemoverPartidaPresupuestoImpl">
+		<property name="eliminarEntidad" ref="eliminarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />		
+	</bean>	
+	
+	<bean id="agregarPartidaPresupuesto"
+		class="com.servicios.negocio.app.peticion.impl.AgregarPartidaPresupuestoImpl">
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />			
+	</bean>	
+	
+	<bean id="crearPresupuesto"
+		class="com.servicios.negocio.app.peticion.impl.CrearPresupuestoImpl">
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />	
+		<property name="actualizarEntidad" ref="actualizarEntidad"/>					
+	</bean>	
+	
+	<bean id="actualizarPresupuesto"
+		class="com.servicios.negocio.app.peticion.impl.ActualizarPresupuestoImpl">
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />	
+		<property name="actualizarEntidad" ref="actualizarEntidad"/>					
+	</bean>	
+	
+	<bean id="codificarAES"
+		class="com.servicios.negocio.app.comun.impl.EncriptacionAESImpl">				
+	</bean>	
+	
+	<bean id="decodificarAES"
+		class="com.servicios.negocio.app.comun.impl.DecriptacionAESImpl">				
+	</bean>	
+	
+	
+	
+</beans>

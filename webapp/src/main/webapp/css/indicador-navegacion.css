@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+#opcionesUsuario-formPrincipal{
+	float:left; 
+	width:200px; 
+	height:33px;
+}
+
+#panelIndicadorNavegacion{
+	float:left;
+	width: calc(100% - 200px);
+}
+
+.informacionNavegacion {
+    background: none repeat scroll 0 0 #343538;
+    box-shadow: 1px -1px 23px rgba(0, 0, 0, 0.2) inset;
+    clear: both;
+    height: 30px;
+    margin-top: 0;
+    padding-top: 3px;    
+}
+
+.informacionNavegacion ul, li {
+	list-style-type:none;
+	padding:0;
+	margin:0;	
+}		
+	
+.informacionNavegacion li {	
+	margin:5px;
+	margin-left:0px;
+	float:left;
+	color:#ffffff;
+	padding-left: 0;
+	font-size:12px;
+}
+	
+
+.informacionNavegacion>:first-child{
+	margin-left:6px;
+}
+
+.informacionNavegacion>:last-child:after{
+	content:"";
+}
+
+.informacionNavegacion li:after{
+	color: white;
+    content: " ►";
+}			
+
+.informacionNavegacion li:last-child{	
+	color:#ffffff;
+	font-weight:bold;
+	content:" ";
+}
+
+/** Empiezan Estilos para los iconos font-awesome **/
+#opcionesUsuario-formPrincipal a:hover{
+    color: #0150A0;    
+}
+
+#opcionesUsuario-formPrincipal a{
+    color: #EAEAEA;    
+	text-decoration: none;
+}
+
+.icono-awesome{
+	font-size: 24px !important;
+	margin-left: 15px;
+	margin-top: 4px;
+}
+/** Terminan Estilos para los iconos font-awesome **/
+
+/** Empiezan Estilos para el confirmDialog que solicita confirmar salir del sistema **/
+#opcionesUsuario-formPrincipal .ui-dialog-title{
+	font-size: 14px !important;
+}
+
+.botonConfirmarSalirDialog{
+	font-size: 14px !important;	
+}
+
+#divBotonesConfirmSalida{
+	margin-left: 102px;
+}
+/** Terminan estilos para el confirm de salida **/

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+
+	<jee:jndi-lookup id="DSSitio" jndi-name="/DSSite"></jee:jndi-lookup>
+	
+	<bean id="conexionSitio" class="com.core.app.bd.ConexionJDBC" scope="request"> 
+		<property name="dataSource" ref="DSSitio"/>	
+		<aop:scoped-proxy/> 
+	</bean>
+
+
+	<bean id="obtenerModulosPorRolSQL" class="com.site.service.data.sentences.ObtenerModulosPorRolSQL"></bean>
+	<bean id="obtenerMenusPorRolSQL" class="com.site.service.data.sentences.ObtenerMenusPorRolSQL"></bean>
+
+	
+	<bean id = "obtenerModulosPorRol" class="com.site.service.data.impl.ObtenerModulosPorRolImpl" scope="request">
+		<property name="query" ref="obtenerModulosPorRolSQL" > </property>
+		<property name="conexion" ref="conexionSitio"> </property>		
+		<aop:scoped-proxy/> 	
+	</bean>
+	
+	
+	<bean id = "obtenerMenusPorRol" class="com.site.service.data.impl.ObtenerMenusPorRolImpl" scope="request">
+		<property name="query" ref="obtenerMenusPorRolSQL" > </property>
+		<property name="conexion" ref="conexionSitio"> </property>
+		<aop:scoped-proxy/>
+	</bean>
+	
+
+
+	<bean id="sitio" class="com.site.service.app.impl.SiteImpl" >
+		<property name="obtenerModulosPorRol" ref="obtenerModulosPorRol" > </property>
+		<property name="obtenerMenusPorRol" ref="obtenerMenusPorRol"> </property>		
+	
+	</bean>
+
+	
+	<bean id="modulosBuilder" class="com.site.build.impl.ModulosBuilder" >
+		<property name="site" ref="sitio" > </property>
+	</bean>
+		
+	<bean id="primeMenuMapBuilder" class="com.site.build.impl.PrimeMenuMapBuilder" >
+		<property name="site" ref="sitio" > </property>
+	</bean>	
+
+</beans>

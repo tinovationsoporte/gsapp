@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.PeticionMapper">
+
+	<resultMap type ="com.modelo.datos.estructuras.Peticiones" id="peticiones">
+		<result column="idPeticion"			 property="idPeticion" 			/>
+		<result column="folio" 				 property="folio"		    	/>
+		<result column="status_actual"		 property="statusActual"    	/>
+		<result column="idstatus_actual"	 property="idStatusActual"    	/>				
+		<result column="categoria"		     property="categoria"  			/>
+		<result column="area"      			 property="area"  				/>
+		<result column="prioridad"     		 property="prioridad"			/>
+		<result column="colonia"      		 property="colonia"				/>
+		<result column="fechaCaptura"     	 property="fechaCaptura" 		/>
+		<result column="status_siguiente"	 property="stausSiguiente"		/>
+		<result column="solicitante"		 property="solicitante"			/>
+		<result column="descripcion"	     property="descripcion" 	/>
+	</resultMap>
+	
+	
+	<resultMap type ="com.modelo.datos.estructuras.Archivos" id="archivos">
+		<result column="idProcesoPeticion"	 property="idProcesoPeticion" 	/>
+		<result column="idPeticion"			 property="idPeticion" 			/>		
+		<result column="idArchivo"	 		 property="idArchivo"		 	/>		
+		<result column="fecha" 				 property="fecha"		    	/>
+		<result column="movimiento"		 	 property="movimiento"    		/>		
+		<result column="comentarios"		 property="comentarios"  		/>
+		<result column="nombreArchivo"		 property="nombreArchivo"  		/>
+		<result column="nombreUsuario"		 property="nombreUsuario"		/>		
+	</resultMap>
+	
+	<resultMap type ="com.modelo.datos.estructuras.MovimientosProceso" id="movimientosProceso">
+		<result column="idPeticion"	 		 property="idPeticion"		 	/>
+		<result column="idProcesoPeticion" 	 property="idProcesoPeticion"  	/>
+		<result column="fecha" 	 			 property="fecha"		    	/>
+		<result column="movimiento"		 	 property="movimiento"    		/>		
+		<result column="comentarios"		 property="comentarios"  		/>		
+		<result column="nombreUsuario"		 property="nombreUsuario"		/>		
+	</resultMap>
+	
+	
+	<resultMap type ="com.modelo.datos.estructuras.PartidasPresupuesto" id="partidasPresupuesto">
+		<result column="idPresupuesto"		 property="idPresupuesto"	/>
+		<result column="idPartida"		 	 property="idPartida"  		/>
+		<result column="cantidad" 			 property="cantidad"		/>
+		<result column="usuario"			 property="usuario"    		/>		
+		<result column="fecha"				 property="fecha"  			/>		
+		<result column="pu"					 property="pu"				/>		
+		<result column="concepto"			 property="concepto"		/>
+		<result column="totalPartida"		 property="totalPartida"	/>		
+	</resultMap>
+	
+	<resultMap type ="com.objetos.transf.datos.app.peticion.ConsultarFechaMovimientoRespuesta" id="consultarFechaMovimientoRespuesta">			
+		<result column="fechaMovimiento"				 property="fecha"  			/>				
+	</resultMap>
+
+
+	<select id="consultarPeticion" resultMap="peticiones" parameterType="map" timeout="30">	
+		SELECT idPeticion, 
+		descripcion,
+		MAX(idProcesoPeticion) as idProcesoPeticion
+	    , folio
+	    , solicitante
+	    , status_actual
+		, idstatus_actual
+	    , categoria
+	    , area
+	    , idArea
+	    , colonia
+	    , prioridad 
+	    , fechaCaptura
+	    , status_siguiente
+		FROM vwconsultapeticion
+		WHERE 1=1		
+			<if test="idPeticion != null">
+			  	AND	idPeticion = #{idPeticion}
+			</if>
+			<if test="folio != null">
+			  	AND	folio = #{folio}
+			</if>
+			<if test="idEntidadMpal != null and idEntidadMpal != 0">
+			 	AND idcolonia = #{idEntidadMpal}
+			</if>
+			<if test="fechaCaptura != null">
+			  	AND	fechaCaptura = #{fechaCaptura}
+			</if>
+			<if test="solicitante != null">
+			  	AND	solicitante like #{solicitante}
+			</if>
+			<if test="idStatus != null">
+			  	AND	idstatus_actual = #{idStatus}
+			</if>
+			<if test="idArea != null">
+			  	AND	idArea = #{idArea}
+			</if>			
+		GROUP BY idPeticion						
+		ORDER BY fechaCaptura	
+	</select>	
+	
+	<select id="consultarArchivos" resultMap="archivos" parameterType="map" timeout="30">		
+		SELECT 	pp.idtppeticion as idProcesoPeticion	
+			,pp.idtmpeticion as idPeticion
+		    ,a.idtparchivo as idArchivo
+		    ,pp.fecha
+		    ,pp.movimiento
+		    ,pp.comentarios
+		    ,a.nombre as nombreArchivo
+		    ,u.nombre as nombreUsuario
+		FROM tparchivo a JOIN tppeticion pp ON ( a.idtppeticion = pp.idtppeticion)
+			JOIN usuariosistema u ON (pp.idusuario = u.idUsuarioSistema)
+		WHERE 1=1
+		<if test="idProcesoPeticion != null">
+		  	AND pp.idtppeticion = #{idProcesoPeticion}
+		</if>
+		<if test="idStatusPeticion != null">
+		  	AND pp.idtpstatuspeticion = #{idStatusPeticion}
+		</if>		
+		<if test="movimiento != null">
+		  	AND pp.movimiento = #{movimiento}
+		</if>
+		<if test="idPeticion != null">
+		  	AND pp.idtmpeticion = #{idPeticion}
+		</if>
+								
+		ORDER BY idArchivo	
+	</select>
+
+	<select id="consultarMovimientosProceso" resultMap="movimientosProceso" parameterType="map" timeout="30">		
+		SELECT pp.idtmpeticion as idPeticion,
+			pp.idtppeticion as idProcesoPeticion,
+			pp.fecha,
+			pp.movimiento,
+		    pp.comentarios,
+		    u.nombre nombreUsuario     
+		FROM tppeticion pp 
+		JOIN usuariosistema u ON (pp.idusuario = u.idUsuarioSistema)
+		WHERE 1=1	
+		
+		<if test="listaIdsStatusPeticion.size > 0">
+			AND pp.idtpstatuspeticion IN
+			<foreach item="id" index="index" collection="listaIdsStatusPeticion" open="(" separator="," close=")">
+        		#{id}
+  			</foreach>  	
+		</if>		
+		<if test="idProcesoPeticion != null">
+		  	AND pp.idtppeticion = #{idProcesoPeticion}
+		</if>
+		<if test="idPeticion != null">
+		  	AND pp.idtmpeticion = #{idPeticion}
+		</if>
+		<if test="movimiento != null">
+		  	AND pp.movimiento = #{movimiento}
+		</if>	
+									
+		ORDER BY idProcesoPeticion	
+	</select>
+	
+	
+	<select id="consultarPartidasPresupuesto" resultMap="partidasPresupuesto" parameterType="map" timeout="30">		
+		SELECT p.idtmpresupuesto as idPresupuesto
+			,pa.idtdpresupuesto idPartida
+			,pa.cantidad
+			,u.nombre as usuario
+			,pa.fecha
+			,pa.pu
+			,pa.concepto
+			,(pa.cantidad * pa.pu) as totalPartida			
+		FROM tdpresupuesto pa JOIN tmpresupuesto p ON (pa.idtmpresupuesto = p.idtmpresupuesto)
+				JOIN usuariosistema u ON (u.idUsuarioSistema = pa.idusuario)
+		WHERE 1=1
+		<if test="idPresupuesto != null">
+		  	AND pa.idtmpresupuesto = #{idPresupuesto}
+		</if>								
+		ORDER BY idPartida	
+	</select>
+
+	<select id="consultarUltimoMovimientoValidoPeticion" resultMap="movimientosProceso" parameterType="map" timeout="30">		
+		SELECT MAX(pp.idtppeticion) AS idProcesoPeticion
+			,MAX(pp.idtpstatuspeticion) AS idStatusPeticion
+			,pp.idtmpeticion AS idPeticion
+		FROM tppeticion pp
+		WHERE pp.idtmpeticion = #{idPeticion}
+			AND pp.idtpstatuspeticion NOT IN (17,18,19,20);				
+	</select>
+	
+	<select id="consultarFechaMovimiento" resultMap="consultarFechaMovimientoRespuesta" parameterType="map" timeout="10">		
+		select gestionsocial.GET_FECHAMOVPETICION(#{folio}, #{idMovimientoPeticion}) as fechaMovimiento;					
+	</select>
+	
+		
+
+
+</mapper>

@@ -1,0 +1,217 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html" 
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:pe="http://primefaces.org/ui/extensions">
+	 
+	
+	 <style type="text/css">
+		.cat_usu_sisPer_frm_fieldsetGral{
+		 	width:600px;
+ 		}		
+		.cat_usu_sisPer_frm_UsuarioSistema {
+		    margin-left: 20px;
+		}
+		.cat_usu_sisPer_frm_Permiso{
+		   margin-left: 20px;
+		}
+		.cat_usu_sisPer_frm_Password{
+		   margin-left: 20px;
+		}
+		.cat_usu_sisPer_frm_PasswordConf{
+		   margin-left: 20px;
+		}
+		.cat_usu_sisPer_frm_Botones{
+		   margin-left: 20px;
+		   margin-bottom: 10px;
+		   margin-top: 10px;
+		}
+		.cat_usu_sisPer_frm_Botones_btn{
+			margin-left:10px;
+		}		
+		.ui-selectonemenu-panel .ui-selectonemenu-list {
+		    border: 0 none;
+		    font-size: 12px;
+		    padding: 0.4em;
+		}
+		/*.cat_usu_sisPer_frm .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+		    background: none repeat scroll 0 0 #85CEE6;
+		    border: 1px solid #529BCC;
+		    color: #000000;
+		    font-weight: bold;
+		    max-width: 230px !important;
+		    text-shadow: none;
+		}
+		*/
+	</style>
+	<script type="text/javascript">
+	   function cambiarTipo(){
+		   var obj1 = document.getElementById('cat_usu_sisPer_frm:cat_usu_sisPer_frm_Password_txt');
+		   var obj2 = document.getElementById('cat_usu_sisPer_frm:cat_usu_sisPer_frm_ConPassword_txt');
+		   
+		   if(obj1.getAttribute('type') == 'password'){
+			   obj1.setAttribute('type', 'text');   
+		   }else{
+			   obj1.setAttribute('type', 'password');
+		   }
+
+		   if(obj2.getAttribute('type') == 'password'){
+			   obj2.setAttribute('type', 'text');   
+		   }else{
+			   obj2.setAttribute('type', 'password');
+		   }
+		   				
+	   }
+	   
+	   function checarCombos(){
+		   var obj1 = document.getElementById('cat_usu_sisPer_frm:at_usu_sisPer_frm_CheckPassword');	   
+		  
+		   var pass1 = document.getElementById('cat_usu_sisPer_frm:cat_usu_sisPer_frm_Password_txt');
+		   var pass2 = document.getElementById('cat_usu_sisPer_frm:cat_usu_sisPer_frm_ConPassword_txt');
+		   
+		   if(obj1){ // mostrar password
+				pass1.setAttribute('type', 'text');
+				pass2.setAttribute('type', 'text');
+		   }else{
+			   pass1.setAttribute('type', 'password');
+			   pass2.setAttribute('type', 'password');
+		   }
+		   
+	   }
+	</script>
+	<h:form id="cat_usu_sisPer_frm" class="cat_usu_sisPer_frm">
+		<p:messages id="catMensajes" showDetail="true"/>
+		<fieldset class="fieldGral cat_usu_sisPer_frm_fieldsetGral">
+			<legend class="lblGral">Captura / edicion de datos</legend>
+			
+			<ul class="cat_usu_sisPer_frm_UsuarioSistema">
+				<li>
+					<h:outputLabel value="Usuario Sistema: "/>
+				</li>
+				<li>
+					<p:selectOneMenu id="cat_usu_sisPer_frm_cmb_usuario"  value="#{catalogoUsuarioSistemaPermisoBean.usuarioSistema_Permiso.usuarioSistema.idUsuarioSistema}"  >  
+						<f:selectItem itemLabel="Selecciona un Usuario del Sistema" itemValue="0" />  
+						<f:selectItems value="#{catalogoUsuarioSistemaPermisoBean.listaUsuarioSistema}" var="item" 
+							itemLabel="#{item.nombre}"  itemValue="#{item.idUsuarioSistema}"/>
+					</p:selectOneMenu>
+				</li>
+			</ul>
+			
+			<ul class="cat_usu_sisPer_frm_Permiso">
+				<li>
+					<h:outputLabel value="Permiso: "/>
+				</li>
+				<li>
+					<p:selectOneMenu id="cat_usu_sisPer_frm_cmd_permiso"  value="#{catalogoUsuarioSistemaPermisoBean.usuarioSistema_Permiso.permiso.idPermiso}" >  
+						<f:selectItem itemLabel="Selecciona el permiso" itemValue="0" />  
+						<f:selectItems value="#{catalogoUsuarioSistemaPermisoBean.listaPermiso}" var="item" 
+							itemLabel="#{item.descripcion}"  itemValue="#{item.idPermiso}"/>
+					</p:selectOneMenu>
+				</li>
+			</ul>
+			<ul class="cat_usu_sisPer_frm_Password">
+				<li>
+					<p:selectBooleanCheckbox id="at_usu_sisPer_frm_CheckPassword" value="#{catalogoUsuarioSistemaPermisoBean.mostrarPassword}"
+						onchange="cambiarTipo()" >
+							<h:outputText value="Mostrar Password" />
+					</p:selectBooleanCheckbox>
+							
+				</li>
+			</ul>
+			 
+			<ul class="cat_usu_sisPer_frm_Password">
+				<li>
+					<h:outputLabel value="Password:" />
+				</li>
+				<li>
+					<p:password id="cat_usu_sisPer_frm_Password_txt" value="#{catalogoUsuarioSistemaPermisoBean.usuarioSistema_Permiso.password}"
+						feedback="true" redisplay="true" autocomplete="false"   
+                        promptLabel="Critico sin password" weakLabel="Baja" goodLabel="Media" strongLabel="Alta" >
+                        <pe:keyFilter for="cat_usu_sisPer_frm_Password_txt" regEx="/[a-zA-Z0-9\.\-\_]/" />
+                        <p:ajax process="@this"/>
+                     </p:password>   
+				</li>
+			</ul>
+			<ul class="cat_usu_sisPer_frm_PasswordConf">
+				<li>
+					<h:outputLabel value="Confirmar Password:" />
+				</li>
+				<li>
+					
+					 <p:password id="cat_usu_sisPer_frm_ConPassword_txt" value="#{catalogoUsuarioSistemaPermisoBean.conPassword}" 
+					 feedback="true" redisplay="true" autocomplete="false"   
+                        promptLabel="Critico sin password" weakLabel="Baja" goodLabel="Media" strongLabel="Alta">
+                        <pe:keyFilter for="cat_usu_sisPer_frm_ConPassword_txt" regEx="/[a-zA-Z0-9\.\-\_]/" />
+                        <p:ajax process="@this"/>
+                       </p:password> 
+					
+				</li>
+			</ul>
+			
+			<ul class="cat_usu_sisPer_frm_Botones">
+				<li>
+					<p:commandButton id="cat_usu_sisPer_frm_btnBuscar" value="BUSCAR" actionListener="#{catalogoUsuarioSistemaPermisoBean.buscarCatalogo}"
+						oncomplete="checarCombos()"
+						update="@form"	styleClass="butGral cat_usu_sisPer_frm_Botones_btn" disabled="#{catalogoUsuarioSistemaPermisoBean.accionBuscar}" />
+					
+					<p:commandButton id="cat_usu_sisPer_frm_btnLimpiar" value="LIMPIAR" actionListener="#{catalogoUsuarioSistemaPermisoBean.limpiarCatalogo}"
+						update="@form"	styleClass="butGral cat_usu_sisPer_frm_Botones_btn" disabled="#{catalogoUsuarioSistemaPermisoBean.accionLimpiar}" />
+					
+					<p:commandButton id="cat_usu_sisPer_frm_btnRegistrar" value="REGISTRAR" actionListener="#{catalogoUsuarioSistemaPermisoBean.registrarCatalogo}"	 
+						oncomplete="checarCombos()"
+						update="@form"	styleClass="butGral cat_usu_sisPer_frm_Botones_btn" disabled="#{catalogoUsuarioSistemaPermisoBean.accionRegistrar}"/>
+										
+					<p:commandButton id="cat_usu_sisPer_frm_btnActualizar" value="GUARDAR CAMBIOS"  onclick="dlgGuardar.show();" 
+						update="@form "	styleClass="butGral cat_usu_sisPer_frm_Botones_btn" disabled="#{catalogoUsuarioSistemaPermisoBean.accionActualizar}"/>
+				</li>
+			</ul>
+			
+			<p:dataTable var="catalogo" value="#{catalogoUsuarioSistemaPermisoBean.modelo}" rowKey="#{catalogo.id}"
+			 			style="height: 240px; overflow:scroll;" id="dataTable1" >
+	       		
+	        	<p:column headerText="Nombre" sortBy="#{catalogo.usuarioSistema_Permiso.usuarioSistema.nombre}" styleClass="pf-table-columna">  
+	            	<h:outputText value="#{catalogo.usuarioSistema.nombre}" />  
+	        	</p:column>  
+	  
+	        	<p:column headerText="Permiso" sortBy="#{catalogo.usuarioSistema_Permiso.permiso.descripcion}" styleClass="pf-table-columna">  
+	            	<h:outputText value="#{catalogo.permiso.descripcion}" />  
+	        	</p:column>  
+	 		
+	 			<p:column  styleClass="pf-table-columna">  
+	            	<p:commandLink value="Eliminar" onclick="dlgEliminar.show()" update="@form"> 
+	            			<f:setPropertyActionListener value="#{catalogo.id}" target="#{catalogoUsuarioSistemaPermisoBean.idCatalogo}" />  
+	            			
+	            		</p:commandLink> 	            		
+	            </p:column>
+	        	
+	        	<p:column  styleClass="pf-table-columna">  
+	            	<p:commandLink value="Actualizar" actionListener="#{catalogoUsuarioSistemaPermisoBean.seleccionarCatalogo}"
+	            		update="@form">	  
+	            		 <f:param name="idCatalogo" value="#{catalogo.id}"/>          		
+	            		 	            		 	            	
+	            	</p:commandLink>	        	
+	        	</p:column>
+	 		</p:dataTable>
+	 		
+		</fieldset>					
+	</h:form>
+	<!-- Dialogo para confirmar guardado de informacion -->
+	<p:confirmDialog id="catalogo_dlgGuardar" severity="alert" widgetVar="dlgGuardar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea guardar los cambios&#63;">
+		<h:form id="formDialogoGuardar">
+			<p:commandButton id="butSiGuardar" styleClass="butGral boton" value="Si" oncomplete="dlgGuardar.hide();" actionListener="#{catalogoUsuarioSistemaPermisoBean.actualizarCatalogo}" 
+				update=":cat_usu_sisPer_frm" />
+			<p:commandButton id="butNoGuardar" styleClass="butGral boton" value="No" onclick="dlgGuardar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+	
+	<!-- Dialogo para confirmar borrado de informacion -->
+	<p:confirmDialog id="catalogo_dlgEliminar" severity="alert" widgetVar="dlgEliminar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea eliminar el registro&#63;">
+		<h:form id="formDialogoEliminar">
+			<p:commandButton id="butSiEliminar" styleClass="butGral boton" value="Si" oncomplete="dlgEliminar.hide();" actionListener="#{catalogoUsuarioSistemaPermisoBean.eliminarCatalogo}" 
+				update=":cat_usu_sisPer_frm" />
+			<p:commandButton id="butNoEliminar" styleClass="butGral boton" value="No" onclick="dlgEliminar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+</div>

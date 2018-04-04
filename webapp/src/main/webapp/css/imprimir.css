@@ -1,0 +1,44 @@
+/*oculta la interfaz para la impresicon*/
+*{
+	padding:0;
+	margin:0;
+
+}
+#wrapper{
+	display: none;
+	
+}
+
+
+#ficha_impresion{
+	position:absolute;
+	font-size:10px;
+	width:450px;
+	margin-left:20px;
+	display:"";
+}
+
+p{
+	font-family:"Times New Roman", Times, serif;
+	text-align:center;
+	
+}
+
+.fecha{
+	float:right;
+	text-align:left;
+	margin-right:15px;
+	
+}
+
+table{
+	margin:0 auto;
+}
+
+table .c1{
+	text-align:right;
+}
+.ui-widget-overlay {
+    display:none;
+    
+}

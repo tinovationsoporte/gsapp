@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="validarUsuarioSistema"
+		class="com.servicios.negocio.app.sistema.impl.ValidarUsuarioSistemaImpl">
+		<property name="obtenerUsuarioSistema" ref="obtenerUsuarioSistema" />
+	</bean>
+	
+	<bean id="registrarPeticion" class="com.servicios.negocio.app.peticion.impl.RegistrarPeticionImpl">
+		<property name="obtenerEntidad" ref="obtenerEntidad" />
+		<property name="crearEntidad" ref="crearEntidad" />		
+		<property name="modificarTamanoImagen" ref="modificarTamanoImagen" />
+	</bean>
+	
+	<bean id="registrarImagen" class="com.servicios.negocio.app.comun.impl.RegistrarImagenImpl">
+		<property name="modificarTamanoImagen" ref="modificarTamanoImagen" />		
+	</bean>
+	
+	<bean id="modificarTamanoImagen"
+		class="com.servicios.negocio.app.comun.impl.ModificarTamanoImagenImpl">
+	</bean>
+	
+	
+	<bean id="autorizarPeticion"
+		class="com.servicios.negocio.app.peticion.impl.AutorizarPeticionImpl">
+	</bean>
+	
+	</beans>

@@ -1,0 +1,43 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" id="divNavegacion">
+	
+	<h:form id="formularioNavegacion" 
+            xmlns:c="http://java.sun.com/jsp/jstl/core" 
+            xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:p ="http://primefaces.org/ui" >          
+        
+        <p:tree value="#{aplicacion.navegacion.modelo }" var="nodo" id="arbolNavegacion" 
+                styleClass="navigationTree" selectionMode="single" 
+                widgetVar="arbolNav" cache="true" selection="#{aplicacion.navegacion.nodoSeleccionado }">  
+        
+            <p:ajax event="select" listener="#{aplicacion.navegacion.cambiarNodo}"  update=":panelIndicadorNavegacion,:panelContenido" process=":formularioNavegacion:arbolNavegacion"/>  
+            
+            <p:treeNode id="nodoArbol">                
+                <span style="cursor:pointer;" onclick="this.parentNode.parentNode.firstChild.click();">
+                	<h:outputText value="#{nodo}" styleClass="hijo" escape="false"/>
+                </span>
+            </p:treeNode> 
+           	  
+        </p:tree>  
+        
+         <!-- 
+        <h:panelGroup id="panelMac">
+	  		<c:if test="#{aplicacion.modulos.cargarApplet}">
+	  			<object type="application/x-java-applet" width="0" height="0" name="macAddressApp" codebase="resources/applets">
+			        <param name="code" value="com.utils.net.applet.MacAddressApplet" />
+			        <param name="archive" value="Utils.jar"  />   
+			     </object>
+			     <h:inputHidden id="txtMac" value="#{aplicacion.macCliente}" />
+			     <script type="text/javascript">
+			     	document.getElementById("formularioNavegacion:txtMac").value = '78:E3:B5:69:8A:79'; 
+			     </script>
+	  		</c:if>
+  		</h:panelGroup>
+  		-->
+    </h:form> 
+
+
+
+
+</div>

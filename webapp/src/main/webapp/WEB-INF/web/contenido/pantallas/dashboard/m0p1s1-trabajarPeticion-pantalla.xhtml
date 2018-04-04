@@ -1,0 +1,33 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:peticion="http://java.sun.com/jsf/composite/peticion"
+      id="m0p1s1_divPrincipal"  
+	  style="width: 900px; height: 600px; margin-left: 0px; margin-top: 0px; ">
+      
+      <div>
+        <ui:include src="/WEB-INF/web/contenido/plantillas/peticion/dashboard/datosPeticion-plantilla.xhtml"/>
+        			      
+	  </div>
+	  <div>
+        <ui:include src="/WEB-INF/web/contenido/plantillas/peticion/dashboard/areaAtencion-plantilla.xhtml"/>
+	  </div>
+      <div>
+        <ui:include src="/WEB-INF/web/contenido/plantillas/peticion/dashboard/presupuesto-plantilla.xhtml"/>
+	  </div>
+      <div>
+        <ui:include src="/WEB-INF/web/contenido/plantillas/peticion/dashboard/asignacionOperador-plantilla.xhtml"/>
+	  </div>	  
+	  <div>
+		<ui:include src="/WEB-INF/web/contenido/plantillas/peticion/dashboard/gestion-plantilla.xhtml"/>		
+	  </div> 
+	  <div>
+		<p:commandButton id="m01p1s1_btnCerrar" value="Cerrar Ventana" onclick="dlg.hide();" style="font-weight:bold;" 
+      		 actionListener="#{consultaDetalleBean.resetBean}"
+      		 update=":panelContenido"></p:commandButton>
+	  </div>
+      
+</div>

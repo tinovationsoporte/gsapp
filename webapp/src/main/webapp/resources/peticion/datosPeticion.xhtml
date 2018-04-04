@@ -1,0 +1,77 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:composite = "http://java.sun.com/jsf/composite"
+     id="divDatosPeticionEstatusPlantilla">    	
+	
+	<composite:interface>
+		<composite:attribute name="folio"/>
+		<composite:attribute name="fechaCaptura"/>
+		<composite:attribute name="descripcion"/>
+		<composite:attribute name="categoria"/>
+		<composite:attribute name="prioridad"/>
+		<composite:attribute name="observaciones"/>
+		<composite:attribute name="status"/>
+		<composite:attribute name="listaArchivos"/>
+		<composite:attribute name="imprimirActionListener" method-signature="void actionListener(javax.faces.event.ActionEvent)"/>
+		<composite:attribute name="abrirSubPantallaNivel2" method-signature="void actionListener(javax.faces.event.ActionEvent)"/>
+	</composite:interface>
+	
+	<composite:implementation>
+	
+    <style>
+     	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+    </style>
+    <p:panelGrid columns="3" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+		
+		<h:outputText class="lblGral" id="m0p1s1_lblFechaCaptura" value="Fecha de Captura:"/>
+		<p:outputLabel id="m0p1s1_txtFechaCaptura" value="#{cc.attrs.fechaCaptura}" readonly="true" size="20">
+			<f:convertDateTime pattern="dd-MMM-yyyy"/>
+		</p:outputLabel>
+		<br/>
+		
+	    <h:outputText class="lblGral" id="m0p1s1_lblDescripcion" value="Descripcion:"/>
+		<p:inputTextarea id="m0p1s1_textareaDescripcion" value="#{cc.attrs.descripcion}"  readonly="true" rows="4" cols="50"/>
+		<p:commandButton id="m0p1s1_btnImprimir" value="Imprimir" style="width:100px;"
+               	 	  		actionListener="#{cc.attrs.imprimirActionListener}" icon="ui-icon-document" />		
+		
+		
+		<h:outputText class="lblGral" id="m0p1s1_lblCategoria" value="Eje Rector:" /> 			
+	    <p:outputLabel id="m0p1s1_txtCategoria" value="#{cc.attrs.categoria}" /> 
+		<br/>
+		
+		<h:outputText class="lblGral" id="m0p1s1_lblPrioridad" value="Prioridad:" />			
+		<p:outputLabel id="m0p1s1_txtPrioridad" value="#{cc.attrs.prioridad}" /> 
+		<br/>
+		
+		<h:outputText class="lblGral" id="m0p1s1_lblObservaciones" value="Observaciones:" /> 	
+		<p:inputTextarea id="m1p1_textareaObservaciones" value="#{cc.attrs.observaciones}" readonly="true" rows="4" cols="50"/> 
+		<br/>
+	
+		<h:outputText class="lblGral" id="m0p1s1_lblArchivos" value="Oficios:" /> 	
+		<p:dataTable id="datosPeticion_tablaArchivos" var="archivo" value="#{cc.attrs.listaArchivos}" emptyMessage="Sin archivos">								
+			<p:column headerText="Archivos">						
+				<p:commandLink id="datosPeticion_lnkArchivo" value="#{archivo.nombreArchivo}" 
+					actionListener="#{cc.attrs.abrirSubPantallaNivel2}"
+					style = "font-weight: bold; color: rgb(0,0,255);"
+					oncomplete="dlg_2.show()" update=":subPantallaNivel2" 
+					process="@this">
+						<f:param name="urlPagina"
+							value="/WEB-INF/web/contenido/plantillas/peticion/imagen-plantilla.xhtml" />
+						<f:param name="nombrePagina" value="Consulta - #{archivo.nombreArchivo}" />	
+						<f:param name="idArchivo" value="#{archivo.idArchivo}"></f:param>		 
+					</p:commandLink>
+			</p:column>
+		</p:dataTable>
+	
+	</p:panelGrid >
+	    
+	</composite:implementation>
+	    
+</div>

@@ -1,0 +1,46 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     id="divDatosSolicitantePlantilla">
+     
+     <style>
+     	 #m0p1s1_ulEtiquetasDatosSolicitante{
+			float: left;
+			margin-right: 5px;
+		 }		
+		 #m0p1s1_ulEtiquetasDatosSolicitante li{
+			padding-top: 3px;
+			padding-bottom: 7px;
+		 }		
+		 #m0p1s1_ulInputsDatosSolicitante{
+			float: left;
+		 }		
+		 #m0p1s1_ulInputsDatosSolicitante li{
+			margin-bottom: 3px;
+		 }		 
+     </style>
+     
+     <!-- <p:fieldset id="m0p1s1_fldSetDatosSolicitante" legend="Datos del Solicitante" styleClass="estiloFldSet">  -->
+  	   <ul id="m0p1s1_ulEtiquetasDatosSolicitante">
+  	     <li> <h:outputText id="m1p1_lblNombre" value="Nombre:"/> </li>
+  	     <li> <h:outputText id="m1p1_lblColoniaComunid" value="Colonia / Comunidad:"/> </li>
+  	     <li> <h:outputText id="m1p1_lblDireccion" value="Direccion:"/> </li>
+  	     <li> <h:outputText id="m1p1_lblMedioContacto" value="Medio de Contacto:"/> </li>          	     
+  	   </ul>
+  	   <ul id="m0p1s1_ulInputsDatosSolicitante">
+  	     <li> <p:inputText id="m0p1s1_txtNombre" value="#{trabajarPeticionBean.nombreSolicitante}" readonly="true"
+  	     		size="25"/></li>
+  	     <li> <p:inputText id="m0p1s1_txtColonia" value="#{trabajarPeticionBean.coloniaSolicitante}" readonly="true" size="25"/> </li>
+  	     <li> <p:inputText id="m0p1s1_txtDireccion" value="#{trabajarPeticionBean.direccionSolicitante}" readonly="true"  
+  	     		size="47"/> </li>
+  	     <li> <p:inputText id="m0p1s1_MedioContacto" value="#{trabajarPeticionBean.medioContacto}" readonly="true" size="20" 
+  	     		style="float:left; margin-right: 5px;"/>
+  	     	  <p:inputText id="m0p1s1_txtInfoDeContacto" value="#{trabajarPeticionBean.infoAdicionalContacto}" readonly="true" size="22"
+  	     	  	style="float:left;"/>
+  	     </li>
+  	   </ul>
+  	<!--  </p:fieldset>  -->
+</div>

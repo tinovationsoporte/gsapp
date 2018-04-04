@@ -1,0 +1,33 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+     id="divCarruselPlantilla"
+     style="width: 900px; height: 600px; margin-left: 0px; margin-top: 0px; ">
+     	
+	<style>
+		
+		
+		#imagen_divBotones{
+			margin-bottom: 10px;
+			margin-top: 10px;
+			width:100px;
+			margin-left:400px;
+		}
+	</style>
+
+	<div id="imagen_divImagen">
+		<p:messages id="imagen_areaMsges" showDetail="false" globalOnly="false" for="imagen_msges"/>
+	
+		<p:graphicImage url="#{imagenBean.urlImagen}" width="890"   />		
+		
+	</div>
+	
+	<div id="imagen_divBotones">
+		<p:commandButton value = "Cerrar" onclick="dlg_2.hide()" actionListener="#{imagenBean.resetBean}" />
+	</div>
+	
+</div>	

@@ -1,0 +1,218 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      id="m0p1_divDashboard" style="width: 1250px; height: 600px; margin: 5px;" >
+      
+      <style>
+      	 
+		 #m0p1_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	 }	 
+		 #m0p1_formPrincipal{		   
+		   width: 100%;
+		   height: 100%;		   
+         }   
+         
+		 
+		#m0p1_divChartConsulta{
+           float: left;           
+           width: 100%;
+           height: 310px;
+           margin-right: 5px;
+         }   
+         
+		 #m0p1_divEstatus{
+		   width: 890px;
+		   height: 320px;		   		   
+		   float:left;
+		   overflow: auto;
+		 }
+		 
+		 #m0p1_divParametrosConsulta{		 
+		   width: 300px;
+		   height: 500;		   		   
+		   float:left;
+		   margin-left:50px;
+		 }
+		 
+		 #m0p1_divTablaPeticiones{		 
+		  width: 100%;
+		  height:450px;
+		  overflow: auto;
+		}		 
+		 
+		#m0p1_divTotales{
+		   border: 0px black solid;
+		   width: 200px;
+		   height: 250px;
+		   padding-left: 1px;
+		   padding-top: 1px;
+		   margin-bottom: 1px;
+		   font-size: 11px !important;
+		 }
+		 
+		 #m0p1_ulTotales{
+			font-size: 20px !important;
+			font-weight: bold; 
+			color: rgb(0,0,255);
+			width:200px; 
+			height:100px; 
+			float:left;
+			margin-top: 60px !important;			
+			border: 1px gray solid;
+		  	background-color: #FF8000;
+		  	border-radius: 4px;	
+			box-shadow: 5px 10px #888888;
+			padding-left:20px;
+			padding-top: 15px;
+		}
+	 	
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+		
+		
+		/*#ui-datepicker-div{
+	        
+     	}	
+             
+		#m0p1_calendario_input{
+  		   width: 125px;
+		}*/		
+      </style>
+      <h:form id="m0p1_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+           <p:messages id="dashboard_areaMsges" showDetail="false" globalOnly="false" for="dashboard_msges"/>
+      	   <div id="m0p1_divChartConsulta">				
+				<div id="m0p1_divEstatus">
+					<p:panel id="m1p1_pnlEstadoSolicitudes" header="Estado de las Solicitudes" >				
+						<p:panelGrid columns="2" cellpadding="5"  styleClass="m1p1_pnlGridCaptura">
+							<p:pieChart value="#{dashboardBean.chartModel}" legendPosition="w" 
+								showDataLabels="true" dataFormat="value" style="width:600px; height:250px;" sliceMargin="3" shadow="false"/>     	 
+							<div id="m0p1_divTotales">
+								<ul id="m0p1_ulTotales" >
+									<li style="padding=5px;">Su carga de trabajo</li>
+									<li style="padding=5px;">al dia de hoy es de</li>
+									<li style="padding=5px;margin-left=5px;" > #{dashboardBean.totalFolios} </li>
+								</ul>	
+							</div>						
+						</p:panelGrid>			
+					</p:panel>				
+				</div>
+				<div id="m0p1_divParametrosConsulta">	
+					<p:panel id="m1p1_pnlOpcionesBusqueda" header="Opciones de Busqueda">				
+						<p:panelGrid columns="1" cellpadding="5"  styleClass="m1p1_pnlGridCaptura">
+							<p:outputLabel id="m0p1_lblFolio" value="Folio:" class="lblGral"/>
+							<p:inputText id="m0p1_txtFolio" value="#{dashboardBean.folioABuscar}" size="20" maxlength="13"/>					
+							
+							<p:outputLabel id="m0p1_lblPrioridad" value="Prioridad:" class="lblGral"/>							
+							<p:selectOneMenu id="m0p1_listaPrioridad" value="#{dashboardBean.idPrioridadSeleccionada}" >
+									 <f:selectItem itemLabel="Todas" ItemValue="0" />
+									 <f:selectItems value="#{dashboardBean.listaPrioridades}" var="prioridad" itemLabel="#{prioridad.valor}" 
+										itemValue="#{prioridad.idtcgeneral}"/>
+							</p:selectOneMenu>
+							
+							
+							<p:outputLabel id="m0p1_lblArea" value="Area:" rendered="#{dashboardBean.mostrarCmbArea}" class="lblGral"/>
+							<p:selectOneMenu id="m0p1_listaAreas" value="#{dashboardBean.idAreaSeleccionada}" rendered="#{dashboardBean.mostrarCmbArea}">
+								<f:selectItem itemLabel="Todas" itemValue="0" />
+								<f:selectItems value="#{dashboardBean.listaAreas}" var="area" itemLabel="#{area.nombre}" 
+										itemValue="#{area.idArea}" />
+							</p:selectOneMenu>
+							
+							
+							<p:outputLabel id="m0p1_lblEstado" value="Estatus:" class="lblGral"/>
+							<p:selectOneMenu id="m0p1_listaEstatus" value="#{dashboardBean.idEstatusSeleccionado}">
+									<f:selectItem itemLabel="Todas" itemValue="0" />
+									<f:selectItems value="#{dashboardBean.listaEstatus}" var="estatus" itemLabel="#{estatus.status}" 
+										itemValue="#{estatus.idStatusPeticion}" /> 							
+							</p:selectOneMenu>
+							
+						</p:panelGrid>
+						<pe:keyFilter for="m0p1_txtFolio" regEx="/[\d\-\.]/" preventPaste="false"/>	
+						<p:panelGrid columns="2" cellpadding="5"  styleClass="m1p1_pnlGridCaptura">
+							<p:commandButton id="m0p1_btnBuscar" value="Buscar" actionListener="#{dashboardBean.buscarFolio}" 
+      	   					 	icon="ui-icon-search" update="@form" process="@form" style="width:100px"/> 
+							<p:commandButton id="m0p1_btnLimpiar" value="Limpiar" actionListener="#{dashboardBean.limpiar}" 
+      	   					 	icon="ui-icon-close" process="@form" 	 update="@form" style="width:100px"/> 
+						</p:panelGrid>
+					</p:panel>			
+				</div>
+				
+      	   </div>
+      	   <div id="m0p1_divTablaPeticiones">
+      	   		<p:panel id="m1p1_pnlTablaTrabajo" header="Solicitudes para Trabajar">					
+					<p:dataTable id="m0p1_tablaPeticiones" var="peticion" value="#{dashboardBean.listaPeticiones}"	
+						emptyMessage="Sin información"				 	
+						paginator = "true"
+						currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,25,50"
+						rows = "10">
+   	      				<p:column headerText="Folio" sortBy="#{peticion.folio}">
+   	      					<p:commandLink value="#{peticion.folio}" oncomplete="dlg.show()" update=":subPantallaNivel1" 
+									actionListener="#{dashboardBean.abrirSubPantallaNivel1}" 
+									style ="font-weight:bold;color: rgb(0,0,255);" 
+									process="@this">
+									<f:param name="urlPagina" 
+									         value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1-consultarPeticionDetalle-pantalla.xhtml" />
+									<f:param name="nombrePagina" 
+										value="#{'Resultado de la consulta :: '.concat('Folio: ').concat(peticion.folio).concat(' :: Status: ').concat(peticion.statusActual)}" />
+									<f:param name="idPeticion" value="#{peticion.idPeticion}" />																		
+							</p:commandLink>
+   	      				</p:column>
+   	      				<p:column headerText="Descripcion">
+   	      					<p:commandLink id="m1p2_lnkVerDescripcion" value=" ... "  
+							style = "font-weight: bold; color: rgb(0,0,255);" onclick="return false;"/>							
+							<p:overlayPanel for="m1p2_lnkVerDescripcion" showEvent="mouseover" hideEvent="mousedown">
+									<h:outputText class="lblGral" value="#{peticion.descripcion}" />									
+							</p:overlayPanel>							
+   	      				</p:column>
+   	      				<p:column headerText="Estatus" sortBy="#{peticion.statusActual}">
+   	      					<h:outputText class="lblGral" value="#{peticion.statusActual}" />
+   	      				</p:column>     		
+   	      				<p:column headerText="Eje Rector" sortBy="#{peticion.categoria}">
+   	      					<h:outputText  value="#{peticion.categoria}" />
+   	      				</p:column>
+   	      				<p:column headerText="Area" sortBy="#{peticion.area}">
+   	      					<h:outputText value="#{peticion.area}" />
+   	      				</p:column>
+   	      				<p:column headerText="Prioridad" sortBy="#{peticion.prioridad}">
+   	      					<h:outputText 
+   	      					    value="#{peticion.prioridad}" />
+   	      				</p:column>   	  
+   	      				<p:column headerText="F. Captura" sortBy="#{peticion.statusActual}">
+   	      					<h:outputText value="#{peticion.fechaCaptura}">
+								<f:convertDateTime pattern="dd-MM-yyyy"/>
+   	      					</h:outputText>
+   	      				</p:column>  	    				
+   	      				
+   	      				<p:column headerText="Presupuesto">
+   	      					<h:outputText value="#{peticion.presupuesto}" />
+   	      				</p:column>  
+   	      				<p:column headerText="Area P.">
+   	      					<h:outputText value="#{peticion.areaPresupuesto}" />
+   	      				</p:column> 	      				
+   	      				<p:column>
+   	      					<p:commandButton id="m0p1_butStatus" 
+									style="width:125px;"
+   	      							value="#{peticion.statusSiguiente}"
+   	      							rendered="#{peticion.idStatusSiguiente != null}" 
+   	      							oncomplete="dlg.show()" update=":subPantallaNivel1" 
+									actionListener="#{dashboardBean.abrirSubPantallaNivel1}"
+									process="@this" class="lblGral">
+									<f:param name="urlPagina"
+									         value="#{peticion.rutaPantalla}" />
+									<f:param name="nombrePagina" value="#{peticion.encabezadoPantalla.concat(' ').concat(peticion.folio)}" />
+									<f:param name="idPeticionDashboard" value="#{peticion.idPeticion}"/>
+									<f:param name="movimiento" value="Autorizar" />																		
+							</p:commandButton>
+   	      				</p:column>
+   	      			</p:dataTable>
+				</p:panel>	
+      	   	</div>		
+      </h:form>
+</div>

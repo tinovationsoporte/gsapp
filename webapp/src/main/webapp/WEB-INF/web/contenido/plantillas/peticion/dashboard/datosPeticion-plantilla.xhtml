@@ -1,0 +1,75 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+	 xmlns:peticion="http://java.sun.com/jsf/composite/peticion"
+     id="divDatosPeticionEstatusPlantilla">
+     	
+     	<style>
+		   
+		 #datosPeticion_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 13px;
+	 	 }
+         #datosPeticion_divDatosPeticionEstatus{
+		    width: 700px;
+		    height: 275px;
+		 }    
+		 #datosPeticion_divArchivos{
+		 	width: 250px;
+		 			 	
+		 }
+         #datosPeticion_accordionResumen a{
+   			text-decoration: none;
+		 }
+		</style>     
+		<h:form id="datosPeticion_formPrincipal" prependId="false" >
+      		<h:inputText id="datosPeticion_txtInfoTabSeleccionado" value="#{consultaDetalleBean.anclaTabSeleccionado}" style="display:none;" />
+      		<p:accordionPanel id="datosPeticion_accordionResumen" multiple="true" activeIndex="0,1"  >
+      		    <p:ajax event="tabChange" listener="#{consultaDetalleBean.onTabChange}" update=":datosPeticion_formPrincipal:datosPeticion_txtInfoTabSeleccionado"/>
+        		<p:tab title="Datos del Solicitante" id="datosPeticion_tabAccordionDatSolicitante" >
+					<peticion:datosSolicitante            			
+						solicitante="#{consultaDetalleBean.datosPeticion.nombreSolicitante}"
+						colonia="#{consultaDetalleBean.datosPeticion.coloniaSolicitante}"
+						direccion="#{consultaDetalleBean.datosPeticion.direccionSolicitante}"
+						medioContacto="#{consultaDetalleBean.datosPeticion.medioContacto}"
+						medioContactoInfo="#{consultaDetalleBean.datosPeticion.infoAdicionalContacto}"
+            		/>
+        		</p:tab>
+        		<p:tab title="Datos de la Peticion" id="datosPeticion_tabAccordionDatPeticion">
+            		<div id="datosPeticion_divDatosPeticionEstatus">          				
+          				<peticion:datosPeticion
+          					folio="#{consultaDetalleBean.datosPeticion.folioPeticion}"
+							fechaCaptura="#{consultaDetalleBean.datosPeticion.fechaCapturaPeticion}"
+							descripcion="#{consultaDetalleBean.datosPeticion.descripcionPeticion}"
+							categoria="#{consultaDetalleBean.datosPeticion.categoria}"
+							prioridad="#{consultaDetalleBean.datosPeticion.prioridad}"
+							observaciones="#{consultaDetalleBean.datosPeticion.observacionesPeticion}"
+							status="#{consultaDetalleBean.datosPeticion.estatusPeticion}"
+							imprimirActionListener="#{consultaDetalleBean.datosPeticion.imprimir}"          					
+          				/>
+          			</div>
+          			<div id="datosPeticion_divArchivos">
+          				<p:fieldset id="datosPeticion_fldSetArchivos" legend="Archivos de Captura">
+          				
+	          				<p:dataTable id="datosPeticion_tablaArchivos" var="archivo" value="#{consultaDetalleBean.datosPeticion.listaArchivos}" emptyMessage="Sin archivos">
+								
+								<p:column headerText="Archivos">						
+									<p:commandLink id="datosPeticion_lnkArchivo" value="#{archivo.nombre}" 
+										actionListener="#{consultaDetalleBean.datosPeticion.abrirSubPantallaNivel2}"
+										style = "font-weight: bold; color: rgb(0,0,255);"
+										oncomplete="dlg_2.show()" update=":subPantallaNivel2" >
+											<f:param name="urlPagina"
+										         value="/WEB-INF/web/contenido/plantillas/peticion/imagen-plantilla.xhtml" />
+											<f:param name="nombrePagina" value="Consulta - #{archivo.nombre}" />	
+											<f:param name="idArchivo" value="#{archivo.idArchivo}"></f:param>		 
+										</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</p:fieldset>
+					</div>
+        		</p:tab>
+		</p:accordionPanel>		
+	</h:form>
+</div>

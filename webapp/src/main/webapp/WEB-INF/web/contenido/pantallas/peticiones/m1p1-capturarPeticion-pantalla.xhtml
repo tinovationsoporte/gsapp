@@ -1,0 +1,294 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      id="m1p1_divPrincipal" style="width: 819px; height: 583px; margin-left: 5px; margin-top: 5px;" >
+      <h:outputScript name="reports.js" library="js"></h:outputScript>
+      <style>	  
+		#divFormCaptura{
+			float:left;
+		}
+	  
+		#divFormArchivo{
+			float:left;
+			margin-top:5px;
+			width: 570px;
+		}
+		
+	  
+        #m1p1_formPrincipal{
+		   width: 100%;
+		   height: 100%;		   
+		   float:left;
+        }     
+         
+         #m1p1_formArchivo{
+		   font-size: 11px;		  
+		   float:left;
+         } 
+		 
+		 #divUpload{		   
+			width: 280px;
+			height: calc(100% - 100px);	
+			float:left;
+         }
+		 
+		 #divArchivos{	   
+		   width: 280px;		   
+		   float:left;		  
+		   margin-left = 10px;
+			
+         }
+		 
+		 #m1p1_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+           font-size: 11px;
+	 	 }
+              
+         #m1p1_formArchivos .ui-widget {
+           font-size: 11px;
+	 	 }
+		 
+		 #m1p1_pnlCatpuraArchivo.ui-widget {
+           font-size: 11px;
+	 	 }
+		 
+	     #m1p1_divColumnaIzq{
+	       float: left;
+	       border: 0px black solid;
+		   width: 570px;
+		   height: calc(100% - 100px);		   
+		   margin-right: 10px;
+	     }	       
+	     #m1p1_divColumnaDer{
+	     	float: left;
+	     	border: 0px black solid;
+			height: calc(100% - 100px);
+			margin-top = 15px;
+			margin-left = 15px;
+	     }
+		 
+	     #m1p1_pnlDatosPeticion{
+			margin-top:5px;
+		 }
+		 
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+				
+		.m1p1_pnlGridMedioContacto.ui-panelgrid>*>tr,
+		.m1p1_pnlGridMedioContacto.ui-panelgrid>*>tr>td {
+			border: none;
+			padding-left:0px
+		}
+		 
+      </style>      
+	  <div id="divFormCaptura">
+		<h:form id="m1p1_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+      	  <p:messages id="catMensajes" showDetail="false" />
+          <div id="m1p1_divColumnaIzq">          	
+			<p:panel id="m1p1_pnlDatosSolicitante" header="Datos del Solicitante" >
+				<p:panelGrid  styleClass="m1p1_pnlGridCaptura">
+					<p:row>
+						<p:column>
+							<p:outputLabel class="lblGral"  for="m1p1_txtNombre" value="Nombre:" id="m1p1_lblNombre"/>
+						</p:column>
+						<p:column >
+							<p:inputText id="m1p1_txtNombre" value="#{capturarPeticionBean.nombre}" disabled="#{capturarPeticionBean.habiltarCaptura}" 
+								required="true" size="45" maxlength="100"/> 
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column >
+							<p:outputLabel class="lblGral"  for="m1p1_listaColoniasComunid" value="Colonia / Comunidad:" id="m1p1_lblColoniaComunid"/>
+						</p:column>
+						<p:column >
+							<p:selectOneMenu id="m1p1_listaColoniasComunid" disabled="#{capturarPeticionBean.habiltarCaptura}"
+							value="#{capturarPeticionBean.idColoniaSeleccionada}" required = "true">
+							<f:selectItem itemLabel="Selecciona una opcion" itemValue="0" noSelectionOption="true"/>
+							<f:selectItems value="#{capturarPeticionBean.listaColonias}" var="entidadMpal" itemLabel="#{entidadMpal.nombre}"
+								itemValue="#{entidadMpal.idEntidadMpal}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel class="lblGral"  for="m1p1_txtDireccion" value="Dirección:" id="m1p1_lblDireccion"/>
+						</p:column>
+						<p:column>
+							<p:inputText id="m1p1_txtDireccion" value="#{capturarPeticionBean.direccion}" disabled="#{capturarPeticionBean.habiltarCaptura}" 
+								size="45" required= "true" maxlength="150"/> 						
+						</p:column>					
+					</p:row>					
+					<p:row>
+						<p:column>
+							<p:outputLabel class="lblGral"  for="m1p1_listaMediosContacto" value="Medio de Contacto:" id="m1p1_lblMedioContacto"/>					
+						</p:column>
+						<p:column>
+							<p:panelGrid  columns="2" cellpadding="1" styleClass="m1p1_pnlGridMedioContacto"> 
+								<p:selectOneMenu id="m1p1_listaMediosContacto" disabled="#{capturarPeticionBean.deshabilitarCamposEditables}"
+									value="#{capturarPeticionBean.idMedioContactoSeleccionado}" required= "true">
+									<f:selectItem itemLabel="Selecciona una opcion" itemValue="0" noSelectionOption="true"/>
+									<f:selectItems value="#{capturarPeticionBean.listaMediosContacto}" var="tipoMedioContacto" itemLabel="#{tipoMedioContacto.valor}"
+										itemValue="#{tipoMedioContacto.idtcgeneral}"/>
+								</p:selectOneMenu>
+								<p:inputText id="Contacto" value="#{capturarPeticionBean.descripcionContacto}" 
+									disabled="#{capturarPeticionBean.deshabilitarCamposEditables}" size="20" required= "true" maxlength="15"/>							
+							</p:panelGrid>							
+						</p:column>						
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel class="lblGral"  for="m1p1_txtCveExterna" value="Clave externa:" id="m1p1_lblCveExterna"/>        	     
+						</p:column>
+						<p:column>
+							<p:inputText id="m1p1_txtCveExterna" value="#{capturarPeticionBean.claveExterna}"  
+          		   			size="20" disabled="#{capturarPeticionBean.deshabilitarCamposEditables}" maxlength="4"/> 
+							<pe:keyFilter for="m1p1_txtCveExterna" regEx="/[\d\-\.]/" preventPaste="false"></pe:keyFilter>							
+						</p:column>						
+					</p:row>
+				</p:panelGrid>
+			</p:panel>
+			
+			<p:panel id="m1p1_pnlDatosPeticion" header="Datos de la peticion" >
+				<p:panelGrid  columns="2" cellpadding="10" styleClass="m1p1_pnlGridCaptura">
+					<p:outputLabel class="lblGral"  for="m1p1_txtFolioNuevo" value="Folio:" id="m1p1_lblFolioNuevo" disabled="true"/>
+					<p:inputText id="m1p1_txtFolioNuevo" value="#{capturarPeticionBean.folioPeticion}" 
+          		   			size="10" disabled="#{capturarPeticionBean.deshabilitarCampoFolio}" maxlength="13"/>           		   		
+					
+					<p:outputLabel class="lblGral"  for="m1p1_txtFechaCaptura" value="Fecha de Captura:" id="m1p1_lblFechaDeCaptura" disabled="true"/>
+					<p:inputText id="m1p1_txtFechaCaptura" value="#{capturarPeticionBean.fechaCaptura}" size="10" disabled="true">
+          		   			<f:convertDateTime pattern="dd-MMM-yyyy"></f:convertDateTime>
+					</p:inputText> 
+				
+					<p:outputLabel class="lblGral"  for="m1p1_textareaDescripcion" value="Descripción:" id="m1p1_lblDescripcion" />
+					<p:inputTextarea id="m1p1_textareaDescripcion" value="#{capturarPeticionBean.descripcion}" rows="4" cols="50" 
+          		   			disabled="#{capturarPeticionBean.habiltarCaptura}" required = "true" maxlength="300"/>
+							
+					<p:outputLabel class="lblGral"  for="m1p1_listaCategorias" value="Eje Rector:" id="m1p1_liLblCategoria"/>
+					<p:selectOneMenu id="m1p1_listaCategorias" disabled="#{capturarPeticionBean.habiltarCaptura}"
+          		   			value="#{capturarPeticionBean.idCategoriaSeleccionada}" required = "true">
+          		   		   <f:selectItem itemLabel="Selecciona una opcion" itemValue="0" noSelectionOption="true"/>
+          	     		   <f:selectItems value="#{capturarPeticionBean.listaCategorias}" var="categoria" itemLabel="#{categoria.descripcion}"
+          	     		   		itemValue="#{categoria.idCategoria}"/>
+          	            </p:selectOneMenu>
+				
+					<p:outputLabel class="lblGral" id="m1p1_lblObservaciones" value="Observaciones:" />
+					<p:inputTextarea id="m1p1_textareaObservaciones" value="#{capturarPeticionBean.observaciones}" rows="4" cols="50"
+          		   			disabled="#{capturarPeticionBean.habiltarCaptura}" maxlength="250"/>							
+				</p:panelGrid>
+				<pe:keyFilter for="m1p1_txtFolioNuevo" regEx="/[\d\-\.]/" preventPaste="false"></pe:keyFilter>	
+			</p:panel>
+		  </div>
+          <div id="m1p1_divColumnaDer">               
+			   <p:panelGrid columns="1" cellpadding="50px" styleClass="m1p1_pnlGridCaptura">
+					<p:commandButton id="m1p1_btnNuevo" value="Nuevo" disabled="#{capturarPeticionBean.deshabilitarBtnNuevo}" 
+                 			style="width:85px;" 
+                 			actionListener="#{capturarPeticionBean.nuevo}" icon="ui-icon-plus"
+                 			process="@this, m1p1_pnlDatosSolicitante, m1p1_pnlDatosPeticion" 
+                 			update="@form , :m1p1_formArchivo:,:m1p1_formArchivos:"/> 
+					
+					<p:commandButton id="m1p1_btnGuardar" value="Guardar" disabled="#{capturarPeticionBean.deshabilitarBtnGuardar}" 
+               	 			style="width:85px;" 
+               	 			actionListener="#{capturarPeticionBean.guardar}"  icon="ui-icon-disk"
+               	 			process="@this, m1p1_pnlDatosSolicitante, m1p1_pnlDatosPeticion" 
+                 			update="@form, :m1p1_formConfirmarAccion:m1p1_confirmarAccion ,:m1p1_formArchivo:,:m1p1_formArchivos:" />
+							
+					<p:commandButton id="m1p1_btnImprimir" value="Imprimir" disabled="#{capturarPeticionBean.deshabilitarBtnImprimir}"
+               	 			style="width:85px;"
+               	 	  		actionListener="#{capturarPeticionBean.imprimir}" icon="ui-icon-document"
+               	 	  		process="@this, m1p1_pnlDatosSolicitante, m1p1_pnlDatosPeticion" 
+                 			update="@form,:m1p1_formArchivo,:m1p1_formConfirmarAccion,:m1p1_formArchivos:" />
+					
+					<p:commandButton id="m1p1_btnCancelar" value="Limpiar" disabled="#{capturarPeticionBean.deshabilitarBtnCancelar}"               	 		
+               	 			style="width:85px;"
+               	 			actionListener="#{capturarPeticionBean.cancelar}" icon="ui-icon-close"      
+							process="@this"
+							inmediate = "false"
+                 			update="@form, :m1p1_formConfirmarAccion:m1p1_confirmarAccion, :m1p1_formArchivo:,:m1p1_formArchivos:" /> 
+					
+					
+					<p:commandButton id="m1p1_btnBuscar" value="Buscar" disabled="#{capturarPeticionBean.deshabilitarBtnBuscar}"
+               	 	  		style="width:85px;"
+               	 	  		actionListener="#{capturarPeticionBean.buscarFolio}" icon="ui-icon-document"
+               	 	  		process="@this, m1p1_pnlDatosSolicitante, m1p1_pnlDatosPeticion" 
+                 			update="@form,:m1p1_formArchivo:,:m1p1_formArchivos:" />
+			   
+			   </p:panelGrid>		   
+          </div>
+		</h:form>
+      </div>	  
+	  <div id="divFormArchivo">
+		
+		<p:panel id="m1p1_pnlCatpuraArchivo" header="Captura de Archivos" >
+			<p:panelGrid  columns="2" cellpadding="10" styleClass="m1p1_pnlGridCaptura">
+				<h:form id="m1p1_formArchivo" enctype="multipart/form-data" onkeypress="if (event.keyCode == 13) { return false; }">		  
+					<div id="divUpLoad"> 				
+						<p:fileUpload  fileUploadListener="#{capturarPeticionBean.cargarArchivo}" 
+								mode="advanced" uploadLabel="Adjuntar" cancelLabel="Cancelar" label="Buscar"
+								disabled="#{capturarPeticionBean.deshabilitarCapturaArchivo}" 
+								allowTypes="/(\.|\/)(png|gif|jpe?g)$/"
+								update="@form,:m1p1_formArchivos, :m1p1_formPrincipal:m1p1_btnGuardar"
+								process="@this"
+								invalidFileMessage="Formato de arvchivo no valido. Solo se permite archivos gif,jpg o png"	
+								auto="true"
+								multiple="true"	
+								sizeLimit="500000"			
+								invalidSizeMessage="El  tamaño de la imagen no puede ser mayor a 100K"										
+								/>	
+					</div>		
+				</h:form>
+				
+				<h:form id = "m1p1_formArchivos" onkeypress="if (event.keyCode == 13) { return false; }">
+					<div id="divArchivos">		
+						<p:dataTable id="m0p1_tablaArchivos" var="archivo" value="#{capturarPeticionBean.listaArchivos}" emptyMessage="Sin archivos">
+							<p:column headerText="Archivo" rendered="#{!capturarPeticionBean.mostrarLinkNombreArchivo}">
+								<h:outputText value="#{archivo.nombre}"/>
+							</p:column>
+							
+							<p:column headerText="Archivo" rendered="#{capturarPeticionBean.mostrarLinkNombreArchivo}">						
+								<p:commandLink id="gestion_lnkArchivo" value="#{archivo.nombre}" 
+									actionListener="#{capturarPeticionBean.abrirSubPantallaNivel2}"
+									style = "font-weight: bold; color: rgb(0,0,255);"
+									oncomplete="dlg_2.show()" update=":subPantallaNivel2" 
+									process="@this">
+										<f:param name="urlPagina"
+											 value="/WEB-INF/web/contenido/plantillas/peticion/imagen-plantilla.xhtml" />
+										<f:param name="nombrePagina" value="Captura - #{archivo.nombre}" />	
+										<f:param name="idArchivo" value="#{archivo.idArchivo}"></f:param>		 
+									</p:commandLink>
+							</p:column>			
+							
+							<p:column rendered="#{capturarPeticionBean.mostrarLinkRemover}">						
+								<p:commandLink id="m1p1_lnkRemoverArchivo" value="Remover" actionListener="#{capturarPeticionBean.removerArchivo}"
+									update="@form"  style = "font-weight: bold; color: rgb(0,0,255);" 
+									rendered="#{capturarPeticionBean.mostrarLinkRemover}">																	
+									<f:param name="archivoRemover" value="#{archivo.nombre}"/>																				 
+								</p:commandLink>
+							</p:column>
+							
+						</p:dataTable>	
+					</div>
+				</h:form>
+			</p:panelGrid>
+		</p:panel>
+		
+		
+	   </div>	  
+       <h:form id="m1p1_formConfirmarAccion">      	
+      	<p:confirmDialog id="m1p1_confirmarAccion" severity="alert" widgetVar="confirmarAccion" header="Confirmacio&#769;n" visible="false"
+			message="#{capturarPeticionBean.mensajeConfirmDialog}" styleClass="confirmarAccionGral" >
+			<div id="m1p1_confirmaAccion_divBotones" class="confirmarAccion_divBotones">
+				<p:commandButton id="m1p1_btnConfirmarAccion_Si" value="Si" oncomplete="confirmarAccion.hide();" 
+					actionListener="#{capturarPeticionBean.realizarAccion}" 
+					update=":m1p1_formPrincipal:							
+							,:m1p1_formArchivo:
+							,:m1p1_formArchivos:" />
+				<p:commandButton id="m1p1_btnConfirmarAccion_No" value="No" onclick="confirmarAccion.hide()" type="button"/>
+			</div>		
+	  	</p:confirmDialog>
+	   </h:form>
+</div>

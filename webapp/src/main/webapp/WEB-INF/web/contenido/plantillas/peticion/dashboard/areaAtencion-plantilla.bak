@@ -1,0 +1,221 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     id="divAreaAtencionPlantilla">
+ 
+ 	 <style>    
+     	#areaAtencion_ulEtiquetasAreaAtencion{
+			float: left;
+			margin-right: 5px;
+		}
+		
+		#areaAtencion_ulEtiquetasAreaAtencion li{
+			padding-top: 5px;
+			padding-bottom: 9px;
+		}
+		
+		#areaAtencion_ulInputsAreaAtencion{
+			float: left;
+			margin-right: 5px;
+		}
+		
+		#areaAtencion_ulInputsAreaAtencion li{
+			padding-bottom: 3px;
+		}		
+		
+		#areaAtencion_ulInputsUsrsArea{
+			float: left;
+			margin-right: 15px;
+			margin-top: 28px;
+
+		}
+		
+		#areaAtencion_ulInputsUsrsArea li{
+			padding-bottom: 3px;
+		}	
+		
+		#areaAtencion_ulLnksAreaDetalle{
+			float: left;		
+			margin-right: 45px;	
+			margin-top: 28px;			
+		}
+		
+		#areaAtencion_ulLnksAreaDetalle li{
+			padding-bottom: 3px;
+			margin-top: 10px;			
+		}
+		
+		#areaAtencion_ulBotonesAreaAtencion{
+	        float:left;
+			margin-right: 5px;
+    	}
+		
+		#areaAtencion_ulBotonesAreaAtencion li{
+	        margin-bottom: 5px;
+    	}
+		
+		#areaAtencion_ulBotonesAreaAtencion button{
+	        width: 120px;
+		}
+		
+		#areaAtencion_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 13px;
+	 	 }
+         
+        #areaAtencion_accordionResumen a{
+   			text-decoration: none;
+		}
+    </style>
+
+	<h:form id="areaAtencion_formPrincipal" prependId="false" >
+      	<h:inputText id="areaAtencion_txtInfoTabSeleccionado" value="#{consultaDetalleBean.anclaTabSeleccionado}" style="display:none;" />
+      	<p:accordionPanel id="areaAtencion_accordionResumen" multiple="true" activeIndex="0,1"  >
+      	    <p:ajax event="tabChange" listener="#{consultaDetalleBean.onTabChange}" update=":areaAtencion_formPrincipal:areaAtencion_txtInfoTabSeleccionado"/>
+        	<p:tab title="Autorizar Peticion" id="areaAtencion_tabAccordionDatSolicitante" >	
+			   <p:messages id="areaMsges" showDetail="false" />
+			   <ul id="areaAtencion_ulEtiquetasAreaAtencion">	
+					<li> <h:outputText id="areaAtencion_lblFechaAutorizacion"  value="Fecha de Autorizacion:" /> </li>
+					<li> <h:outputText id="areaAtencion_lblArea" value="Area Asignada:" /> </li>
+					<li> <h:outputText id="areaAtencion_lblResponsable" value="Are de presupuesto: " /> </li>
+					<!-- 
+					<li> <h:outputText id="areaAtencion_lblDireccion" value="Area adicional: "/> </li>
+					 -->
+			   </ul>
+			   <ul id="areaAtencion_ulInputsAreaAtencion">
+					<li> <p:inputText id="areaAtencion_txtFechaAutorizacion" value="#{consultaDetalleBean.autorizarPeticion.fechaAutorizacion}" size="10" readonly="true">
+							<f:convertDateTime pattern="dd-MMM-yyyy"/>
+						 </p:inputText>
+					</li>
+					<li> <p:selectOneMenu id="areaAtencion_listaAreasPrincipal" value="#{consultaDetalleBean.autorizarPeticion.idAreaAsignada}"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Area" itemValue="0"/>							 
+							<f:selectItems value="#{consultaDetalleBean.autorizarPeticion.listaAreasAsignar}" var="area" itemLabel="#{area.nombre}" 
+									itemValue="#{area.idArea}" />						
+							<p:ajax update="@form" listener="#{consultaDetalleBean.autorizarPeticion.onListChange}" process="@this"/>
+						 </p:selectOneMenu>
+					</li>
+					<li> <p:selectOneMenu id="areaAtencion_listaAreasPresupuesto" value="#{consultaDetalleBean.autorizarPeticion.idAreaPresupuesto}"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Area" itemValue="0"/>
+    						 <f:selectItems value="#{consultaDetalleBean.autorizarPeticion.listaAreasPresupuesto}" var="area" itemLabel="#{area.nombre}" 
+									itemValue="#{area.idArea}" />
+							<p:ajax update="areaAtencion_listaUsrsAreaPresupuesto" listener="#{consultaDetalleBean.autorizarPeticion.onListChange}" process="@this"/>
+						 </p:selectOneMenu> 
+					</li>
+					
+					<!-- 
+					<li> <p:selectOneMenu id="areaAtencion_listaAreasAdicional" value="#{consultaDetalleBean.autorizarPeticion.idAreaAdicional}"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Area" itemValue="0"/>						 
+							<f:selectItems value="#{consultaDetalleBean.autorizarPeticion.listaAreasAdicional}" var="area" itemLabel="#{area.nombre}" 
+									itemValue="#{area.idArea}" />							
+							<p:ajax update="areaAtencion_listaUsrsAreaAdicional" listener="#{consultaDetalleBean.autorizarPeticion.onListChange}" process="@this"/>
+						 </p:selectOneMenu> 
+					</li>
+					 -->
+			   </ul>
+			   <ul id="areaAtencion_ulInputsUsrsArea">					
+					<li> <p:selectOneMenu id="areaAtencion_listaUsrsAreaPrincipal" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaAsignada}"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Usuario" itemValue="0"/>							
+							<f:selectItems value="#{consultaDetalleBean.autorizarPeticion.listaUsuariosAreaAsignar}" var="usuario" itemLabel="#{usuario.nombre}" 
+									itemValue="#{usuario.idUsuarioSistema}" />	
+							<p:ajax update="@form" listener="#{consultaDetalleBean.autorizarPeticion.onListChange}" process="@this"/>
+						 </p:selectOneMenu>
+					</li>
+					<li> <p:selectOneMenu id="areaAtencion_listaUsrsAreaPresupuesto" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaPresupuesto}"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Usuario" itemValue="0"/>							
+							<f:selectItems value="#{consultaDetalleBean.autorizarPeticion.listaUsuariosAreaPresupuesto}" var="usuario" itemLabel="#{usuario.nombre}" 
+									itemValue="#{usuario.idUsuarioSistema}"  />			
+							<p:ajax update="@form" listener="#{consultaDetalleBean.autorizarPeticion.onListChange}" process="@this"/>
+						 </p:selectOneMenu> 
+					</li>
+					<!-- 
+					<li> <p:selectOneMenu id="areaAtencion_listaUsrsAreaAdicional" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaAdicional}"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarCaptura}">
+							<f:selectItem itemLabel="Seleccione un Usuario" itemValue="0"/>							 
+							<f:selectItems value="#{consultaDetalleBean.autorizarPeticion.listaUsuariosAreaAdicional}" var="usuario" itemLabel="#{usuario.nombre}" 
+									itemValue="#{usuario.idUsuarioSistema}"  />							 
+							<p:ajax update="@form" listener="#{consultaDetalleBean.autorizarPeticion.onListChange}" process="@this"/>
+						 </p:selectOneMenu> 
+					</li>
+					 -->					
+			   </ul>
+				<ul id="areaAtencion_ulLnksAreaDetalle">
+					<li> <p:commandLink id="areaAtencion_lnkAreaPrincipal" value="Ver info" style = "font-weight: bold; color: rgb(0,0,255);text-decoration: underline;"
+						update="@form,:subPantallaNivel2" actionListener="#{consultaDetalleBean.autorizarPeticion.abrirSubPantallaNivel2}" 
+						oncomplete="if(!args.validationFailed){dlg_2.show()}" disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarLnkVer}">			
+							<f:param name="urlPagina" value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1s1-detalleArea-pantalla.xhtml" />
+							<f:param name="nombrePagina" value="Area Principal" />
+							<f:param name="idArea" value="#{consultaDetalleBean.autorizarPeticion.idAreaAsignada}"/>
+							<f:param name="idUsuario" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaAsignada}"/>				
+						</p:commandLink>
+					</li>
+					<li> <p:commandLink id="areaAtencion_lnkAreaPresupuesto" value="Ver info" style = "font-weight: bold; color: rgb(0,0,255);text-decoration: underline;"
+							update="@form,:subPantallaNivel2" actionListener="#{consultaDetalleBean.autorizarPeticion.abrirSubPantallaNivel2}" 
+							oncomplete="if(!args.validationFailed){dlg_2.show()}" disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarLnkVer}">			
+							<f:param name="urlPagina" value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1s1-detalleArea-pantalla.xhtml" />
+							<f:param name="nombrePagina" value="Area Presupuesto" />
+							<f:param name="idArea" value="#{consultaDetalleBean.autorizarPeticion.idAreaPresupuesto}"/>
+							<f:param name="idUsuario" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaPresupuesto}"/>				
+						</p:commandLink>
+					</li>
+					<!-- 	
+					<li> <p:commandLink id="areaAtencion_lnkAreaAdcional" value="Ver info" style = "font-weight: bold; color: rgb(0,0,255); text-decoration: underline;"
+							update="@form,:subPantallaNivel2" actionListener="#{consultaDetalleBean.autorizarPeticion.abrirSubPantallaNivel2}" 
+							oncomplete="if(!args.validationFailed){dlg_2.show()}" disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarLnkVer}">			
+							<f:param name="urlPagina" value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1s1-detalleArea-pantalla.xhtml" />
+							<f:param name="nombrePagina" value="Area Adicional" />
+							<f:param name="idArea" value="#{consultaDetalleBean.autorizarPeticion.idAreaAdicional}"/>
+							<f:param name="idUsuario" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaAdicional}"/>				
+						</p:commandLink> 
+					</li>
+					 -->					
+				</ul>			   
+			   <ul id="areaAtencion_ulBotonesAreaAtencion">
+					<li> <p:commandButton id="areaAtencion_btnValidar" value="Validar" 
+						 actionListener="#{consultaDetalleBean.autorizarPeticion.validarPeticion}"  
+						 icon="ui-icon-check" 
+						 disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarBtnValidar}"
+						 update="@form">
+						 
+							<p:confirm  header="Validar" 
+							icon="ui-icon-alert"
+							message="Esta seguro que desea validar la peticion" />
+						 </p:commandButton> </li>
+					
+					<li> <p:commandButton id="areaAtencion_btnReasignar" value="Reasignar" icon="ui-icon-check"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarBtnReasignar}"
+							actionListener="#{consultaDetalleBean.autorizarPeticion.reasignarPeticion}"  
+							update="@form">
+						</p:commandButton> </li>
+					
+					<li> <p:commandButton id="areaAtencion_btnCancelar" value="Limpiar" icon="ui-icon-check"
+							actionListener="#{consultaDetalleBean.autorizarPeticion.limpiar}" 							
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarBtnCancelar}"
+							update="@form">						 
+								<p:confirm  header="Limpiar" 
+									icon="ui-icon-alert"
+									message="Esta seguro que desea limpiar el formulario" />
+						 </p:commandButton> </li>
+					
+					<li> <p:commandButton id="areaAtencion_btnSuspender" value="Suspender" icon="ui-icon-check"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarBtnSuspender}"/> </li>
+					
+					<li> <p:commandButton id="areaAtencion_btnRechazar" value="Rechazar" icon="ui-icon-check"
+							disabled="#{!consultaDetalleBean.autorizarPeticion.habilitarBtnRechazar}"/> </li>		
+					
+			   </ul>	
+			   <p:confirmDialog global="true" >
+					<p:commandButton title="GDelYesButton" value="Yes" styleClass="ui-confirmdialog-yes"/>
+					<p:commandButton title="GDelNoButton" value="No" styleClass="ui-confirmdialog-no" />
+			   </p:confirmDialog>
+			</p:tab>
+		</p:accordionPanel>
+	</h:form>	
+	
+</div>

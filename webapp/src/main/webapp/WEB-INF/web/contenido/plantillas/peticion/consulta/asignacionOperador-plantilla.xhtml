@@ -1,0 +1,60 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"    
+     id="divAsignacionOperadorPlantilla">
+	 
+	 <style>
+	 	#asignacion_formPrincipal .ui-widget{
+            font-size: 11px;
+	 	}
+		
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+		
+		#asignacion_accordionResumen a{
+   			text-decoration: none;
+		}
+	 </style>
+	 
+	 <h:form id="asignacion_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+ 		
+ 		<h:inputText id="asignacion_txtInfoTabSeleccionado" value="#{consultaDetalleBean.anclaTabSeleccionado}" style="display:none;" />
+      	<p:accordionPanel id="asignacion_accordionResumen" multiple="true" activeIndex="0,1"  >
+      	    <p:ajax event="tabChange" listener="#{consultaDetalleBean.onTabChange}" update=":asignacion_formPrincipal:asignacion_txtInfoTabSeleccionado"/>
+        	<p:tab title="Asignar Operador" id="asignacion_tabAccordion"  rendered="#{consultaDetalleBean.asignarOperador.mostrarContenido}">
+        		<p:messages id="asignacion_areaMsges" showDetail="false" globalOnly="false" for="asignacion_msges"/>
+        		
+				<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+				    <h:outputText class="lblGral" id="asignacion_lblFechaAsignacionOperador" value="Fecha de Asignacion:" />
+					<p:outputLabel id="asignacion_txtFecha"  
+						 value="#{consultaDetalleBean.asignarOperador.fecha}" >
+						<f:convertDateTime pattern="dd-MMM-yyyy"/>
+					</p:outputLabel>
+					
+					<h:outputText class="lblGral" id="asignacion_lblOperador" value="Operador:"/> 												
+					<p:outputLabel id="asignacion_txtOperador" 
+						 value="#{consultaDetalleBean.asignarOperador.operador}" >
+					</p:outputLabel>
+					
+					<h:outputText class="lblGral" id="asignacion_lblCerrarEvidencia" value="Requiere Evidencia:" /> 		
+					<p:outputLabel id="asignacion_txtFechaEvidencia" 
+						 value="#{consultaDetalleBean.asignarOperador.evidencia}" >
+					</p:outputLabel>
+				 </p:panelGrid>
+				 
+        	</p:tab>
+        	<p:tab title="Asignar Operador" id="asignacion_tabAccordionDatSolicitante2" rendered="#{!consultaDetalleBean.asignarOperador.mostrarContenido}" >
+        		<p:messages id="asignacion_areaMsges2" showDetail="false" globalOnly="false" for="asignacion_msges"/>
+        	</p:tab>
+        </p:accordionPanel>
+     </h:form>		
+	 
+	 
+	 
+ </div>

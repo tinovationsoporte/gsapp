@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		   			       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		   			       http://www.springframework.org/schema/aop 
+						   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+						   
+	<!--
+	<bean id="obtenerUsuarioSistemaSQL" class="com.sentencias.sql.sistema.ObtenerUsuarioSistemaSQL"/>	  
+	<bean id="obtenerUsuarioSistema" class="com.servicios.datos.app.sistema.impl.ObtenerUsarioSistemaImpl">	
+		<property name="conexion" ref="conexion"/>
+		<property name="query" ref="obtenerUsuarioSistemaSQL"/>	
+	</bean>
+	-->
+
+	<bean id="obtenerUsuarioSistema" class="com.servicios.datos.app.sistema.impl.ObtenerUsuarioSistemaJPAImpl">
+		<property name="obtenerEntidadesPorCriterio" ref="obtenerEntidadesPorCriterio" />
+	</bean>
+	
+	
+	<bean id="dashboardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+  		<property name="mapperInterface" value="com.mybatis.mapper.DashboardMapper" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="peticionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+  		<property name="mapperInterface" value="com.mybatis.mapper.PeticionMapper" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="consultarDashboard" class="com.servicios.datos.app.dashboard.impl.ConsultarDashboardImpl">	
+		<property name="dashboardMapper" ref="dashboardMapper"/>
+	</bean>
+	
+	<bean id="consultarPeticion" class="com.servicios.datos.app.peticion.impl.ConsultarPeticionImpl">	
+		<property name="peticionMapper" ref="peticionMapper"/>
+	</bean>
+</beans>

@@ -1,0 +1,30 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" class="modulos" id="divModulos">
+	
+	<div id="labelSistema" style="float:left; color: white; width:185px; height:38px; font-size: 25px; margin-left: 15px;">
+		<LABEL>Gestion Social</LABEL>
+	</div>
+
+	<h:form id="formularioModulos">
+
+		<ul>
+			<ui:repeat var="modulo" value="#{aplicacion.modulos.modelo}">
+
+				<li class="modulo1" onclick="marcarElementoActivo(this);">
+					
+					<p:commandLink id="moduleLink"
+						value="#{modulo.nombre}"
+						actionListener="#{aplicacion.modulos.cambioModulo}"
+						update=":formularioNavegacion,:panelIndicadorNavegacion,:panelContenido">
+						<f:param name="idModulo" value="#{modulo.id}"/>						
+					</p:commandLink>
+			  </li>
+			</ui:repeat>
+		</ul>
+
+	</h:form>
+</div>

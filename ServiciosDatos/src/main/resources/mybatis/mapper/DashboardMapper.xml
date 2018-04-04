@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.DashboardMapper">
+
+	<resultMap type ="com.modelo.datos.estructuras.Dashboard" id="dashboard">
+		<result column="idPeticion"			 property="idPeticion" 			/>
+		<result column="folio" 				 property="folio"		    	/>
+		<result column="status_actual"		 property="statusActual"    	/>	
+		<result column="idstatus_actual"	 property="idStatusActual"    	/>			
+		<result column="status_siguiente"  	 property="statusSiguiente" 	/>
+		<result column="idstatus_siguiente"  property="idStatusSiguiente" 	/>
+		<result column="rutaPantalla"		 property="rutaPantalla"	 	/>
+		<result column="encabezadoPantalla"	 property="encabezadoPantalla" 	/>		
+		<result column="categoria"		     property="categoria"  			/>
+		<result column="area"      			 property="area"  				/>
+		<result column="presupuesto"      	 property="presupuesto"			/>
+		<result column="areaPresupuesto"     property="areaPresupuesto"			/>
+		<result column="prioridad"      	 property="prioridad"			/>		
+		<result column="colonia"      		 property="colonia"				/>
+		<result column="operador"     		 property="operador"			/>
+		<result column="fechaCaptura"     	 property="fechaCaptura" 		/>
+		<result column="fechaAutorizacion"	 property="fechaAutorizacion" 	/>
+		<result column="descripcion"	     property="descripcion" 	/>
+	</resultMap>
+
+	<resultMap type ="com.modelo.datos.estructuras.StatusPeticiones" id="statusPeticiones">
+		<result column="idRol"			 	 property="idRol" 			/>
+		<result column="rol" 				 property="rol"		    	/>
+		<result column="idStatusPeticion"	 property="idStatusPeticion"/>		
+		<result column="status"  			 property="status" 			/>
+	</resultMap>
+	
+	<resultMap type ="com.modelo.datos.estructuras.ResumenDashboard" id="resumenDashboard">
+		<result column="total"			 	 property="total" 			/>
+		<result column="status"  			 property="status" 			/>
+	</resultMap>
+
+	<select id="consultarDashboard" resultMap="dashboard" parameterType="map" timeout="30">		
+		SELECT idRol,
+				idPeticion,
+				descripcion,
+				max(idProcesoPeticion) idProcesoPeticion,
+				folio,
+				status_actual,
+				idstatus_actual,
+				status_siguiente,
+				idstatus_siguiente,
+				encabezadoPantalla,
+				rutaPantalla,			
+				categoria,
+				area,
+				idArea,
+	            areaPresupuesto,
+	            idAreaPresupuesto,
+				presupuesto,
+				colonia,
+				prioridad,
+				operador,
+				fechaCaptura,
+				fechaAutorizacion
+			FROM gestionsocial.vwdashboard a
+			WHERE 1=1 			
+			
+			<!-- si es idRol = 4 (operador) se pasa la pura area y muestra las solicitudes de acuerdo al tcarea y a tr_status_rol (GESTIONAR|TRABAJAR) -->
+			<if test="idRol == 4"> 								 
+                AND idarea = #{idArea} 
+			</if>			
+			
+			<!-- muestra las solicitudes de acuerdo tr_status_rol (*VALIDADA|VALIDADA PRESUPUESTO|PRESUPUESTO RECHAZADO|PRESUPUESTO AUTORIZADO|*TERMINADA) -->
+			<if test="idRol == 3 and esAreaPresupuesto == true">
+                  
+				 and (idarea = #{idArea} or (idAreaPresupuesto = #{idArea} and idstatus_actual not in (3,9,15) )) 				                  
+			</if>
+			
+			<!-- muestra las solicitudes de acuerdo al tcarea y a tr_status_rol (VALIDADA|TERMINADA)  -->
+            <if test="idRol == 3 and esAreaPresupuesto == false">				
+				and idarea = #{idArea}
+                and idstatus_actual not in (4,8)
+			</if>			
+			
+			<if test="idRol != null">
+				AND idrol = #{idRol}
+			</if>		
+			<if test="folio != null">
+				AND folio = #{folio}
+			</if>			
+			<if test="idEstatus != null">
+				AND idstatus_actual = #{idEstatus}
+			</if>			
+			<if test="idPrioridad != null">
+				AND idPrioridad = #{idPrioridad}
+			</if>		
+			<if test="fecha != null">
+				AND fechaCaptura = #{fecha}
+			</if>		
+		GROUP BY idPeticion
+		ORDER BY fechaCaptura;
+		<!-- 
+		<if test="idRolUsuario != null and idAreaUsuario != '*'">
+			AND idusuario = #{idUsuaario}
+		</if>
+		 -->
+	</select>
+	
+	
+	<select id="consultarStatusPeticionPorRol" resultMap="statusPeticiones" parameterType="map" timeout="30">	
+	
+		SELECT r.idROL as idRol
+		    ,r.DESCRIPCION as rol     
+			,sp.idtpstatuspeticion as idStatusPeticion
+			,sp.valor as status    
+		FROM tpstatuspeticion sp
+		JOIN trrol_tpstatuspeticion rs  ON (sp.idtpstatuspeticion = rs.idtpstatuspeticion)
+		JOIN rol r ON (r.idROL = rs.idrol)
+		WHERE 1=1
+					
+		<if test="idRol != null">
+			AND rs.idrol = #{idRol}
+		</if>
+		
+		ORDER BY rs.idrol, sp.idtpstatuspeticion;
+		
+		
+	</select>
+
+	<select id="consultarResumenDashboard" resultMap="resumenDashboard" parameterType="map" timeout="30" >
+		SELECT count(db.idPeticion) as total,
+			db.status_siguiente as status
+		FROM(
+		    SELECT idPeticion,
+				max(idProcesoPeticion) idProcesoPeticion,
+				status_siguiente,
+				idstatus_siguiente	
+			FROM gestionsocial.vwdashboard a
+			WHERE 1=1
+				AND idrol = #{idRol}					
+			
+			<!-- si es idRol = 4 (operador) se pasa la pura area y muestra las solicitudes de acuerdo al tcarea y a tr_status_rol (GESTIONAR|TRABAJAR) -->
+			<if test="idRol == 4"> 								 
+                AND idarea = #{idArea} 
+			</if>			
+			
+			<!-- muestra las solicitudes de acuerdo tr_status_rol (*VALIDADA|VALIDADA PRESUPUESTO|PRESUPUESTO RECHAZADO|PRESUPUESTO AUTORIZADO|*TERMINADA) -->
+			<if test="idRol == 3 and esAreaPresupuesto == true">                  
+				 and (idarea = #{idArea} or (idAreaPresupuesto = #{idArea} and idstatus_actual not in (3,9,15) )) 				                  
+			</if>
+			
+			<!-- muestra las solicitudes de acuerdo al tcarea y a tr_status_rol (VALIDADA|TERMINADA)  -->
+            <if test="idRol == 3 and esAreaPresupuesto == false">				
+				and idarea = #{idArea}
+                and idstatus_actual not in (4,8)
+			</if>
+			
+			
+			GROUP BY idPeticion        
+		    ) AS db		
+		GROUP BY db.idstatus_siguiente
+		HAVING status_siguiente IS NOT NULL;	
+	</select>
+
+</mapper>

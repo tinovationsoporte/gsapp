@@ -1,0 +1,138 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html" 
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+	 style="width: 950px; height: 700px; margin: 5px;" >
+	
+ <style type="text/css">
+	#catColonias_form .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	} 
+	
+	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+	}
+	
+	#catColonias_divCaptura{
+		float:left;
+		width:950px;
+		margin-bottom:5px;
+	}
+	#catColonias_divTabla{
+		float:left;
+		width:950px;
+	}
+</style>
+    <h:form id="catColonias_form" class="frmGral">
+		<p:messages id="catUsSistemaMensajes" showDetail="true"/>
+		<div id="catColonias_divCaptura">	
+			<p:panel id="catalago_pnlCapturaColonias" header="Captura - Edicion de Colonias" >
+				<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+					<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+						
+						<p:outputLabel value="Nombre:" id="cat_lblNombre" class="lblGral"/> 
+						<p:inputText styleClass="txtGral textBox" id="cat_txtNombre" value="#{catalogoColoniaBean.colonia.nombre}" 
+			       			maxlength="80" >			       			
+			            </p:inputText>
+			            
+						<p:outputLabel value="Clave:" id="cat_lblResponsable" class="lblGral"/> 
+						<p:inputText styleClass="txtGral textBox" id="cat_txtResponsable" value="#{catalogoColoniaBean.colonia.clave}"
+			       			maxlength="20"/>
+			       		
+						<p:outputLabel value="Lider/Jefe Manzana:" id="cat_lblTelefono" class="lblGral"/> 
+						<p:inputText styleClass="txtGral textBox" id="cat_txtTelefono" value="#{catalogoColoniaBean.colonia.descripcion}" 
+								maxlength="80" >			       			
+						</p:inputText>
+						
+						<p:outputLabel value="Tipo:" id="cat_lblStatus" class="lblGral"/> 
+						<p:selectOneMenu id="cat_cmbTipoColonia" value="#{catalogoColoniaBean.colonia.tipoEntidadMpal.idtcgeneral}" >			       		    
+								<f:selectItem itemLabel="Seleccione una opcion" itemValue="0"></f:selectItem>
+								<f:selectItems value="#{catalogoColoniaBean.listaTipoEntidadMpal}" var="tipoColonia"
+									itemValue="#{tipoColonia.idtcgeneral}" itemLabel="#{tipoColonia.valor}" /> 
+			       		</p:selectOneMenu> 
+					
+					</p:panelGrid>
+					<p:panelGrid columns="1" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+						<p:commandButton id="cat1p1_btnBuscar" value="BUSCAR"	actionListener="#{catalogoColoniaBean.buscarCatalogo}" 
+						update="@form" styleClass="espacioBoton butGral" disabled="#{catalogoColoniaBean.accionBuscar}" />
+					
+						<p:commandButton id="cat1p1_btnLimpiar" value="LIMPIAR"  actionListener="#{catalogoColoniaBean.limpiarCatalogo}"						
+							update="@form"	styleClass="espacioBoton butGral" disabled="#{catalogoColoniaBean.accionLimpiar}" />
+						
+						<p:commandButton id="cat1p1_btnRegistrar" value="REGISTRAR"	actionListener="#{catalogoColoniaBean.registrarCatalogo}" 
+							update="@form"	styleClass="espacioBoton butGral"	disabled="#{catalogoColoniaBean.accionRegistrar}"/>
+											
+						<p:commandButton id="cat1p1_btnActualizar" value="GUARDAR" onclick="dlgGuardar.show();" 
+							update="@form"	styleClass="espacioBoton butGral"	disabled="#{catalogoColoniaBean.accionActualizar}"/>
+						</p:panelGrid>
+				</p:panelGrid>
+				<pe:keyFilter for="cat_txtNombre" regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />
+				<pe:keyFilter for="cat_txtResponsable" regEx="/[a-zA-Z0-9]/" /> 			       		 
+			    <pe:keyFilter for="cat_lblTelefono" regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />
+			        
+			</p:panel>
+		</div>
+		<div id="catColonias_divTabla"> 
+			<p:panel id="catalago_pnlTablaColonias" header="Areas" >
+				
+				<p:dataTable var="colonia" value="#{catalogoColoniaBean.listaColonias}" rowKey="#{colonia.id}"
+			 			style="overflow:scroll;" id="dataTable1" 	       		
+	       				paginator="true" rows="10"  
+                 		currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords} Colonias"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"					
+                 		rowsPerPageTemplate="5,10">    			       		 
+	  
+	        	<p:column headerText="Nombre" sortBy="#{colonia.nombre}" >  
+	            	<h:outputText value="#{colonia.nombre}" />	            	
+	        	</p:column>
+	        	
+	        	<p:column headerText="Clave" sortBy="#{colonia.clave}" >  
+	            	<h:outputText value="#{colonia.clave}" />	            	
+	        	</p:column> 
+	        	
+	        	<p:column headerText="Jefe/Lider" sortBy="#{colonia.descripcion}" >  
+	            	<h:outputText value="#{colonia.descripcion}" />	            	
+	        	</p:column>    
+	        	
+	        	<p:column headerText="Tipo" sortBy="#{colonia.tipoEntidadMpal.valor}" >  
+	            	<h:outputText value="#{colonia.tipoEntidadMpal.valor}" />	            	
+	        	</p:column>	 			
+	 		
+	 			<p:column  >  
+	            	<p:commandLink value="Eliminar" onclick="dlgEliminar.show()" update="@form" 
+						style ="font-weight:bold;color: rgb(0,0,255);"
+	            		actionListener="#{catalogoColoniaBean.eliminarCatalogo(colonia)}">	            			
+	            	</p:commandLink> 	            		
+	            </p:column>
+	        	
+	        	<p:column  >  
+	            	<p:commandLink value="Actualizar" actionListener="#{catalogoColoniaBean.seleccionarCatalogo(colonia)}"
+						style ="font-weight:bold;color: rgb(0,0,255);"
+	            		update="@form"> 		 	            	
+	            	</p:commandLink>	        	
+	        	</p:column>	 		
+	 		
+	 		</p:dataTable>
+			</p:panel>
+		</div>									
+	</h:form>
+	<!-- Dialogo para confirmar guardado de informacion -->
+	<p:confirmDialog id="catalogo_dlgGuardar" severity="alert" widgetVar="dlgGuardar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea guardar los cambios&#63;">
+		<h:form id="formDialogoGuardar">
+			<p:commandButton id="butSiGuardar" styleClass="butGral boton" value="Si" oncomplete="dlgGuardar.hide();" actionListener="#{catalogoColoniaBean.actualizarCatalogo}" update=":catColonias_form" />
+			<p:commandButton id="butNoGuardar" styleClass="butGral boton" value="No" onclick="dlgGuardar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+	
+	<!-- Dialogo para confirmar borrado de informacion -->
+	<p:confirmDialog id="catalogo_dlgEliminar" severity="alert" widgetVar="dlgEliminar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea eliminar el registro&#63;">
+		<h:form id="formDialogoEliminar">
+			<p:commandButton id="butSiEliminar" styleClass="butGral boton" value="Si" oncomplete="dlgEliminar.hide();" actionListener="#{catalogoColoniaBean.eliminarCatalogo}" update=":catColonias_form" />
+			<p:commandButton id="butNoEliminar" styleClass="butGral boton" value="No" onclick="dlgEliminar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+</div>

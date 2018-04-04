@@ -1,0 +1,182 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html" 
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+	 style="width: 950px; height: 700px; margin: 5px;" >
+	
+ <style type="text/css">
+	#catAreas_form .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	} 
+	
+	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+	}
+	
+	#catAreas_divCaptura{
+		float:left;
+		width:950px;
+		margin-bottom:5px;
+	}
+	#catAreas_divTabla{
+		float:left;
+		width:950px;
+	}
+</style>
+
+    <h:form id="catAreas_form" class="frmGral">
+		<p:messages id="catUsSistemaMensajes" showDetail="true"/>
+		<div id="catAreas_divCaptura">	
+			<p:panel id="catalago_pnlCapturaAreas" header="Captura - Edicion de Areas" >
+				<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+					<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+						<p:outputLabel value="Nombre :" id="cat_lblNombre" class="lblGral"/>  
+						<p:inputText styleClass="txtGral textBox" id="cat_txtNombre" value="#{catalogoAreaBean.area.nombre}" 
+							maxlength="80" size="40">							
+						</p:inputText>
+						
+						<p:outputLabel value="Responsable:" id="cat_lblResponsable" class="lblGral"/>  
+						<p:inputText styleClass="txtGral textBox" id="cat_txtResponsable" value="#{catalogoAreaBean.area.descripcion}"
+							maxlength="20" size="40"/>
+						
+						<p:outputLabel value="Status:" id="cat_lblStatus" class="lblGral"/>  
+						<p:selectOneMenu id="cat_cmbStatus" value="#{catalogoAreaBean.area.status}" >
+							<f:selectItem itemLabel="Activo" itemValue="1"></f:selectItem>
+							<f:selectItem itemLabel="Inactivo" itemValue="0"></f:selectItem>  
+						</p:selectOneMenu>  
+						
+						<p:outputLabel value="Default:" id="cat_lblDefault" class="lblGral"/>  
+						<p:selectOneMenu id="cat_cmbDefault" value="#{catalogoAreaBean.area.esDefault}" >
+							<f:selectItem itemLabel="Si" itemValue="1"></f:selectItem>
+							<f:selectItem itemLabel="No" itemValue="0"></f:selectItem>  
+						</p:selectOneMenu>  
+						
+						<p:outputLabel value="Presupuesto:" id="cat_lblPresupuesto" class="lblGral"/>  
+						<p:selectOneMenu id="cat_cmbPresupuesto" value="#{catalogoAreaBean.area.esPresupuesto}" >
+							<f:selectItem itemLabel="Si" itemValue="1"></f:selectItem>
+							<f:selectItem itemLabel="No" itemValue="0"></f:selectItem>  
+						</p:selectOneMenu>  
+						
+						<p:outputLabel value="Telefono:" id="cat_lblTelefono" class="lblGral"/>  
+						<p:inputText styleClass="txtGral textBox" id="cat_txtTelefono" value="#{catalogoAreaBean.area.telefono}" 
+							maxlength="80" >							
+						</p:inputText>
+						
+						<p:outputLabel value="Email:" id="cat_lblEmail" class="lblGral"/>  
+						<p:inputText styleClass="txtGral textBox" id="cat_txtEmail" value="#{catalogoAreaBean.area.email}" 
+							maxlength="80" >							
+						</p:inputText>
+							
+						<p:outputLabel value="Direccion:" id="cat_lblDireccion" class="lblGral"/>  
+						<p:inputText styleClass="txtGral textBox" id="cat_txtDireccion" value="#{catalogoAreaBean.area.direccion}" 
+							maxlength="80" size="40">							
+						</p:inputText>
+					</p:panelGrid>
+					<p:panelGrid columns="1" cellpadding="5" styleClass="m1p1_pnlGridCaptura">	
+						<p:commandButton id="cat1p1_btnBuscar" value="BUSCAR"	actionListener="#{catalogoAreaBean.buscarCatalogo}" 
+						update="@form" styleClass="espacioBoton butGral" disabled="#{catalogoAreaBean.accionBuscar}" />
+					
+						<p:commandButton id="cat1p1_btnLimpiar" value="LIMPIAR"  actionListener="#{catalogoAreaBean.limpiarCatalogo}"						
+							update="@form"	styleClass="espacioBoton butGral" disabled="#{catalogoAreaBean.accionLimpiar}" />
+						
+						<p:commandButton id="cat1p1_btnRegistrar" value="REGISTRAR"	actionListener="#{catalogoAreaBean.registrarCatalogo}" 
+							update="@form"	styleClass="espacioBoton butGral"	disabled="#{catalogoAreaBean.accionRegistrar}"/>
+											
+						<p:commandButton id="cat1p1_btnActualizar" value="GUARDAR" onclick="dlgGuardar.show();" 
+							update="@form"	styleClass="espacioBoton butGral"	disabled="#{catalogoAreaBean.accionActualizar}"/>
+					</p:panelGrid>					
+				</p:panelGrid>
+					<pe:keyFilter for="cat_txtNombre" regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />
+					<pe:keyFilter for="cat_txtResponsable" regEx="/[a-zA-Z0-9]/" /> 						
+					<pe:keyFilter for="cat_lblTelefono" regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />						
+					<pe:keyFilter for="cat_lblEmail" regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />						
+					<pe:keyFilter for="cat_lblDireccion" regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />
+			</p:panel>
+		</div>
+		<div id="catAreas_divTabla"> 
+			<p:panel id="catalago_pnlTablaAreas" header="Areas" >
+				<p:dataTable var="area" value="#{catalogoAreaBean.listaAreas}" rowKey="#{area.id}"
+							style="overflow:scroll;" id="dataTable1" 					
+					paginator="true" rows="10"  
+					currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords} Areas"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"					
+					rowsPerPageTemplate="5,10">        		
+					
+		
+					<p:column headerText="Nombre" sortBy="#{area.nombre}"  >  
+						<h:outputText value="#{area.nombre}" />	            	
+					</p:column>
+					
+					<p:column headerText="Responsable" sortBy="#{area.descripcion}"  >  
+						<h:outputText value="#{area.descripcion}" />	            	
+					</p:column> 
+					
+					<p:column headerText="Status" sortBy="#{area.status}"  >  
+						<h:outputText value="#{area.status}" />	            	
+					</p:column>    
+					
+					<p:column headerText="Telefono" sortBy="#{area.telefono}"  >  
+						<h:outputText value="#{area.telefono}" />	            	
+					</p:column>	 
+					
+					<p:column headerText="E-mail" sortBy="#{area.email}"  >  
+						<h:outputText value="#{area.email}" />	            	
+					</p:column>	
+					
+					<p:column headerText="Direccion" sortBy="#{area.direccion}"  >  
+						<h:outputText value="#{area.direccion}" />	            	
+					</p:column>	
+					
+					<p:column headerText="Presupuestar" sortBy="#{area.esPresupuesto}"  >  
+						<h:outputText value="#{area.esPresupuesto}" />	            	
+					</p:column>	
+					
+					
+					<p:column headerText="Defualt" sortBy="#{area.esDefault}"  >  
+						<h:outputText value="#{area.esDefault}" />	            	
+					</p:column>				
+				
+					<p:column   >  
+						<p:commandLink value="Eliminar" onclick="dlgEliminar.show()"  
+						style ="font-weight:bold;color: rgb(0,0,255);" 
+						actionListener="#{catalogoAreaBean.eliminarCatalogo(area)}" 
+						update="@form"> 
+						</p:commandLink> 	            		
+					</p:column>
+					
+					<p:column   >  
+						<p:commandLink value="Actualizar" 
+						style ="font-weight:bold;color: rgb(0,0,255);" 
+						actionListener="#{catalogoAreaBean.seleccionarCatalogo(area)}"
+							update="@form">	                    	
+						</p:commandLink>	        	
+					</p:column>
+				
+				
+				</p:dataTable>
+			</p:panel>
+		</div>		
+						
+	</h:form>
+	<!-- Dialogo para confirmar guardado de informacion -->
+	<p:confirmDialog id="catalogo_dlgGuardar" severity="alert" widgetVar="dlgGuardar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea guardar los cambios&#63;">
+		<h:form id="formDialogoGuardar">
+			<p:commandButton id="butSiGuardar" styleClass="butGral boton" value="Si" oncomplete="dlgGuardar.hide();" 
+			actionListener="#{catalogoAreaBean.actualizarCatalogo}" update=":catAreas_form" />
+			<p:commandButton id="butNoGuardar" styleClass="butGral boton" value="No" onclick="dlgGuardar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+	
+	<!-- Dialogo para confirmar borrado de informacion -->
+	<p:confirmDialog id="catalogo_dlgEliminar" severity="alert" widgetVar="dlgEliminar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea eliminar el registro&#63;">
+		<h:form id="formDialogoEliminar">
+			<p:commandButton id="butSiEliminar" styleClass="butGral boton" value="Si" oncomplete="dlgEliminar.hide();" 
+			actionListener="#{catalogoAreaBean.eliminarCatalogo}" update=":catAreas_form" />
+			<p:commandButton id="butNoEliminar" styleClass="butGral boton" value="No" onclick="dlgEliminar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+</div>

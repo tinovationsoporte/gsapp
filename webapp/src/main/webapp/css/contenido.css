@@ -1,0 +1,6 @@
+/** Estilos para todos los elementos contenidos en CONTENIDO-PLANTILLA.xhtml **/
+#divContenido{
+	width: 100%;
+	height: 100%;
+	overflow:auto;
+}

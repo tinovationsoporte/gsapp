@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sistema" class="com.servicios.app.sistema.impl.SistemaImpl" >
+		<property name="validarUsuarioSistema" ref="validarUsuarioSistema" />
+	</bean>
+	
+	<bean id="servicioPeticiones" class="com.servicios.app.peticion.impl.ServicioPeticionesImpl" >
+		<property name="registrarPeticion" ref="registrarPeticion" />
+		<property name="consultarPeticion" ref="consultarPeticion" />
+		<property name="autorizarPeticion" ref="autorizarPeticion" />		
+	</bean>
+	
+	<bean id="servicioDashboard" class="com.servicios.app.dashboard.impl.ServicioDashboardImpl" >		
+		<property name="consultarDashboard" ref="consultarDashboard" />		 
+	</bean>
+	
+	<bean id="servicioCatalogo" class="com.servicios.app.catalogos.impl.ServicioCatalogoImpl" >
+		<property name="crearEntidad" ref="crearEntidad" />
+		<property name="eliminarEntidad" ref="eliminarEntidad" />
+		<property name="actualizarEntidad" ref="actualizarEntidad" />
+		<property name="obtenerEntidad" ref="obtenerEntidad" />
+		<property name="obtenerEntidadesPorCriterio" ref="obtenerEntidadesPorCriterio" />
+	</bean>
+	
+	<bean id="servicioComun" class="com.servicios.app.comun.impl.ServicioComunImpl" >
+		<property name="registrarImagen" ref="registrarImagen" />		
+	</bean>
+	
+	
+	
+	</beans>

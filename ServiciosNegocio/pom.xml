@@ -1,0 +1,136 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <!-- 
+  <parent>
+    <groupId>com.app</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+   -->
+   
+  <groupId>com.app.servicios.negocio</groupId>
+  <artifactId>ServiciosNegocio</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>ServiciosNegocio</name>
+  <url>http://maven.apache.org</url>
+  
+  <repositories>
+    <repository>
+      <id>JBoss repository</id>
+      <url>http://repository.jboss.com/maven2/</url>
+    </repository>
+     <repository>
+        <id>java.net.m2repo</id>
+        <name>java.net Maven 2 Repository</name>
+        <url>http://download.java.net/maven/2/</url>
+        <layout>default</layout>
+    </repository>
+    <repository>
+        <id>GlassFish</id>
+        <name>GlassFish Maven Repository</name>
+        <url>http://download.java.net/maven/glassfish/</url>
+    </repository>
+  </repositories>
+  
+  <build>
+  
+  	<resources>
+		<resource>
+			<directory>src/main/resources</directory>
+			<filtering>false</filtering>
+		</resource>
+	</resources>
+
+	<testResources>
+		<testResource>
+			<directory>src/test/resources</directory>
+		</testResource>
+		<testResource>
+			<directory>${basedir}/src/test/java/</directory>
+			<excludes>
+				<exclude>**/*.java</exclude>
+			</excludes>
+		</testResource>
+	</testResources>
+  
+  
+	    <plugins>
+	    	<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>        
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>      	
+	  	<artifactId>maven-surefire-plugin</artifactId>
+		<version>2.14</version>		
+	   </plugin>    
+	    </plugins>
+  </build>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+	    <groupId>com.app.core</groupId>
+	    <artifactId>core</artifactId>
+	    <version>1.1-SNAPSHOT</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>com.app.modelo.datos</groupId>
+	    <artifactId>MD</artifactId>
+	    <version>1.0-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+    	<groupId>com.app.otd</groupId>
+	    <artifactId>OTD</artifactId>
+	    <version>1.0-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+    	<groupId>com.app.servicios.datos</groupId>
+	    <artifactId>ServiciosDatos</artifactId>
+	    <version>1.0-SNAPSHOT</version>
+  	</dependency>   
+ 
+	<dependency>
+    	<groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>4.2.9.RELEASE</version>
+    </dependency>
+     
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-beans</artifactId>
+    	<version>4.2.9.RELEASE</version>
+	</dependency>
+     
+ 	<dependency>
+    	<groupId>commons-validator</groupId>
+    	<artifactId>commons-validator</artifactId>
+    	<version>1.4.0</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>commons-codec</groupId>
+    	<artifactId>commons-codec</artifactId>
+    <version>1.10</version>
+    
+</dependency>
+  </dependencies>
+  
+</project>

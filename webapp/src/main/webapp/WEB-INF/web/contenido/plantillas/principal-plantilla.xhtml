@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      >
+      
+      
+ <h:head >
+    <!-- page title param passed in by param -->
+    <title>Sistema de gestion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="es" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <link rel="stylesheet" href="../css/principal.css" media="screen" />
+    <link rel="stylesheet" href="../css/modulos.css" media="screen" />	
+	<link rel="stylesheet" href="../css/navegacion.css" media="screen" />
+	<link rel="stylesheet" href="../css/contenido.css" media="screen" />
+	<link rel="stylesheet" href="../css/indicador-navegacion.css" media="screen" />					
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	
+	<h:outputScript library="js" name="extensions.js"></h:outputScript>
+	<h:outputScript library="js" name="keyfilter.js"></h:outputScript>
+	<h:outputScript library="js" name="components.js"></h:outputScript>
+	<h:outputScript library="js" name="menu.js"></h:outputScript>
+	<h:outputScript name="reports.js" library="js"></h:outputScript>
+	<h:outputScript name="help.js" library="js"></h:outputScript>
+		
+  </h:head>
+
+<h:body>
+	<div class="divContenedorPrincipal">
+		<!-- <div class="encabezado">
+		  <ui:include src="/WEB-INF/web/contenido/plantillas/cabe-plantilla.xhtml"/>			
+		</div>
+		-->
+		<div class="divModulosPrincipal">
+			<ui:include src="/WEB-INF/web/contenido/plantillas/modulos-plantilla.xhtml"/>	    	
+		</div>
+		<div class="divInformacionNavegacionPrincipal">
+		    <ui:include src="/WEB-INF/web/contenido/plantillas/indicador-plantilla.xhtml"/>
+		    <ui:include src="/WEB-INF/web/contenido/plantillas/info-usuario-plantilla.xhtml"/>		    
+		</div>
+		<div class="divmenuNavegacionPrincipal">
+			<ui:include src="/WEB-INF/web/contenido/plantillas/navegacion-plantilla.xhtml"/>
+		</div>
+		<div class="divContenidoPrincipal">
+			<ui:include src="/WEB-INF/web/contenido/plantillas/contenido-plantilla.xhtml"/>
+		</div>
+		<div id= "subPantalla1">
+			<h:panelGroup id="subPantallaNivel1">
+				<ui:include src="/WEB-INF/web/contenido/plantillas/subpantalla-nivel1-plantilla.xhtml"/>
+			</h:panelGroup>
+		</div>
+		
+		<div id= "subPantalla2">
+			<h:panelGroup id="subPantallaNivel2">
+				<ui:include src="/WEB-INF/web/contenido/plantillas/subpantalla-nivel2-plantilla.xhtml"/>
+			</h:panelGroup>
+		</div>
+		
+		<div id= "subPantalla3">
+			<h:panelGroup id="subPantallaNivel3">
+				<ui:include src="/WEB-INF/web/contenido/plantillas/subpantalla-nivel3-plantilla.xhtml"/>
+			</h:panelGroup>
+		</div>
+		
+		<div id= "subPantallaRpt">
+			<h:panelGroup id="subPantallaReporte">				
+				<ui:include src="/WEB-INF/web/contenido/plantillas/subpantalla-reporte-plantilla.xhtml"/>
+			</h:panelGroup>
+		</div>
+		
+		<div id= "subPantallaMensajes">
+			<h:panelGroup id="subPantallaMensaje">
+				<ui:include src="/WEB-INF/web/contenido/plantillas/subpantalla-mensaje-plantilla.xhtml"/>
+			</h:panelGroup>
+		</div>
+		
+		<!-- Esta 'plantilla' contiene el ajaxEstatus y errorHandler -->
+		<ui:include src="/WEB-INF/web/contenido/plantillas/mensajes-plantilla.xhtml"/>
+		
+		<!-- 
+		<div id="footer" class="footer">
+	    	 <ui:include src="/WEB-INF/web/contenido/plantillas/pie-plantilla.xhtml"/>
+	   	</div>
+	   	 -->		
+	</div>
+	
+</h:body>
+</html>

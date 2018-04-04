@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		   			       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		   			       http://www.springframework.org/schema/aop 
+						   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+						   
+	<!--
+	<bean id="obtenerUsuarioSistemaSQL" class="com.sentencias.sql.sistema.ObtenerUsuarioSistemaSQL"/>	  
+	<bean id="obtenerUsuarioSistema" class="com.servicios.datos.app.sistema.impl.ObtenerUsarioSistemaImpl">	
+		<property name="conexion" ref="conexion"/>
+		<property name="query" ref="obtenerUsuarioSistemaSQL"/>	
+	</bean>
+	-->
+
+	<bean id="obtenerUsuarioSistema" class="com.servicios.datos.app.sistema.impl.ObtenerUsuarioSistemaJPAImpl">
+		<property name="obtenerEntidadesPorCriterio" ref="obtenerEntidadesPorCriterio" />
+	</bean>
+	
+	
+	<bean id="dashboardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+  		<property name="mapperInterface" value="com.mybatis.mapper.DashboardMapper" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="peticionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+  		<property name="mapperInterface" value="com.mybatis.mapper.PeticionMapper" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	
+	<bean id="reporteActividadMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+  		<property name="mapperInterface" value="com.mybatis.mapper.ReporteActividadMapper" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="consultarDashboard" class="com.servicios.datos.app.dashboard.impl.ConsultarDashboardImpl">	
+		<property name="dashboardMapper" ref="dashboardMapper"/>
+	</bean>
+	
+	<bean id="consultarResumenDashboard" class="com.servicios.datos.app.dashboard.impl.ConsultarResumenDashboardImpl">	
+		<property name="dashboardMapper" ref="dashboardMapper"/>
+	</bean>
+	
+	<bean id="consultarStatusPeticionPorRol" class="com.servicios.datos.app.dashboard.impl.ConsultarStatusPeticionPorRolImpl">	
+		<property name="dashboardMapper" ref="dashboardMapper"/>
+	</bean>
+	
+
+	<bean id="consultarPeticion" class="com.servicios.datos.app.peticion.impl.ConsultarPeticionImpl">	
+		<property name="peticionMapper" ref="peticionMapper"/>
+	</bean>
+	
+	<!--  -->
+	<bean id="consultarArchivos" class="com.servicios.datos.app.peticion.impl.ConsultarArchivosImpl">	
+		<property name="peticionMapper" ref="peticionMapper"/>
+	</bean>
+	
+	<bean id="consultarMovimientosProceso" class="com.servicios.datos.app.peticion.impl.ConsultarMovimientosProcesoImpl">	
+		<property name="peticionMapper" ref="peticionMapper"/>
+	</bean>
+	
+	<bean id="consultarUltimoMovimientoValido" class="com.servicios.datos.app.peticion.impl.ConsultarUltimoMovimientoValidoImpl">	
+		<property name="peticionMapper" ref="peticionMapper"/>
+	</bean>
+	
+	<bean id="consultarFechaMovimiento" class="com.servicios.datos.app.peticion.impl.ConsultarFechaMovimientoImpl">	
+		<property name="peticionMapper" ref="peticionMapper"/>
+	</bean>
+	
+	<bean id="consultarPartidasPresupuesto" class="com.servicios.datos.app.peticion.impl.ConsultarPartidasPresupuestoImpl">	
+		<property name="peticionMapper" ref="peticionMapper"/>
+	</bean>
+
+	<bean id="consultarReportesPorFecha" class="com.servicios.datos.app.reportes.impl.ConsultarReportesPorFechaImpl">	
+		<property name="reporteActividadMapper" ref="reporteActividadMapper"/>
+	</bean>
+	
+	<bean id="consultarFechasReportes" class="com.servicios.datos.app.reportes.impl.ConsultarFechasReportesImpl">	
+		<property name="reporteActividadMapper" ref="reporteActividadMapper"/>
+	</bean>
+	
+	<bean id="consultarTotalReportes" class="com.servicios.datos.app.reportes.impl.ConsultarTotalReportesImpl">	
+		<property name="reporteActividadMapper" ref="reporteActividadMapper"/>
+	</bean>
+		
+</beans>

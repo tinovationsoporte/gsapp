@@ -1,0 +1,80 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     id="divAreaAtencionPlantilla">
+ 
+ 	 <style>    
+     	
+		#areaAtencion_formPrincipal .ui-widget{
+            font-size: 11px;
+	 	}
+		
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+		
+		#areaAtencion_accordionResumen a{
+   			text-decoration: none;
+		}
+    </style>
+
+	<h:form id="areaAtencion_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+      	<h:inputText id="areaAtencion_txtInfoTabSeleccionado" value="#{consultaDetalleBean.anclaTabSeleccionado}" style="display:none;" />
+      	<p:accordionPanel id="areaAtencion_accordionResumen" multiple="true" activeIndex="0,1"  >
+      	    <p:ajax event="tabChange" listener="#{consultaDetalleBean.onTabChange}" update=":areaAtencion_formPrincipal:areaAtencion_txtInfoTabSeleccionado"/>
+        	<p:tab title="Autorizar Peticion" id="areaAtencion_tabAccordionDatSolicitante" rendered="#{consultaDetalleBean.autorizarPeticion.mostrarContenido}">	
+			   <p:messages id="areaMsges" showDetail="false" globalOnly="false" for="autorizar_msges"/>
+			   
+			    <p:panelGrid columns="4" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+					<h:outputText class="lblGral" id="areaAtencion_lblFechaAutorizacion"  value="Fecha de Autorizacion:" />
+					<p:outputLabel id="areaAtencion_txtFechaAutorizacion" value="#{consultaDetalleBean.autorizarPeticion.fechaAutorizacion}" size="10" readonly="true">
+							<f:convertDateTime pattern="dd-MMM-yyyy"/>
+					</p:outputLabel>
+					<h:outputText value=""/>
+					<br/>
+					<br/>		
+					
+					<h:outputText class="lblGral" id="areaAtencion_lblArea" value="Area Asignada:" /> 
+					<p:outputLabel id="areaAtencion_txtAreaAsignada" value="#{consultaDetalleBean.autorizarPeticion.areaAsignada}" />	
+					<p:outputLabel id="areaAtencion_txtUsuarioArea" value="#{consultaDetalleBean.autorizarPeticion.usuarioAreaAsignada}" />
+					<p:commandLink id="areaAtencion_lnkAreaPrincipal" value="Ver info" style = "font-weight: bold; color: rgb(0,0,255);text-decoration: underline;"
+						update="@form,:subPantallaNivel2" 
+						actionListener="#{consultaDetalleBean.autorizarPeticion.abrirSubPantallaNivel2}" 
+						oncomplete="dlg_2.show()" >			
+							<f:param name="urlPagina" value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1s1-detalleArea-pantalla.xhtml" />
+							<f:param name="nombrePagina" value="Area Principal" />
+							<f:param name="idArea" value="#{consultaDetalleBean.autorizarPeticion.idAreaAsignada}"/>
+							<f:param name="idUsuario" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaAsignada}"/>				
+					</p:commandLink>
+					
+					<h:outputText class="lblGral" id="areaAtencion_lblResponsable" value="Are de presupuesto: " /> 		
+				    <p:outputLabel id="areaAtencion_txtAreaPresupuesto" value="#{consultaDetalleBean.autorizarPeticion.areaPresupuesto}" /> 
+					<p:outputLabel id="areaAtencion_txtUsuarioPresupuesto" value="#{consultaDetalleBean.autorizarPeticion.usuarioAreaPresupuesto}" /> 
+					<p:commandLink id="areaAtencion_lnkAreaPresupuesto" value="Ver info" style = "font-weight: bold; color: rgb(0,0,255);text-decoration: underline;"
+						update="@form,:subPantallaNivel2" 
+						actionListener="#{consultaDetalleBean.autorizarPeticion.abrirSubPantallaNivel2}" 
+						oncomplete="dlg_2.show()" >			
+						<f:param name="urlPagina" value="/WEB-INF/web/contenido/pantallas/peticiones/m1p2s1s1-detalleArea-pantalla.xhtml" />
+						<f:param name="nombrePagina" value="Area Presupuesto" />
+						<f:param name="idArea" value="#{consultaDetalleBean.autorizarPeticion.idAreaPresupuesto}"/>
+						<f:param name="idUsuario" value="#{consultaDetalleBean.autorizarPeticion.idUsuarioAreaPresupuesto}"/>				
+                    </p:commandLink>
+
+					
+					<h:outputText class="lblGral" id="areaAtencion_lblPrioridad" value="Prioridad: " />
+					<p:outputLabel id="areaAtencion_txtPrioridad" value="#{consultaDetalleBean.autorizarPeticion.prioridad}"/>			 	
+					<br/>
+					<br/>
+				</p:panelGrid>			   			  
+			</p:tab>
+			<p:tab title="Autorizar Peticion" id="areaAtencion_hidenTab" rendered="#{!consultaDetalleBean.autorizarPeticion.mostrarContenido}">
+        		<p:messages id="autorizar_msges2" showDetail="false" globalOnly="false" for="autorizar_msges2"/>
+        	</p:tab>
+		</p:accordionPanel>
+	</h:form>	
+	
+</div>

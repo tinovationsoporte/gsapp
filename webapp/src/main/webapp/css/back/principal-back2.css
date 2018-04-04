@@ -1,0 +1,1080 @@
+@charset "utf-8";
+@import url("pago-anual-pantalla.css");
+/* Actualización 15 feb Karmina AB */
+* {
+    font-family: "Lucida Grande",Arial,Sans-Serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    font-family:Tahoma, Geneva, sans-serif;
+    
+}
+
+.cabe {
+
+    float: left;
+    height: 103px;
+    margin-left: 189px;
+    margin-top: 2px;
+    position: relative;
+    width: 823px;
+}
+.titulo {
+    background: none repeat scroll 0 0 rgba(200, 200, 250, 0.5);
+    float: left;
+    margin-left: 52px;
+    margin-top: 42px;
+    width: 490px;
+}
+h1 {
+    border-color: #000099;
+    color: #0000FF;
+    font: 200% sans-serif;
+    text-align: center;
+    text-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+.info {
+background-color: #000066;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 10px;
+    font-style: italic;
+    margin-left: 21px;
+    margin-top: 25px;
+    padding: 3px;
+}
+#modulesForm ul {
+    background-color: #000066;
+    clear: both;
+    float: left;
+    margin-left: -12px;
+    margin-top: 2px;
+    width: 812px;
+	
+}
+#modulesForm ul li {
+    float: left;
+}
+.logo {
+    display: none;
+    float: left;
+    margin: 10px;
+    width: 20%;
+}
+
+.login .formulario form {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+}
+.login .formulario fieldset {
+    background-color: #EEEEFF;
+    margin: 0 auto 10px 170px;
+    position: relative;
+    width: 30%;
+}
+.login .formulario label {
+    cursor: default;
+    font-family: "Lucida Grande",Arial,Sans-Serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+input, textarea, keygen, select, button, isindex {
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0;
+    text-align: start;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    word-spacing: normal;
+}
+.login .formulario {
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+.login p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+.btn {
+    background-color: #0033CC;
+    border: medium none;
+    color: #EEEEEE;
+    cursor: pointer;
+    font-family: 'Russo One',sans-serif;
+    font-weight: bold;
+    height: 25px;
+    padding: 5px;
+    width: 55px;
+}
+.indicador {
+    background-color: #CCCCCC;
+    height: 30px;
+}
+.modulos {
+    background-color: #3A01DF ;
+}
+.modulos ul li {
+    background-color: #0150A0;
+    border-right: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    transition: all 0.5s linear 0s;
+}
+
+.modulos ul li:last-child {
+	border-right: none;
+}
+
+.modulos ul li a {
+    color: #FFFFFF;
+    padding: 0 4px;
+    text-decoration: none;
+}
+.modulos ul li:hover {
+    background-color: #106830;
+   	border-radius: 0px;
+   	border-right: 1px solid #FFFFFF;
+}
+.modulos ul li *:active {
+    background-color: #0150A0;
+    border-radius: 1px 1px 1px 1px !important;
+    clear: both;
+}
+
+.footer {
+    background: none repeat scroll 0 0 #3A01DF ;
+    height: 30px;
+    text-align: center;
+    width: 1015px;
+    float: left;
+}
+h2 {
+    color: #464646;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+h6 {
+    color: #FFFFFF;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.pie {
+    float: right;
+    height: 90%;
+    width: 74%;
+}
+.pie p {
+}
+.pie .texto2 {
+    background-color: #EEEEEE;
+    float: left;
+    width: 64%;
+}
+.pie .texto3 {
+    float: right;
+    width: 33%;
+}
+.texto1 {
+    float: left;
+    width: 24%;
+}
+.tabla_form {
+    border-spacing: 10px 20px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+
+#ayudaFormulario{
+    clear: both;
+    float: right;
+    margin-right: 42px;
+    margin-top: 56px;
+    font-size:13px;
+}
+
+#ayudaFormulario a{
+    color: white;
+    float: left;
+    font-weight: bold;
+    padding-right: 9px;
+}
+
+/*ESTILOS GENERALES PARA TODAS LAS PÁGINAS Carmina Angeles B. 19-02-13*/
+
+@charset "utf-8";
+.lblGral {
+   color: #343538;
+    font-family: verdana;
+    font-size: 11px;
+    font-weight: bold;
+	font-family: Tahoma,Geneva,sans-serif;
+	}
+.txtGral {
+    border-radius: 4px 4px 4px 4px;
+    border-style: ridge;
+    font-size: 11px;
+	font-family: Tahoma,Geneva,sans-serif;
+}
+
+.areaGral {
+    font-family: verdana;
+    font-size: 11px;
+    padding: 5px;
+	font-family: Tahoma,Geneva,sans-serif;
+	color: #4F4F4F;
+}
+.butGral {
+  background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0 #C4C4C4;
+   border: 1px solid #A8A8A8;
+   	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+   font-weight: bold;
+   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    min-height: 25px;
+    min-width: 93px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	padding-bottom:1px;
+	text-align: center;
+}
+.butGral:hover {
+
+	color:#999
+	}
+.frmGral {
+}
+
+.cmbGral {
+    border-radius: 4px 4px 4px 4px;
+    font-size: 11px;
+    height: 24px;
+    min-width: 100px;
+    padding: 2px;
+	font-family: Tahoma,Geneva,sans-serif;
+	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+}
+.listGral {
+    border: 1px solid #A8A8A8;
+    border-radius: 4px 4px 4px 4px;
+    min-width: 100px;
+    padding: 2px;
+	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+}
+
+	
+.aGral {
+     background-image: url("img/bullet.png");
+    background-position: 4px 2px;
+    background-repeat: no-repeat;
+    color: #4F4F4F;
+    cursor: pointer;
+    font-family: Tahoma,Geneva,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding-left: 15px;
+    text-decoration: none;
+	
+}
+.tableGral {
+ table-layout: fixed;
+ border-collapse:collapse;
+}
+.tableGral thead{
+	background:-moz-radial-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0 #C4C4D4;
+	 border-collapse: collapse;
+    font-family: verdana;
+    font-size: 11px;
+    table-layout: fixed;
+	font-family: Tahoma,Geneva,sans-serif;
+	color: #4F4F4F;
+	}
+
+.tableGral td{
+	border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 4px 10px;
+    white-space: nowrap;	
+	border-color:#C4C4D4;
+    color: #4F4F4F;
+	font-size:11px;
+	font-family: Tahoma,Geneva,sans-serif;
+	}	
+
+.tableGral tr:nth-child(odd){
+	background::none repeat scroll 0 0 #FFFFFF;
+	}
+.tableGral  tr:nth-child(even){
+	background:none repeat scroll 0 0 #F2F5F9;
+	}
+
+.tableGral thead th{
+
+   border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 4px 10px;
+    white-space: nowrap;	
+	border-color:#C4C4D4;
+	color: #4F4F4F;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	font-size:11px;
+	font-family: Tahoma,Geneva,sans-serif;
+	
+	}	
+
+.fieldGral{
+	border: 1px solid #A8A8A8;
+    border-radius: 2px;
+    padding: 2px;
+	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+	font-size:12px;
+	font-weight:bold;
+
+	}
+	.divGral{
+	border: 1px solid #A8A8A8;
+    border-radius: 2px;
+    padding: 2px;
+	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+	font-weight:bold;	
+	}
+.h1Gral {
+}
+.h2Gral {
+}
+.h3Gral {
+}
+/*Agregados el 27/03/2013 karmina angeles b.*/
+
+.modulos {
+    background-color: transparent;
+    float: left;
+    width: 796px;
+    font-size: 13px;
+}
+.modulos ul li {
+    background-color: transparent;
+    border: 1px solid #CCC;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    transition: all 0.5s linear 0s;
+}
+
+
+.info {
+    background-color: #343538;
+    border-radius: 5px;
+    color: #ffffff;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 600;
+    height: 80px;
+    line-height: 1.2;
+    margin-left: -97px;
+    margin-top: 5px;
+    padding: 3px;
+    width: 295px;
+}
+
+.indicador {
+    background-color: TRANSPARENT;
+    height: 30px;
+}
+
+.cabe {
+    float: right;
+    height: 103px;
+    margin-right: 2px;
+    margin-top: 2px;
+    position: relative;
+    width: 293px;
+}
+
+.titulo {
+	display:none;
+	
+}
+
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 16px;
+    margin-top: 24px;
+    text-decoration: none;
+}
+
+
+.modulos {
+    background-color: transparent;
+    float: left;
+    font-size: 13px;
+    margin-top: -39px;
+    width: 796px;
+}
+
+.footer {
+    background: none repeat scroll 0 0 #3A01DF;
+    height: 30px;
+    text-align: center;
+    width: 1190px;
+    box-shadow: 1px -11px 8px rgba(0, 0, 0, 0.5) inset;   
+}
+
+h6 {
+    color: #FFFFFF;
+    display: block;
+    font-family: arial;
+    font-size: 11px;
+    margin-left: 92px;
+    margin-top: 10px;
+}
+
+.info {
+    background-color: #000066;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    height: 90px;
+    margin-left: -67px;
+    margin-top: 60px;
+    padding: 3px;
+    width: 270px;
+}
+
+.modulos {
+    background-color: #3A01DF;
+    float: left;
+    font-size: 13px;
+    margin-top: 0;
+    width: 989px;
+}
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 92px;
+    margin-top: 24px;
+    text-decoration: none;
+}
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 92px;
+    margin-top: 24px;
+    text-decoration: none;
+}
+/*Agregados el 1 de abril del 2013*/
+
+#ayudaFormulario a {
+    color: white;
+    float: left;
+    font-size: 11px;
+    font-weight: bold;
+    padding-right: 14px;
+}
+
+#ayudaFormulario {
+    clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 85px;
+    margin-top: 3px;
+    text-decoration: none;
+}
+
+.modulos ul li {
+    background-color: transparent;
+    border: 1px solid #666666;
+    border-radius: 7px 7px 7px 7px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    transition: all 0.5s linear 0s;
+}
+
+.info {
+    background-color: #000066;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    height: 90px;
+    margin-left: -67px;
+    margin-top: 60px;
+    padding: 3px;
+    width: 270px;
+}
+
+.ui-tree .ui-tree-nodes .ui-tree-item {
+    clear: left;
+    display: inline;
+    float: left;
+    margin: 4px 0 0 1px;
+    padding: 0;
+    width: 100%;
+}
+
+.ui-tree .ui-tree-nodes .ui-tree-parent {
+    clear: left;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 83%;
+}
+
+.ui-tree-nodes{
+	color:red;
+}
+
+.ui-tree-node{
+	color:blue;
+	font-weight: 500;
+}
+
+.titPrincipal{}
+.pPrincipal{
+	
+}
+
+.pPrincipal {
+    clear: both;
+    float: left;
+    margin-bottom: 13px;
+    margin-left: 202px;
+    margin-top: 24px;
+    text-align: justify;
+    width: 620px;
+}
+
+.titPrincipal {
+    float: left;
+    margin-left: 242px;
+    margin-top: 76px;
+}
+.pWrapper{
+	width:100px;
+	background:url("../img/topAgua.png") no-repeat scroll center top #006699;
+	
+}
+.pWrapper {
+    background: url("../img/soap.png") no-repeat scroll 375px top;
+    height: 283px;
+    width: 977px;
+}
+
+.titPrincipal {
+    float: left;
+    margin-left: 242px;
+    margin-top: 133px;
+
+}
+
+.migas {
+    background: none repeat scroll 0 0 #343538;
+    box-shadow: 1px -1px 23px rgba(0, 0, 0, 0.2) inset;
+    clear: both;
+    float: left;
+    height: 30px;
+    margin-top: 0;
+    padding-top: 3px;
+    width: 1186px;
+}
+
+.modulos {
+    background-color: #3A01DF;
+    float: left;
+    font-size: 13px;
+    margin-top: 0;
+    width: 1190px;
+}
+
+/*Temporales 8 abril 2013   Gustavo L.*/
+.txtDinero{
+	color: #238FBB;
+	font-weight:bold;
+	font-size: 15px !important;
+	border-radius: 4px 4px 4px 4px;
+    border-style: ridge;
+	font-family: Tahoma,Geneva,sans-serif;
+	width:130px;
+}
+
+
+.titPrincipal {
+    float: left;
+    margin-left: 242px;
+    margin-top: 208px;
+}
+
+
+.titPrincipal {
+    float: left;
+    margin-left: 242px;
+    margin-top: 208px;
+}
+
+.modulos ul li:hover{
+	border-radius:0px;
+	
+}
+
+.modulos ul li a:visited{
+	border-radius:7px;
+	background-color:#000099;
+}
+.modulos ul li {
+    background-color: transparent;
+    border: 1px solid #CCCCCC;
+    border-radius: 7px 7px 7px 7px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    transition: all 0.5s linear 0s;
+}
+
+
+.ui-helper-clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    margin-left: -31px;
+    visibility: hidden;
+    width: 160px;
+}
+
+
+/*_________________________________-*/
+
+
+.ui-tree .ui-tree-nodes .ui-tree-item {
+    clear: left;
+    display: inline;
+    float: left;
+    margin: 4px 0 0 -7px;
+    padding: 0;
+    width: 100%;
+}
+
+.ui-tree-node-content {
+    background:transparent;
+    
+    font-size: 12px;
+    font-weight: lighter;
+    padding-bottom: 4px;
+    vertical-align: middle;
+    width: 140px;
+    color:black;
+}
+.ui-tree-node-content:hover {
+    background: transparent;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    vertical-align: middle;
+    width: 170px;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    background:transparent;
+    border: 1px solid #529BCC;
+    color: black;
+    text-shadow: none;
+    font-weight:bold;
+    /*max-width: 179px;*/
+}
+.ui-state-default {
+    box-shadow: none;
+}
+
+.info {
+    background-color: #000066;
+    border-radius: 5px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 12px;
+    font-style: italic;
+    height: 90px;
+    margin-left: -67px;
+    margin-top: 60px;
+    padding: 3px;
+    width: 270px;
+}
+
+#ayudaFormulario {
+   clear: both;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    margin-right: 15px;
+    margin-top: -16px;
+    text-decoration: none;
+}
+
+.info {
+   background-color: #343538;
+    border-radius: 5px;
+    color: #ffffff;
+    float: left;
+    font-size: 11px;
+    font-style: italic;
+    font-weight: 600;
+    height: 80px;
+    line-height: 1.2;
+    margin-left: -15px;
+    margin-top: 5px;
+    padding: 3px;
+    width: 295px;
+}
+#ficha_impresion{
+		display:none;
+}
+.ajaxpreloader{
+	position: fixed;
+    top: 50%;
+    left: 50%;
+}
+/*ESTILOS PARA LA PÁGINA LOGIN   Karmina Angeles Bautista 25/abril/2013*/
+
+.imgMainWrapper{
+    float:left;
+}
+
+.imgMainWrapper img {
+    float: left;
+    margin-left: 162px;
+    margin-top: 82px;
+}
+
+.tabla_form {
+    border-spacing: 10px 20px;
+    float: left;
+    margin: 92px auto 0 32px;
+    padding: 10px;
+    width: 340px;
+    z-index:100;
+}
+
+.loginPage input{
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0;
+    text-align: start;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    width: 250px;
+    word-spacing: normal;
+    position:absolute;
+    z-indez:100;
+}
+
+.loginPage .btn{
+    background-color: #2471AF;
+    float: left;
+    margin-left: 160px;
+    padding-bottom: 23px;
+    padding-left: 12px;
+    width: 94px;
+    }
+
+.loginPage label {
+    color: #333333;
+    cursor: default;
+    font-family: "Lucida Grande",Arial,Sans-Serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.tabla_form {
+    border-spacing: 10px 20px;
+    float: left;
+    margin: 55px auto 0 48px;
+    padding: 10px;
+    width: 340px;
+}
+
+.login .formulario label {
+    color: #999999;
+    cursor: default;
+    font-family: "Lucida Grande",Arial,Sans-Serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.loginPage .btn {
+    background-color: #2471AF;
+    float: left;
+    font-size: 13px;
+    margin-left: 160px;
+    padding-bottom: 21px;
+    padding-left: 9px;
+    width: 94px;
+}
+
+
+.imgBg {
+    margin-left: 710px;
+    margin-top: 205px;
+    position: absolute;
+    z-index:1;
+}
+
+.footerLine {
+    clear: both;
+    float: left;
+    margin-top: 62px;
+}
+
+.footerText{
+  float: left;
+  margin-top: 5px;
+}
+   
+.topLine{
+	background-color: #2471AF;
+    height: 40px;
+    width: 1186px;  
+}
+  
+.loginPage input {
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0;
+    position: absolute;
+    text-align: start;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    width: 250px;
+    word-spacing: normal;
+    z-index: 210;
+}
+
+/*Modificado por Gustavo Leon Hernandez (Temporal)*/
+
+.modulos ul li {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+	border-right: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    list-style-type: none;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 4.5px;
+    border-radius: 0px;
+}
+
+.modulos ul li + li {
+    padding-left: 2px;
+    content: "|";
+}
+
+.modulos ul li:last-child {
+	border-right: none;
+}
+
+.inicio{
+	/*background: url("../img/soap.png") no-repeat scroll center center rgba(0, 0, 0, 0);*/
+	background-color:white;
+    height: 403px;
+    margin: 50px auto 0;
+    width: 740px;
+}
+
+.inicio > p{
+	color: #444444;
+    font-family: helvetica;
+    font-weight: 400;
+    padding-bottom: 15px;
+    text-align: justify;
+    line-height: normal;
+}
+
+.inicio > h2{
+	color: #000000;
+    font-family: helvetica;
+    font-size: 27px;
+    line-height: normal;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+/*Contenedor principal*/
+.ui-tree{
+	background-color: #EAEAEA;
+	border: none;
+	width: 183px;
+	color: black;
+	background-color: 
+}
+
+/*Contenedor nodos hijos*/
+.ui-tree-nodes{
+
+}
+
+/*Nodo del arbol*/
+.ui-tree-node{
+}
+
+/* Cada item del arbol*/
+.ui-tree .ui-tree-nodes .ui-tree-item {
+	margin-left: 0px !important;
+	width: 150px;
+}
+	
+/*Contenido del nodo*/
+.ui-tree-node-content{
+	width: 150px !important;
+}
+
+/*Icono del nodo*/
+.ui-tree-icon{}
+
+/*Etiqueta del nodo*/
+.ui-tree-node-label{}
+
+/*Elimina decoracion extra de los nodos*/
+.ui-tree .ui-state-default{
+	box-shadow:none;
+}
+
+/* Estado con el mouse sobre el nodo*/
+
+.ui-tree .ui-state-hover{
+	/*background-image: url('../img/medio-gris-ruido.jpg');*/
+	color: #FFFFFF !important;
+	text-shadow: none; 
+}
+
+/*Estado del nodo seleccionado*/
+.ui-tree .ui-state-highlight{
+	background-image: url('../img/oscuro-gris-ruido.jpg');
+	color: white !important;
+}
+.padre{
+	
+}
+
+.hijo{}
+
+.ui-tree .ui-tree-child .hijo{
+	color: #3f3f3f !important;
+	font-weight: normal;
+}
+
+
+
+.ui-tree .ui-tree-parent span, .ui-tree .ui-tree-item span {
+    color: #343538 !important;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ui-tree-node-content .ui-icon-triangle-1-s{
+	background-image: url('img/fechanuevaabierto.png') !important;
+	background-position: 0px 0px !important;
+	background-repeat:no-repeat;
+	height: 16px;
+	width: 16px;
+}
+
+.ui-tree-node-content .ui-icon-triangle-1-e{
+	background-image: url('img/fechanuevacerrado.png') !important;
+	background-position: 0px 0px !important;
+	height: 16px; 
+	width: 16px;
+	background-repeat:no-repeat;
+}
+
+.ui-state-default .ui-icon{
+	
+}
+
+.ui-state-highlight .ui-tree-node-label .hijo{
+	font-weight: 600;
+	color: white !important;
+}
+
+.imgAjax{
+	float: left;
+    margin-left: 5px;
+    width: 80px;
+    height: 80px;
+}
+.lblAjax{
+	clear: both;
+    float: left;
+    margin-top: 5px;
+    margin-left: 5px;
+	
+}
+
+.moduloActivo{
+	background-color: #106830 !important;
+}

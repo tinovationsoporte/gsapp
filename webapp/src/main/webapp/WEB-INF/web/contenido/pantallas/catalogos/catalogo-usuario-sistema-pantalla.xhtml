@@ -1,0 +1,216 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html" 
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+	 id="catalogoUsuarios_divPrincipal" style="width: 850px; height: 600px; margin: 5px;" >
+	
+ <style type="text/css">
+	#catUsuarioSis_form .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	} 
+	
+	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+	}
+	
+	#catUsuario_divCaptura{
+		float:left;
+		width:800px;
+		margin-bottom:5px;
+	}
+	#catUsuario_divTabla{
+		float:left;
+		width:800px;
+	}
+	 
+</style>
+<script type="text/javascript">
+   function cambiarTipo(obj){
+	   if(obj.getAttribute('type') == 'password')
+	   	obj.setAttribute('type', 'text');
+	   	else
+	   		obj.setAttribute('type', 'password');
+   }
+   
+   function checarCombos(){
+	   var obj1 = document.getElementById('catUsuarioSis_form:catUsuariosSis_smcPass1:0');	   
+	   var obj2 = document.getElementById('catUsuarioSis_form:catUsuariosSis_smcPass2:0');
+	   var pass1 = document.getElementById('catUsuarioSis_form:catUsuarioSis_txtPass');
+	   var pass2 = document.getElementById('catUsuarioSis_form:catUsuarioSis_confPass');
+	   
+	   if(obj1.checked) // mostrar password
+			pass1.setAttribute('type', 'text');
+	   else
+		   pass1.setAttribute('type', 'password'); 
+	   
+	   if(obj2.checked) // mostrar password
+			pass2.setAttribute('type', 'text');
+	   else
+		   pass2.setAttribute('type', 'password');     
+	   
+   }
+</script>
+
+    <h:form id="catUsuarioSis_form" class="frmGral">
+		<p:messages id="catUsSistemaMensajes" showDetail="true"/>
+		
+		<div id="catUsuario_divCaptura">	
+		<p:panel id="catalago_pnlCapturaUsuario" header="Captura - Edicion de Usuario" >
+			
+			<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+			
+				<p:panelGrid columns="3" cellpadding="5" styleClass="m1p1_pnlGridCaptura">				
+					<p:outputLabel value="Nombre Usuario:" id="catUsuarioSis_lblNombre2" class="lblGral"/>  
+					<p:inputText styleClass="txtGral textBox" id="catUsuarioSis_txtNombre" value="#{catalogoUsuarioSistemaBean.usuarioSistema.nombre}" 
+						maxlength="80" />
+					<br/>			
+				
+					<p:outputLabel value="Login:" id="catUsuarioSis_lblLogin" class="lblGral"/>  
+					<p:inputText styleClass="txtGral textBox" id="catUsuarioSis_txtLogim" value="#{catalogoUsuarioSistemaBean.usuarioSistema.login}"
+						maxlength="20" />
+					<br/>
+						
+					<p:outputLabel value="Password:" id="catUsuarioSis_lblPassword" class="lblGral"/>  
+					<p:password id="catUsuarioSis_txtPass" styleClass="txtGral textBox" autocomplete="off"
+						label="Password" maxlength="20" value="#{catalogoUsuarioSistemaBean.password1}" redisplay="true"
+						feedback="true" 
+						promptLabel="Inserte una contrasena" weakLabel="Debil"  
+						goodLabel="Buena" strongLabel="Fuerte">
+						<p:ajax process="@this" />
+					</p:password>
+					
+					<h:selectManyCheckbox id="catUsuariosSis_smcPass1"  
+						value="#{catalogoUsuarioSistemaBean.mostrarPassword1}"
+						onchange="cambiarTipo(document.getElementById('catUsuarioSis_form:catUsuarioSis_txtPass'))">
+						<f:selectItem itemValue="1" itemLabel="Mostrar Password" />
+					</h:selectManyCheckbox>
+					
+					<p:outputLabel value="Confirmar PW:" id="catUsuarioSis_lblConfPass" class="lblGral"/>  
+					<p:password id="catUsuarioSis_confPass" styleClass="txtGral textBox" autocomplete="off"
+						label="Confirmar PW" value="#{catalogoUsuarioSistemaBean.password2}" redisplay="true"
+						feedback="true" maxlength="20" 
+						promptLabel="Inserte una contrasena" weakLabel="Debil"  
+						goodLabel="Buena" strongLabel="Fuerte">
+						<p:ajax process="@this"> </p:ajax>
+					</p:password>
+					
+					<h:selectManyCheckbox id="catUsuariosSis_smcPass2"
+						value="#{catalogoUsuarioSistemaBean.mostrarPassword2}" 
+						onchange="cambiarTipo(document.getElementById('catUsuarioSis_form:catUsuarioSis_confPass'))">
+						<f:selectItem itemValue="1" itemLabel="Mostrar Password" />
+					</h:selectManyCheckbox>
+					
+					<p:outputLabel value="Status:" id="catUsuarioSis_lblStatus" class="lblGral"/>  
+					<p:selectOneMenu id="catUsuarioSis_cmbStatus" value="#{catalogoUsuarioSistemaBean.usuarioSistema.status}" >
+						<f:selectItem itemLabel="Activo" itemValue="1"></f:selectItem>
+						<f:selectItem itemLabel="Inactivo" itemValue="0"></f:selectItem>  
+					</p:selectOneMenu>  
+					<br/>
+					
+					<p:outputLabel value="Rol:" id="catUsuarioSis_lblRol" class="lblGral"/>  
+					<p:selectOneMenu id="catUsuarioSis_cmbRol" value="#{catalogoUsuarioSistemaBean.usuarioSistema.rol.idRol}" >
+							<f:selectItem itemLabel="Seleccione una opcion" noSelectionOption="true"></f:selectItem>
+							<f:selectItems value="#{catalogoUsuarioSistemaBean.listaRoles}" var="rol"
+							itemValue="#{rol.id}" itemLabel="#{rol.descripcion}" />   
+					</p:selectOneMenu>  
+					<br/>
+					
+					<p:outputLabel value="Area:" id="catUsuarioSis_lblArea" class="lblGral"/>  
+					<p:selectOneMenu id="catUsuarioSis_cmbArea" value="#{catalogoUsuarioSistemaBean.usuarioSistema.area.idArea}" >
+						<f:selectItem itemLabel="Seleccione una opcion" noSelectionOption="true"></f:selectItem>
+						<f:selectItems value="#{catalogoUsuarioSistemaBean.listaAreas}" var="area"
+						itemValue="#{area.idArea}" itemLabel="#{area.nombre}" />   
+					</p:selectOneMenu>
+					<br/>		
+				</p:panelGrid>			
+				
+				<p:panelGrid columns="1" cellpadding="5" styleClass="m1p1_pnlGridCaptura">				
+					<p:commandButton id="cat1p1_btnBuscar" value="BUSCAR"	actionListener="#{catalogoUsuarioSistemaBean.buscarCatalogo}" 
+						oncomplete="checarCombos()" style="width:100px;"
+						update="@form" styleClass="espacioBoton butGral" disabled="#{catalogoUsuarioSistemaBean.accionBuscar}" />
+					
+					<p:commandButton id="cat1p1_btnLimpiar" value="LIMPIAR"  actionListener="#{catalogoUsuarioSistemaBean.limpiarCatalogo}"
+						style="width:100px;"
+						update="@form"	styleClass="espacioBoton butGral" disabled="#{catalogoUsuarioSistemaBean.accionLimpiar}" />
+					
+					<p:commandButton id="cat1p1_btnRegistrar" value="REGISTRAR"	actionListener="#{catalogoUsuarioSistemaBean.registrarCatalogo}" 
+						oncomplete="checarCombos()" style="width:100px;"
+						update="@form"	styleClass="espacioBoton butGral"	disabled="#{catalogoUsuarioSistemaBean.accionRegistrar}"/>
+										
+					<p:commandButton id="cat1p1_btnActualizar" value="GUARDAR CAMBIOS" onclick="dlgGuardar.show();" 
+						style="width:100px;"
+						update="@form"	styleClass="espacioBoton butGral"	disabled="#{catalogoUsuarioSistemaBean.accionActualizar}"/>
+				</p:panelGrid>
+			</p:panelGrid>	
+			<pe:keyFilter for="catUsuarioSis_txtPass" regEx="/[a-zA-Z0-9\.\-\_]/" />
+			<pe:keyFilter for="catUsuarioSis_txtNombre" regEx="/[a-zA-Z&#225;&#233;&#237;&#243;&#250;&#241;&#193;&#201;&#205;&#211;&#218;&#209;&#220; ]/" />
+			<pe:keyFilter for="catUsuarioSis_confPass" regEx="/[a-zA-Z0-9\.\-\_]/" />
+			<pe:keyFilter for="catUsuarioSis_txtLogim" regEx="/[a-zA-Z0-9]/" /> 	
+		</p:panel>
+		</div>
+		
+		<div id="catUsuario_divTabla"> 
+		<p:panel id="catalago_pnlTablaUsuario" header="Usuarios" >
+			<p:dataTable var="usuarioSistema" value="#{catalogoUsuarioSistemaBean.modelo}" rowKey="#{usuarioSistema.id}"
+					style="overflow:scroll;" id="dataTable1" 	       		
+					paginator="true" rows="10"  
+					currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords} Usuarios"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10">  
+	  
+				<p:column headerText="Nombre" sortBy="#{usuarioSistema.nombre}"  >  
+					<h:outputText value="#{usuarioSistema.nombre}" />	            	
+				</p:column>
+				
+				<p:column headerText="Login" sortBy="#{usuarioSistema.login}"  >  
+					<h:outputText value="#{usuarioSistema.login}" />	            	
+				</p:column> 
+				
+				<p:column headerText="Status" sortBy="#{usuarioSistema.status}"  >  
+					<h:outputText value="#{usuarioSistema.status}" />	            	
+				</p:column>    
+				
+				<p:column headerText="Area" sortBy="#{usuarioSistema.area.nombre}"  >  
+					<h:outputText value="#{usuarioSistema.area.nombre}" />	            	
+				</p:column>	 			
+				
+				<p:column headerText="Rol" sortBy="#{usuarioSistema.rol.descripcion}"  >  
+					<h:outputText value="#{usuarioSistema.rol.descripcion}" />	            	
+				</p:column>
+			
+				<p:column>  
+					<p:commandLink value="Eliminar" onclick="dlgEliminar.show()" update="@form"
+					style ="font-weight:bold;color: rgb(0,0,255);" > 
+							<f:setPropertyActionListener target="#{catalogoUsuarioSistemaBean.idCatalogo}" value="#{usuarioSistema.id}"/>
+					</p:commandLink> 	            		
+				</p:column>
+				
+				<p:column>  
+					<p:commandLink value="Actualizar" actionListener="#{catalogoUsuarioSistemaBean.seleccionarCatalogo}"
+						style ="font-weight:bold;color: rgb(0,0,255);"  update="@form">	            		
+						<f:param name="idCatalogo" value="#{usuarioSistema.id}"/>	            		 	            	
+					</p:commandLink>	        	
+				</p:column>	 		
+			</p:dataTable>			
+		</p:panel>			
+		</div>
+	</h:form>
+	
+	<p:confirmDialog id="catalogo_dlgGuardar" severity="alert" widgetVar="dlgGuardar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea guardar los cambios&#63;">
+		<h:form id="formDialogoGuardar">
+			<p:commandButton id="butSiGuardar" styleClass="butGral boton" value="Si" oncomplete="dlgGuardar.hide();" actionListener="#{catalogoUsuarioSistemaBean.actualizarCatalogo}" update=":catUsuarioSis_form" />
+			<p:commandButton id="butNoGuardar" styleClass="butGral boton" value="No" onclick="dlgGuardar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+	
+	<p:confirmDialog id="catalogo_dlgEliminar" severity="alert" widgetVar="dlgEliminar" header="Confirmacion" visible="false"
+		message="&#191;Esta seguro que desea eliminar el registro&#63;">
+		<h:form id="formDialogoEliminar">
+			<p:commandButton id="butSiEliminar" styleClass="butGral boton" value="Si" oncomplete="dlgEliminar.hide();" actionListener="#{catalogoUsuarioSistemaBean.eliminarCatalogo}" update=":catUsuarioSis_form" />
+			<p:commandButton id="butNoEliminar" styleClass="butGral boton" value="No" onclick="dlgEliminar.hide()" type="button"/>
+		</h:form>
+	</p:confirmDialog>
+</div>

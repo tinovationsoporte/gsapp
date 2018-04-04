@@ -1,0 +1,60 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html" 
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:pe="http://primefaces.org/ui/extensions"
+	 style="width: 800px; height: 500px; padding: 20px;">
+	
+ <style type="text/css">
+	 
+	 #utilerias_form .ui-widget{
+	   font-size: 11px;	   
+	}
+	 
+	 .m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+	.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+	}
+	 
+</style>
+
+	<h:outputScript name="help.js" library="js"></h:outputScript>
+	
+    <h:form id="utilerias_form" class="frmGral">		
+		
+		<p:panel id="utilerias_pnlRecursosAdicionales" header="Recursos Adicionales" >	
+			<p:panelGrid  columns="1" cellpadding="10" styleClass="m1p1_pnlGridCaptura">
+				
+				<p:commandLink value="Descarga la guía rápida" 
+					update="@form" 
+					actionListener="#{utileriasBean.descargarGuiaRapida}" 
+					style ="font-weight:bold;color: rgb(0,0,255);" 
+					process="@this">						
+				</p:commandLink>
+				
+				<p:commandLink value="Ver la guía rápida como página web" 
+					update="@form" 
+					actionListener="#{utileriasBean.verGuiaRapida}" 
+					style ="font-weight:bold;color: rgb(0,0,255);" 
+					process="@this">
+					
+				</p:commandLink>
+			
+				<p:commandLink value="Ver proceso GS" 
+						actionListener="#{capturarPeticionBean.abrirSubPantallaNivel1}"
+						style = "font-weight: bold; color: rgb(0,0,255);"
+						oncomplete="dlg.show()" update=":subPantallaNivel1"
+						process="@this">
+							<f:param name="urlPagina"
+						         value="/WEB-INF/web/contenido/pantallas/imagen-pantalla.xhtml" />
+							<f:param name="nombrePagina" value="Proceso GS" />	
+							<f:param name="imagen" value="img/ProcesoGS.jpg"></f:param>		 
+							<f:param name="titulo" value="Proceso de trabajo"></f:param>
+							<f:param name="alt" value="Proceso de atencion de peticiones llevado acabo en el sistema GS"></f:param>
+				</p:commandLink>
+			</p:panelGrid>
+		</p:panel>
+		
+	</h:form>
+	
+</div>

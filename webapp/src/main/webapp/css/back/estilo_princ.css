@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+   	padding: 0;
+   	margin: 0;
+	font-family:"MS Serif", "New York", serif;
+ 	/*border: 1px dashed #8c8c8c;
+*/
+ }
+ .wrapper {
+  width: 100%; 
+  margin: auto;
+  background-color:#CCC;
+  border: 1px dashed #8c8c8c;
+ 
+}
+.header{
+	background-color:#6FC;
+	height:120px;
+	border: 1px dashed #8c8c8c;
+
+}
+.titulo {
+	float: right; 
+  	width: 74%;
+	margin-top:10px; 
+	border: 1px dashed #8c8c8c;
+
+}
+    .titulo h2,
+    .titulo p
+    {
+      padding: 20px; 
+    }
+	.contenidoprin {
+		float: left; 
+		width: 65%; 
+		background-color: #eee; 
+	}
+	
+.logotipo {
+  	float: left; 
+  	width: 23%;
+  	padding-top:10px;
+  	background-color: #d9d9d9; 
+	border: 1px dashed #8c8c8c;
+
+}
+.logotipo img{
+  margin-left:10px;
+}
+.contenedor{
+	margin:0 auto;
+	/*text-align:center;*/
+	height:500px;
+	}
+	
+.contenedor .formulario label{
+	padding:5px;
+	margin:30px;
+}
+.contenedor .formulario fieldset{
+	margin:0 auto;
+	margin-bottom:10px;
+	width:30%;	
+}
+.contenedor .formulario {
+	padding-top:150px;
+}
+.contenedor .login p{
+	margin-top:10px;
+	font-size:20px;
+}
+.btn {
+	color:#e44e2d;
+	border:none;
+	background-color:#FFF;
+	cursor:pointer;
+	font-family: 'Russo One', sans-serif;
+			
+}
+	
+.footer {
+  	clear:both;
+	height:40px;  
+  	text-align: center; /*centrar*/
+	font-size: 80%; /*más pequeña*/
+	font-style: normal; /*fuente normal, no cursiva*/
+	letter-spacing:2px; /*Distancia entre las letras*/
+	line-height:1.5em; /*Distancia entre las lineas*/
+	background-color:#66CCCC;
+	text-align: center;/*centrado para IE*/
+	padding:10px;
+	
+	
+	border-top:1px solid black;
+	
+}
+.pie {
+	float: right; 
+  	width: 74%;
+	height:90%;
+	
+}
+    .pie p
+    {
+      /*padding: 20px;*/ 
+    }
+	.pie .texto2 {
+		float: left; 
+		width: 64%;
+		height:40px;;
+		background-color: #eee; 
+	}
+	.pie .texto3{
+		float: right;  
+		width: 33%;
+		height:40px;;
+		background-color: #d9d9d9; 
+	}
+.footer .texto1 {
+  	float: left; 
+  	width: 24%;
+	height:40px;;
+	background-color: #d9d9d9; 
+
+}
+
+table{
+	padding:10px;
+	margin:0 auto;
+	border-spacing: 10px 20px;
+}

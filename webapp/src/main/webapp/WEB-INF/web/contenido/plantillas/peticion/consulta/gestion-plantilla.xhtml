@@ -1,0 +1,83 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"     
+     id="divGestionPlantilla">
+  	 <style>
+	 		
+  	 	#gestion_formPrincipal .ui-widget{
+            font-size: 11px;
+	 	}
+		
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m1p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+		
+		#gestion_accordionResumen a{
+   			text-decoration: none;
+		}
+		 
+  	 </style>
+  	<h:form id="gestion_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">	
+		<p:accordionPanel id="gestion_accordionResumen" multiple="true" activeIndex="0,1"  >
+			<p:tab title="Entrega a Recepcion" id="gestion_tabAccordionDatSolicitante" rendered="#{consultaDetalleBean.gestion.mostrarSeccionGestion}">			
+				  	<p:messages id="gestion_areaMsges" showDetail="false" for="gestion_msges" globalOnly="false"/>				 				
+					<h:inputText id="gestion_txtInfoTabSeleccionado" value="#{consultaDetalleBean.anclaTabSeleccionado}" style="display:none;" />
+					<p:panelGrid columns="2" cellpadding="5" styleClass="m1p1_pnlGridCaptura">
+						<h:outputText class="lblGral" value="Operador:" />
+						<p:outputLabel value="#{consultaDetalleBean.gestion.operador}" />
+						
+						<h:outputText class="lblGral" value="Acciones Realizadas:" />
+						<p:dataTable id="gestion_tablaMovimientosGestion" var="movimiento" value="#{consultaDetalleBean.gestion.listaMovimientos}"  
+								emptyMessage="Sin movimientos">
+							<p:column headerText="Fecha">
+								<h:outputText value="#{movimiento.fecha}">
+									<f:convertDateTime pattern="dd-MM-yyyy"/>
+								</h:outputText>
+							</p:column>										
+							<p:column headerText="Movimiento">
+								<h:outputText value="#{movimiento.movimiento}" />
+							</p:column>
+							<p:column headerText="Comentario">
+								<h:outputText value="#{movimiento.comentarios}" />
+							</p:column>
+							<p:column headerText="Usuario">
+								<h:outputText value="#{movimiento.nombreUsuario}" />							
+							</p:column>														
+						</p:dataTable>
+						
+						
+						
+						<h:outputText class="lblGral" value="Comentarios de Entrega:" />
+						<p:inputTextarea id="gestion_textareaDescripcion" value="#{consultaDetalleBean.gestion.descripcionEntrega}"  readonly="true" rows="4" cols="50"/>
+						
+						
+						<h:outputText class="lblGral" value="Evidencias:" />
+						<p:dataTable id="gestion_tablaArchivos" var="archivo" value="#{consultaDetalleBean.gestion.listaArchivos}" 
+							emptyMessage="Sin archivos" style="width:305px">
+							<p:column headerText="Archivo">						
+								<p:commandLink id="gestion_lnkArchivo" value="#{archivo.nombreArchivo}" 
+									actionListener="#{consultaDetalleBean.gestion.abrirSubPantallaNivel2}"
+									style = "font-weight: bold; color: rgb(0,0,255);"
+									oncomplete="dlg_2.show()" update=":subPantallaNivel2" 
+									process="@this">
+									<f:param name="urlPagina"
+									         value="/WEB-INF/web/contenido/plantillas/peticion/imagen-plantilla.xhtml" />
+									<f:param name="nombrePagina" value="Evidencia - #{archivo.nombreArchivo}" />	
+									<f:param name="idArchivo" value="#{archivo.idArchivo}"></f:param>		 
+								</p:commandLink>
+							</p:column>									
+						</p:dataTable>
+					
+					</p:panelGrid>
+				</p:tab>
+				<p:tab title="Entrega a Recepcion" id="gestion_tabAccordionDatSolicitante2" rendered="#{!consultaDetalleBean.gestion.mostrarSeccionGestion}">
+					<p:messages id="gestion_areaMsges2" showDetail="false" for="gestion_msges" globalOnly="false"/>
+				</p:tab>
+		</p:accordionPanel>
+	 </h:form>
+</div>

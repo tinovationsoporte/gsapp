@@ -1,0 +1,32 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+     id="divCarruselPlantilla"
+     style="width: 900px; height: 600px; margin-left: 0px; margin-top: 0px; ">
+     	
+	<style>
+		
+		
+		#imagenPrincipal_divBotones{
+			margin-bottom: 10px;
+			margin-top: 10px;
+			width:100px;
+			margin-left:400px;
+		}
+	</style>
+
+	<div id="imagenPrincipaldivImagen">	  		
+	
+		<p:graphicImage name="#{param['imagen']}" width="890"  alt="#{param['alt']}" title="#{param['titulo']}" />		
+		
+	</div>
+	
+	<div id="imagenPrincipal_divBotones">
+		<p:commandButton value = "Cerrar" onclick="dlg.hide()" />
+	</div>
+	
+</div>	

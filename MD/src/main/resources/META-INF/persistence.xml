@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	
+	<persistence-unit name="MD" transaction-type="RESOURCE_LOCAL">		
+			  
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		 
+		<class>com.modelo.datos.app.Rol</class>		
+		<class>com.modelo.datos.app.UsuarioSistema</class>
+		<class>com.modelo.datos.app.Peticion</class>
+		<class>com.modelo.datos.app.Archivo</class>
+		<class>com.modelo.datos.app.Area</class>
+		<class>com.modelo.datos.app.Catalogo</class>
+		<class>com.modelo.datos.app.Categoria</class>
+		<class>com.modelo.datos.app.EntidadMpal</class>
+		<class>com.modelo.datos.app.Prioridad</class>
+		<class>com.modelo.datos.app.ProcesoPeticion</class>
+		<class>com.modelo.datos.app.StatusPeticion</class>
+		<class>com.modelo.datos.app.TipoEntidadMpal</class>
+		<class>com.modelo.datos.app.TipoMedioContacto</class>
+		<class>com.modelo.datos.app.Presupuesto</class>
+		<class>com.modelo.datos.app.DetallePresupuesto</class>
+		<class>com.modelo.datos.app.StatusPresupuesto</class>
+		<class>com.modelo.datos.app.ReporteActividad</class>
+		<class>com.modelo.datos.app.StatusReporteActividad</class>
+						
+		
+		<properties>		
+			<!-- 
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gestionsocial"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
+			 -->
+            <!--Hibernate properties-->
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			
+			<!-- 
+			<property name="hibernate.hbm2ddl.auto" value="validate"/>			
+ 			-->
+		</properties>
+		
+	</persistence-unit>
+	
+</persistence>

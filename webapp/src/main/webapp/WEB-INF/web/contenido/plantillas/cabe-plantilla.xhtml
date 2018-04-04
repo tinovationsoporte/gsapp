@@ -1,0 +1,55 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:p ="http://primefaces.org/ui" class="cabe" div="divCabe">
+	
+	
+	
+	<div class="titulo">
+		<h1>TITULO DE SISTEMA</h1>
+	</div>
+	
+	<div class="info">	   
+		<table width="100%">
+			<tr>
+				<td>Nombre:</td>
+				<td>#{aplicacion.usuario.nombre}</td>
+			</tr>
+			<tr>
+				<td>Usuario:</td>
+				<td>#{aplicacion.usuario.login}</td>
+			</tr>
+			<tr>
+				<td>Rol:</td>
+				<td>#{aplicacion.usuario.rol.descripcion}</td>
+			</tr>
+			<tr>
+				<td>Fecha:</td>
+				<td>#{aplicacion.fecha}</td>
+			</tr>
+			<tr>
+				<td>Version:</td>
+				<td>#{aplicacion.version}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<h:form id="ayudaFormulario" >
+		
+		<p:commandLink id="linkAyuda"  styleClass="AyudaChildren"  value="Salir"  onclick="confirmacionSalir.show()" />
+		
+		
+		
+		<p:commandLink styleClass="AyudaChildren" value="Ayuda" actionListener="#{aplicacion.mostrarAyuda}" />
+		
+		<p:confirmDialog id="confirmarSalirDialog" message="Esta seguro que desea salir de la aplicacion?"  
+                header="Salir" severity="alert" widgetVar="confirmacionSalir">  
+                  
+	        <p:commandButton id="confirmar" value="Si"  oncomplete="confirmacionSalir.hide()"  
+	                    	 actionListener="#{aplicacion.cerrarSession}" action="cerrar" ajax="false" />
+	                    	  
+	        <p:commandButton id="rechazar" value="No" onclick="confirmacionSalir.hide()" type="button" />   
+                  
+    	</p:confirmDialog> 
+		
+	</h:form>
+</div>

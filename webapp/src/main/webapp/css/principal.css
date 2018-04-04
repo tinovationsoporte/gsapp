@@ -1,0 +1,320 @@
+* {    
+    font-family: "Segoe UI","Segoe WP","Segoe UI WPC",Tahoma,Arial,sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+html, body { 
+	height: 100%; 
+}
+
+body{
+	background-color: #555555;
+}
+
+h1 {
+    border-color: #000099;
+    color: #0000FF;
+    font: 200% sans-serif;
+    text-align: center;
+    text-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    color: #464646;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h6 {
+    color: #FFFFFF;
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 92px;
+    margin-top: 10px;
+}
+
+.fontPrincipal{
+	font-family: "Segoe UI","Segoe WP","Segoe UI WPC",Tahoma,Arial,sans-serif !important;
+}
+
+/** Inician Estilos estructura principal **/
+.divContenedorPrincipal{
+	background-color:#eaeaea;
+    width: 100%;
+    height: 100%;	
+    margin: 0 auto;
+    min-height: 659px;  /* original: 659px */
+	min-width: 1324px;  /* original: 1024px */
+}
+.divModulosPrincipal{
+	float: left;
+	background-color: #31353A;	
+	width: 100%;  
+    height: 38px;
+}
+
+.divInformacionNavegacionPrincipal{
+	float: left;
+	background-color: #31353A;	
+	width: 100%;
+    height: 33px;
+}
+
+.divmenuNavegacionPrincipal{
+	float: left;
+    background-color: #EAEAEA;    
+    width: 200px;
+    height: calc(100% - 71px);
+    min-height: 588px;
+}
+
+.divContenidoPrincipal{
+    float: left;
+    background-color: white;    
+    width: calc(100% - 200px);
+    height: calc(100% - 71px);     
+    padding: 0px;
+    margin: 0px;
+    min-height: 588px;
+    min-width: 660px;    
+}
+/** Terminan Estilos estructura principal **/
+
+input, textarea, keygen, select, button, isindex {
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0;
+    text-align: start;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    word-spacing: normal;
+}
+
+.btn {
+    background-color: #0033CC;
+    border: medium none;
+    color: #EEEEEE;
+    cursor: pointer;
+    font-family: 'Russo One',sans-serif;
+    font-weight: bold;
+    height: 25px;
+    padding: 5px;
+    width: 55px;
+}
+
+/*ESTILOS GENERALES PARA TODAS LAS PÁGINAS Carmina Angeles B. 19-02-13*/
+.lblGral {
+   color: #343538;
+    font-family: verdana;
+    font-size: 11px;
+    font-weight: bold;
+	font-family: Tahoma,Geneva,sans-serif;
+	}
+.txtGral {
+    border-radius: 4px 4px 4px 4px;
+    border-style: ridge;
+    font-size: 11px;
+	font-family: Tahoma,Geneva,sans-serif;
+}
+.areaGral {
+    font-family: verdana;
+    font-size: 11px;
+    padding: 5px;
+	font-family: Tahoma,Geneva,sans-serif;
+	color: #4F4F4F;
+}
+.butGral {
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0 #C4C4C4;
+    border: 1px solid #A8A8A8;
+   	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    min-height: 25px;
+    min-width: 93px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	padding-bottom:1px;
+	text-align: center;
+}
+.butGral:hover {
+	color:#999
+}
+.frmGral {
+}
+.cmbGral {
+    border-radius: 4px 4px 4px 4px;
+    font-size: 11px;
+    height: 24px;
+    min-width: 100px;
+    padding: 2px;
+	font-family: Tahoma,Geneva,sans-serif;
+	color: #4F4F4F;	
+}
+.listGral {
+    border: 1px solid #A8A8A8;
+    border-radius: 4px 4px 4px 4px;
+    min-width: 100px;
+    padding: 2px;
+	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+}	
+.aGral {
+    background-image: url("img/bullet.png");
+    background-position: 4px 2px;
+    background-repeat: no-repeat;
+    color: #4F4F4F;
+    cursor: pointer;
+    font-family: Tahoma,Geneva,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding-left: 15px;
+    text-decoration: none;
+	
+}
+.tableGral {
+	table-layout: fixed;
+ 	border-collapse:collapse;
+}
+.tableGral thead{
+	background:-moz-radial-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0 0 #C4C4D4;
+	border-collapse: collapse;
+    font-family: verdana;
+    font-size: 11px;
+    table-layout: fixed;
+	font-family: Tahoma,Geneva,sans-serif;
+	color: #4F4F4F;
+}
+
+.tableGral td{
+	border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 4px 10px;
+    white-space: nowrap;	
+	border-color:#C4C4D4;
+    color: #4F4F4F;
+	font-size:11px;
+	font-family: Tahoma,Geneva,sans-serif;
+}	
+
+.tableGral tr:nth-child(odd){
+	background::none repeat scroll 0 0 #FFFFFF;
+}
+.tableGral  tr:nth-child(even){
+	background:none repeat scroll 0 0 #F2F5F9;
+}
+
+.tableGral thead th{
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 4px 10px;
+    white-space: nowrap;	
+	border-color:#C4C4D4;
+	color: #4F4F4F;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	font-size:11px;
+	font-family: Tahoma,Geneva,sans-serif;	
+}	
+
+.fieldGral{
+	border: 1px solid #A8A8A8;
+    border-radius: 2px;
+    padding: 2px;
+	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+	font-size:12px;
+	font-weight:bold;
+}
+.divGral{
+	border: 1px solid #A8A8A8;
+    border-radius: 2px;
+    padding: 2px;
+	color: #4F4F4F;
+	font-family: Tahoma,Geneva,sans-serif;
+	font-weight:bold;	
+}
+
+.txtDinero{
+	color: #238FBB;
+	font-weight:bold;
+	font-size: 15px !important;
+	border-radius: 4px 4px 4px 4px;
+    border-style: ridge;
+	font-family: Tahoma,Geneva,sans-serif;
+	width:130px;
+}
+
+.confirmarAccionGral{
+	font-size: 14px;
+}
+
+.confirmarAccionGral .ui-dialog-title{
+    font-size: 14px !important;
+}
+
+.confirmarAccionGral button{
+    font-size: 14px !important;
+    font-weight: normal;    
+}
+
+.confirmarAccionGral .confirmarAccion_divBotones{
+	margin-left: 102px;
+}
+
+#subpantallaNivel1_dlg .ui-dialog-title{
+    font-size:14px;
+}
+/** terminan estilos generales para todos los componentes **/
+
+.ui-helper-clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    margin-left: -31px;
+    visibility: hidden;
+    width: 160px;
+}
+#ficha_impresion{
+	display:none;
+}
+
+/** Empiezan estilos para el AjaxErrorHandler que verifica el tiempo de sesion **/
+
+#ajaxErrorHandlerDialog span{
+    font-size: 14px;
+}
+
+#ajaxErrorHandlerDialog{
+    font-size: 12px !important;
+    width: 600px !important;
+  	min-height: 100px;
+}    
+
+/** Terminan estilos para el AjaxErrorHandler que verifica el tiempo de sesion **/
+
+  
+/** Empiezan Estilos para el Ajax Loader (el que despliega el gif de cargando...) **/
+.imgAjax{
+	float: left;
+    margin-left: -1px;
+    width: 80px;
+    height: 80px;
+}
+.lblAjax{
+	clear: both;
+    float: left;
+    margin-top: 5px;
+    margin-left: 5px;	
+}
+/** Terminan Estilos para el Ajax Loader (el que despliega el gif de cargando...) **/

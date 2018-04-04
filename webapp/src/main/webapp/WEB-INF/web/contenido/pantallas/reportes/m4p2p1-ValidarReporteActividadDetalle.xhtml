@@ -1,0 +1,79 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pe="http://primefaces.org/ui/extensions"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"     
+     id="divGestionPlantilla"
+	 style="width: 800px; height: 650px; margin-left: 10px;">
+
+	<style>
+		#m4p2p1_formPrincipal .ui-widget, .ui-selectonemenu-list-item {
+            font-size: 11px;
+	 	}		
+		
+		#m4p2p1_divReporteEditor{
+			margin-bottom:10px;
+		}
+		#m4p2p1_divCheckBox{
+			margin-bottom:10px;
+		}
+		#m4p2p1_divObservacionesEditor{
+			margin-bottom:10px;
+		}
+		#m4p2p1_divReporteBtns{
+			margin-bottom:5px;
+			margin-left:250px;
+			width:400px;
+			
+		}
+		
+		
+		.m4p2p1_pnlGridCaptura.ui-panelgrid>*>tr,
+		.m4p2p1_pnlGridCaptura.ui-panelgrid>*>tr>td {
+			border: none;			
+		}
+		
+		.m4p2p1_pnlGridCaptura{
+			
+		}
+		
+	</style>	
+	 
+	<h:form id="m4p2p1_formPrincipal" prependId="false" onkeypress="if (event.keyCode == 13) { return false; }">
+		<p:messages id="detalleReporte_msges" showDetail="false" globalOnly="false" for="detalleReporte_msges"/>
+		
+		<div id="m4p2p1_divReporteEditor">
+			<p:editor  controls="" value="#{validaReporteActividadDetalleBean.textoEditor}" disabled="true"/>	
+		</div>
+		
+		<div id="m4p2p1_divCheckBox">
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="15" >			        
+				<p:outputLabel styleClass="lblGral" value="Agregar Comentarios:" />
+				<p:selectBooleanCheckbox value="#{validaReporteActividadDetalleBean.agregarComentarios}"  >
+				    <p:ajax update="@form" listener="#{validaReporteActividadDetalleBean.definirComentarios}" process="@this"  />
+				</p:selectBooleanCheckbox>				        
+			</h:panelGrid>	
+		</div>
+				
+		<div id="m4p2p1_divObservacionesEditor">
+			<p:editor value="#{validaReporteActividadDetalleBean.textoObservaciones}" rendered="#{validaReporteActividadDetalleBean.mostrarPanelComentarios}"
+				controls="bold italic underline color size bullets numbering alignleft center alignright justify copy paste undo redo print" />	
+		</div>
+		<div id="m4p2p1_divReporteBtns">
+			<p:panelGrid columns="2" cellpadding="150"  styleClass="m4p2p1_pnlGridCaptura" >
+				<p:commandButton id="m4p2p1_btnGuardar" actionListener="#{validaReporteActividadDetalleBean.guardarReporte}" 
+					value="#{validaReporteActividadDetalleBean.textoBtnGuardar}" icon="ui-icon-disk" style="width:100px" update="@form" />
+				<p:commandButton id="m4p2p1_btnCerrar"  value="Cerrar" 
+					actionListener="#{validaReporteActividadDetalleBean.resetBean}" onclick="dlg.hide();" update=":panelContenido"
+					 icon="ui-icon-disk" style="width:100px" />						 					
+			</p:panelGrid>	
+		</div>
+		
+	</h:form>
+	
+	
+	
+
+</div>

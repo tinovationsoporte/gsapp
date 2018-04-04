@@ -1,0 +1,51 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+	 <style>
+	   
+	      #m1p1_divWrapper{
+		   width: 800px;
+		   height: 500px;
+		   font-size: 11px;
+	 	}  
+   		
+	 </style>
+	 <script >
+	   
+	 </script>
+	 <div id="m1p1_divWrapper">
+		 <h:form id="m1p1_formComanda" class="formGral" prependId="false">
+		    <div id="m1p1_divPrincipal">
+		      <p:fieldset legend="Mesas">
+		         <p:dataGrid var="mesa" value="#{comandaBean.listaMesas}" columns="3" layout="grid"
+        	      rows="6" paginator="true" id="m1p1_dataGridMesas" 
+        	      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        	     >
+ 			     <p:column>
+                  <p:panel header="Mesa #{mesa.numeroMesa}" style="text-align:center" >
+                
+                  <h:panelGrid columns="1" style="width:100%" >
+                
+                   <h:outputText value="Status: #{mesa.status}" style="color: blue; font-weight: bold; " rendered="#{mesa.numeroStatus == 1}"/>
+                   <h:outputText value="Status: #{mesa.status}" style="color: rgb(160,0,0); " rendered="#{mesa.numeroStatus == 0}"/>
+                   <h:outputText value="Atiende: #{mesa.mesero}" rendered="#{mesa.numeroStatus == 1}" />
+                   <h:outputText value="Total: #{mesa.total}"  rendered="#{mesa.numeroStatus == 1}"/>
+                                      
+                   <p:commandButton id="m1p1_btnAtenderMesa" value="#{mesa.numeroStatus == 0? 'Atender': 'Finalizar'}"
+                       process="@this"
+                       update=":subPantallaNivel1" oncomplete="dlg.show()" actionListener="#{comandaBean.verDetalle(mesa)}">
+                       					      		
+				   </p:commandButton>
+                 </h:panelGrid>
+                
+                 </p:panel>
+                </p:column>
+    	        </p:dataGrid>
+		      </p:fieldset>
+		    </div>		
+		 </h:form>
+	 </div>
+</div>

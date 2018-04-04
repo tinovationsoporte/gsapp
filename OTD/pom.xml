@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <!-- 
+  <parent>
+    <groupId>com.app</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent> 
+   -->
+  <groupId>com.app.otd</groupId>
+  <artifactId>OTD</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>OTD</name>
+  <url>http://maven.apache.org</url>
+  
+  <build>
+    <resources>
+		<resource>
+			<directory>src/main/resources</directory>
+			<filtering>false</filtering>
+		</resource>				
+	</resources>
+	<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>${basedir}/src/test/java/</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+	</testResources>
+	
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>        
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>      	
+	  	<artifactId>maven-surefire-plugin</artifactId>
+		<version>2.14</version>
+		
+	   </plugin>
+    </plugins>
+  </build>
+  
+  <dependencies>
+    <dependency>
+	    <groupId>com.app.core</groupId>
+	    <artifactId>core</artifactId>
+	    <version>1.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+    	<groupId>javax.faces</groupId>
+	    <artifactId>jsf-api</artifactId>
+	    <version>2.1</version>
+	    <scope>provided</scope>	
+  	</dependency>	
+  	<dependency>
+    	<groupId>com.app.modelo.datos</groupId>
+	    <artifactId>MD</artifactId>
+	    <version>1.0-SNAPSHOT</version>
+  	</dependency>
+  	
+  </dependencies>
+</project>

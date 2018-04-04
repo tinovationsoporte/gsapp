@@ -1,0 +1,15 @@
+.sello_contenedor{
+	clear: both;
+    float: left;
+    font-size: 9px !important;
+    line-height: 0;
+}
+
+.sello_contenedor *{
+	font-size: 9px;
+	line-height: 0.7;
+}
+.imgTicket{
+	width: 21cm;
+	height: 29.5cm;
+}

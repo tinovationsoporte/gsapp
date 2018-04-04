@@ -1,0 +1,87 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+	 <style>
+	   
+	     #m1p2_divWrapper{
+		   width: 460px;
+		   height: 320px;
+		   font-size: 11px;
+	 	}  
+	 	
+	 	#m1p2_divTablaDetalleMesa{
+            border: 1px solid #A8A8A8;
+    	    border-radius: 2px;
+		    height: 145px;
+    	    width: 420px;		   
+			margin-top: 15px;
+			margin-left: 0px;
+			margin-bottom: 10px;
+		    overflow: scroll;
+        }
+   		#dd_panel >ul >li {
+				font-size: 11px;
+		}
+	 </style>
+	 <script >
+	   
+	 </script>
+	 <div id="m1p2_divWrapper">
+		 <h:form id="m1p2_formAtenderMesa" class="formGral" prependId="false">
+		    <div id="m1p2_divPrincipal">
+		      <p:fieldset legend="Mesa #{atenderMesaBean.datosMesa.numeroMesa}">
+		        <fieldset id="m1p2_fieldProducto">
+		          <legend>Producto</legend>
+		          <table>
+		            <tr>
+		              <td> <h:outputLabel id="m1p2_lblClave" value="Clave" /> </td>
+		              <td> <h:outputLabel id="m1p2_lblDescripcion" value="Descripcion" /> </td>
+		              <td> <h:outputLabel id="m1p2_lblCantidad" value="Cantidad" /> </td>
+		            </tr>
+		            <tr>
+		              <td> <p:inputText id="m1p2_txtClaveProducto" value="#{atenderMesaBean.claveProducto}"/> </td>
+		              <td>  <p:autoComplete id="dd" dropdown="true" value="#{atenderMesaBean.platilloSeleccionado}" 
+		                       completeMethod="#{atenderMesaBean.completeText}" />
+                      </td>
+		              <td> <p:inputText id="m1p2_txtCantidadProducto" size="5" value="#{atenderMesaBean.cantidadProducto}"/> </td>
+		              <td> <p:commandButton value="+" actionListener="#{atenderMesaBean.agregarProducto}" update="m1p2_tablaDetalleMesa m1p2_txtCantidadProducto dd m1p2_txtClaveProducto"> </p:commandButton> </td>
+		            </tr>
+		          </table>
+		      	</fieldset>
+		      	
+		      	 <div id="m1p2_divTablaDetalleMesa">
+	    		   <p:dataTable id="m1p2_tablaDetalleMesa" var="detalle" value="#{atenderMesaBean.detalleMesa}" 
+	    		      editable="true"  >
+                           
+                  	<p:column id="m1p2_colProducto" >
+						<f:facet name="header">Producto</f:facet>
+						<h:outputText id="m1p2_lblProducto" value="#{detalle.producto}" style="font-weight: bold;"/>
+					</p:column>
+ 				    <p:column headerText="Cantidad">
+                          <p:inputText value="#{detalle.cantidad}" style="width: 80px;" 
+                             >
+                             <p:ajax event="change" process=":m1p2_formAtenderMesa:m1p2_tablaDetalleMesa" update=":m1p2_formAtenderMesa:m1p2_tablaDetalleMesa"  
+                              listener="#{atenderMesaBean.actualizarDetalle}"></p:ajax> 
+                          </p:inputText>               			
+                     </p:column>
+                      <p:column headerText="Quitar">
+                          <p:commandButton id="m1p2_btnQuitarRegistro" value="-" 
+                              
+                              update=":m1p2_formAtenderMesa"
+                              actionListener="#{atenderMesaBean.quitarDetalle(detalle)}">                                                            
+                          </p:commandButton>               			
+                     </p:column>
+                   </p:dataTable>
+			    </div>
+		      	
+		      	<p:commandButton id="m1p2_btnSalir" value="Continuar Atendiendo" onclick="dlg.hide()"></p:commandButton>
+		      	<p:commandButton id="m1p2_btnImprimir" value="Finalizar" onclick="dlg.hide()" actionListener="#{atenderMesaBean.finalizar}"></p:commandButton>
+		      	
+		      </p:fieldset>
+		    </div>		
+		 </h:form>
+	 </div>
+</div>

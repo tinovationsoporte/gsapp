@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+.navegacion ul.sub-level {    
+		display: none;
+	}
+	.navegacion li:hover .sub-level {    
+		background: #09F;    
+		display: block;    
+		position: absolute;    
+		left: 120px;    
+		top: 5px;
+	}
+	.navegacion ul.sub-level li {    
+		border: none;    
+		float:left;    
+		width:100px;
+	}
+
+.navegacion {
+  background-color: #EAEAEA;
+    /*clear: both;
+    float: left;*/
+    min-height: 509px;
+    position: relative;
+    width: 200px;
+}
+	.navegacion ul {
+		margin:0px; 
+		padding:0px;
+	}
+	.navegacion li {
+		list-style: none;
+	}
+	.navegacion ul.top-level {
+	background-color: #0099FF;
+	}
+	.navegacion ul.top-level li {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #CC6;
+	border-bottom-color: #CC6;
+	}
+	.navegacion a { 
+		color: #fff; 
+		cursor: pointer; 
+		display:block; 
+		height:30px; 
+		line-height: 25px; 
+		text-indent: 10px; 
+		text-decoration:none; 
+		/*width:900%;*/
+	}
+	.navegacion a:hover{
+		text-decoration: none;
+	}
+	.navegacion li:hover {
+		position: relative;
+	}
+
+
+
+
+
+/*modificaciones 8 abril 2013 (MENU) kAR
+*/
+
+
+.navegacion {
+    background-color: #EAEAEA;
+    /*clear: both;
+    float: left;*/
+    min-height: 509px;
+    padding-top: 72px;
+    position: relative;
+    width: 200px;
+}
+
+.navegacion {
+    background-color: #EAEAEA;
+    /*clear: both;
+    float: left;*/
+    min-height: 509px;
+    padding-top: 0;
+    position: static !important;
+    width: 200px;
+}
